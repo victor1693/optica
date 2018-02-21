@@ -17,9 +17,14 @@ class con_usuarios extends Controller {
 
 		$sql="SELECT * FROM tbl_usuario";
 		try {
-			$datos=DB::select($sql);  
-                 $vista=View::make('usuarios');
+				 $vista=View::make('usuarios');
+				
+				 $datos=DB::select($sql);  
                  $vista->datos=$datos;
+
+                 $datos=DB::select("SELECT * FROM tbl_privilegios");  
+                 $vista->privilegios=$datos;
+
                  return $vista;
 		} catch (Exception $e) {
 			return Redirect('error'); 
@@ -58,6 +63,28 @@ class con_usuarios extends Controller {
 				return Redirect('error'); 
 			}
 		}
+	}
+
+	public function editar()
+	{
+		if($_POST['ed_nombre']==""){return Redirect('usuarios?info=ed_nombre');exit();}
+		if($_POST['ed_usuario']==""){return Redirect('usuarios?info=ed_usuario');exit();}
+		if($_POST['ed_correo']==""){return Redirect('usuarios?info=ed_correo');exit();}		
+		if($_POST['ed_clave']==""){return Redirect('usuarios?info=ed_clave');exit();}
+		if($_POST['ed_privilegios']==""){return Redirect('usuarios?info=ed_privilegios');exit();}
+		$privilegio=explode("-",$_POST['ed_privilegios']);
+		
+		$sql="UPDATE tbl_usuario SET nombre='".$_POST['ed_nombre']."',usuario='".$_POST['ed_usuario']."',correo='".$_POST['ed_correo']."',clave='".$_POST['ed_clave']."',privilegio='".$privilegio[1]."' WHERE id = ".$_POST['ed_id']."";
+
+		try {
+ 			$datos=DB::select($sql);
+			return Redirect('usuarios?info=up_true');
+		} catch (Exception $e) {
+			return Redirect('error'); 
+			
+		}
+ 
+	 
 	}
 
 	public function create()

@@ -18,12 +18,12 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="local/resources/views/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo session()->get("nombre");?></span>
+              <img src="local/resources/views/img/oh.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo session()->get("nombreAdministrador");?></span>
             </a>             
           </li>
            <li class="dropdown user user-menu">
-            <a href="logout">
+            <a href="logoutadmin">
                
               <span class="hidden-xs">Salir</span>
             </a>             

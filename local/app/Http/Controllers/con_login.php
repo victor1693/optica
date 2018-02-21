@@ -57,7 +57,7 @@ class con_login extends Controller {
           				}
           				else
           				{
-          					return Redirect('iniciar?activate=false');
+          					return Redirect('iniciar?info=up_user');
           				}
 		                
 		            } catch (QueryException $e) {

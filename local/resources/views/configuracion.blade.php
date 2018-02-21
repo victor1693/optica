@@ -63,7 +63,7 @@
                                                 </img>
                                             </div>
                                             <div class="col-sm-6">
-                                                <form action="login" id="formulario" method="post">
+                                                <form action="clave" id="formulario" method="post">
                                                     <input name="_token" type="hidden" value="<?php echo csrf_token(); ?>">
                                                         <div class="form-group has-feedback">
                                                             <label>
@@ -81,10 +81,10 @@
                                                         </div>
                                                         <div class="row">
                                                             <!-- /.col -->
-                                                            <div class="col-xs-12 text-center">
-                                                                <a class="btn btn-primary btn-block btn-flat" id="btn_entrar">
+                                                            <div class="col-xs-12 text-center"> 
+                                                                <a onClick="enviar()" class="btn btn-primary btn-block btn-flat" id="btn_entrar">
                                                                     Actualizar
-                                                                </a>
+                                                                </a> 
                                                             </div>
                                                             <!-- /.col -->
                                                         </div>
@@ -109,6 +109,30 @@
             <div class="control-sidebar-bg">
             </div>
         </div>
-        <?php include('local/resources/views/includes/referencias_down.php');?>
+         <div id="ohsnap"></div>
+        </div>
+          <?php include('local/resources/views/includes/referencias_down.php');?>
+          <script type="text/javascript">
+            function enviar()
+            {
+                if($("#correo").val()==""){ohSnap('Debe colorcar su correo.', {color: 'orange '});$('#correo').focus();}
+                else if($("#clave").val()==""){ohSnap('Debe colorcar su clave.', {color: 'orange '});$('#clave').focus();} 
+                else
+                {
+                    $("#formulario").submit();
+                }
+            }
+        </script>
+        <?php
+          if(isset($_GET["info"]))
+          {
+             if($_GET["info"]=="correo") {echo "<script>ohSnap('Debe colorcar su correo.', {color: 'orange '});$('#correo').focus();</script>";}   
+             if($_GET["info"]=="clave") {echo "<script>ohSnap('Debe colorcar su clave.', {color: 'orange '});$('#clave').focus();</script>";} 
+             if($_GET["info"]=="up_user") {echo '<script>swal("Atención!", "Datos actualizados con éxito.", "success");
+                 </script>';} 
+          } 
+
+         ?>
+      
     </body>
 </html>

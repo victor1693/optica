@@ -1,11 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\Controller; 
 use Illuminate\Http\Request;
-use view;
-
+use View;
+use DB;
 class con_dash extends Controller {
 
 	/**
@@ -14,8 +13,16 @@ class con_dash extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
-		return View("dashboard");
+	{  
+		try {
+			$sql="SELECT count(id) as total,sum(suspendido) as suspendidos FROM tbl_usuario";
+				$vista=View::make('dashboard'); 
+				 $datos=DB::select($sql);  
+                 $vista->datos=$datos;
+				return $vista;
+		} catch (Exception $e) {
+			
+		}
 	}
 
 	/**

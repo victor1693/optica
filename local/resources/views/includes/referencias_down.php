@@ -14,9 +14,7 @@
 </script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js">
-</script>
-<script src="/optica/local/resources/views/plugins/morris/morris.min.js">
-</script>
+</script> 
 <!-- Sparkline -->
 <script src="/optica/local/resources/views/plugins/sparkline/jquery.sparkline.min.js">
 </script>
@@ -47,10 +45,7 @@
 </script>
 <!-- AdminLTE App -->
 <script src="/optica/local/resources/views/dist/js/adminlte.min.js">
-</script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/optica/local/resources/views/dist/js/pages/dashboard.js">
-</script>
+</script> 
 <!-- AdminLTE for demo purposes -->
 <script src="/optica/local/resources/views/dist/js/demo.js">
 </script>

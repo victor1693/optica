@@ -22,7 +22,7 @@ class con_administrator extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function login()
+	public function login(Request $request)
 	{
 		$correo=$_POST["correo"];
 		$pass=$_POST["pass"];
@@ -39,6 +39,9 @@ class con_administrator extends Controller {
 			}
 			else
 			{
+				$request->session()->set('correoAdministrador', $datos[0]->correo);
+				$request->session()->set('nombreAdministrador', $datos[0]->nombre);
+				$request->session()->set('idAdministrador', $datos[0]->id);
 				return Redirect("dashboard");
 			}			
 		} catch (Exception $e) {
@@ -51,9 +54,12 @@ class con_administrator extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function salir(Request $request)
 	{
-		//
+		$request->session()->forget('correoAdministrador');
+		$request->session()->forget('idAdministrador');
+		$request->session()->forget('nombreAdministrador');    
+        return redirect('administrator');
 	}
 
 	/**

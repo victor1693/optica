@@ -73,7 +73,7 @@
                                             </h3>
                                         </div>
                                         <div class="box-body no-padding">
-                                            <table class="table table-condensed">
+                                            <table class="table table-condensed" id="tabla">
                                                 <tbody>
                                                
                                                     <tr>
@@ -125,15 +125,10 @@
                                                                 </a>
                                                                 <ul class="dropdown-menu">
                                                                     <li role="presentation">
-                                                                        <a href="#" role="menuitem" tabindex="-1">
+                                                                        <a href="#" role="menuitem" onClick="editar('.$key->id.')">
                                                                             Editar
                                                                         </a>
-                                                                    </li>
-                                                                    <li role="presentation">
-                                                                        <a href="#" role="menuitem" tabindex="-1">
-                                                                            Eliminar
-                                                                        </a>
-                                                                    </li>
+                                                                    </li> 
                                                                     <li role="presentation">
                                                                         <a href="#" role="menuitem" tabindex="-1">
                                                                             Reenviar clave
@@ -142,7 +137,7 @@
                                                                     '.$accion.'
                                                                 </ul>
                                                             </li> ';
-echo"<tr><td>".$contador."</td><td>".$key->nombre."</td><td>".$key->correo."</td><td>".$key->usuario."</td><td>Nivel-".$key->privilegio."</td><td>".$estado."</td><td>".$accion."</td></tr>";
+echo"<tr><td>".$contador."</td><td id='nombre-".$key->id."'>".$key->nombre."</td><td id='correo-".$key->id."'>".$key->correo."</td><td id='usuario-".$key->id."'>".$key->usuario."</td><td id='privilegios-".$key->id."'>Nivel-".$key->privilegio."</td><td id='estado-".$key->id."'>".$estado."</td><td>".$accion."</td></tr>";
                                                     }?>
                                                      
                                                 </tbody>
@@ -206,6 +201,56 @@ echo"<tr><td>".$contador."</td><td>".$key->nombre."</td><td>".$key->correo."</td
                             <!-- /.tab-content -->
                         </div>
                     </div>
+
+                    <!-- Button trigger modal -->
+                    
+                    <!-- Modal -->
+                    <div  class="modal fade" id="modal_editar" tabindex="1" role="dialog" aria-labelledby="modal_editar" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title pull-left" id="modal_editar">Editar información.</h5>
+                            <button type="button pull-right" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                          <div class="row">
+                               <div class="col-sm-6 text-center" style="padding: 40px;">
+                                   <img src="local/resources/views/iconos/id-card.png" style="width: 200px;">
+                               </div>
+                                <div class="col-sm-6">
+                                <form id="formulario-editar" method="POST" action="editar_registro">
+                                  <input name="_token" type="hidden" value="<?php echo csrf_token(); ?>">
+                                  <input class="modal_editar" id="ed_id" name="ed_id" type="hidden">
+                                     <label>Nombre</label>
+                                    <input class="form-control modal_editar" type="text" name="ed_nombre" id="ed_nombre">
+                                    <label>Usuario</label>
+                                    <input class="form-control modal_editar" type="text" name="ed_usuario" id="ed_usuario">
+                                     <label>Privilegios</label>
+                                    <select class="form-control modal_editar" name="ed_privilegios" id="ed_privilegios">
+                                        <option value="">Seleccionar</option>
+                                        <?php foreach ($privilegios as $key) {
+                                            echo'<option value="Nivel-'.$key->id.'">'.$key->desc.'</option>';
+                                        }?>
+                                    </select>
+                                    <label>Correo</label>
+                                    <input class="form-control modal_editar" type="text" name="ed_correo" id="ed_correo">
+                                    <label>Clave</label>
+                                    <input class="form-control modal_editar" type="password" id="ed_clave" name="ed_clave">
+                                </form>
+                           </div>
+                          </div>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                            <button type="button" class="btn btn-primary" onClick="guardar_editados()">Aplicar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                 </section>
                 <!-- /.content -->
             </div>
@@ -219,6 +264,32 @@ echo"<tr><td>".$contador."</td><td>".$key->nombre."</td><td>".$key->correo."</td
 
         <?php include('local/resources/views/includes/referencias_down.php');?>
         <script type="text/javascript">
+
+            function editar(id)
+            { 
+                $(".modal_editar").val(""); 
+                $("#ed_id").val(id);
+                $("#ed_usuario").val($("#usuario-"+id).text());
+                $("#ed_nombre").val($("#nombre-"+id).text());
+                $("#ed_correo").val($("#correo-"+id).text());
+                $("#ed_privilegios").val($("#privilegios-"+id).text());
+                $("#ed_estado").val($("#estado-"+id).text());  
+                $("#modal_editar").modal();
+            }
+
+            function guardar_editados()
+            { 
+                if($("#ed_nombre").val()==""){ohSnap('Debe colorcar su nombre.', {color: 'orange '});$('#ed_nombre').focus();}
+                else if($("#ed_usuario").val()==""){ohSnap('Debe colorcar su usuario.', {color: 'orange '});$('#ed_usuario').focus();}
+                else if($("#ed_privilegios").val()==""){ohSnap('Debe colorcar su usuario.', {color: 'orange '});$('#ed_privilegios').focus();}
+                else if($("#ed_correo").val()==""){ohSnap('Debe colorcar su correo.', {color: 'orange '});$('#ed_correo').focus();}
+                else if($("#ed_clave").val()==""){ohSnap('Debe colorcar su clave.', {color: 'orange '});$('#ed_clave').focus();}
+                else
+                {
+                    $("#formulario-editar").submit();
+                }
+            }
+
             function enviar()
             {
                 if($("#nombre").val()==""){ohSnap('Debe colorcar su nombre.', {color: 'orange '});$('#nombre').focus();}
@@ -238,10 +309,19 @@ echo"<tr><td>".$contador."</td><td>".$key->nombre."</td><td>".$key->correo."</td
              if($_GET["info"]=="correo") {echo "<script>ohSnap('Debe colorcar su correo.', {color: 'orange '});$('#correo').focus();</script>";}
              if($_GET["info"]=="usuario") {echo "<script>ohSnap('Debe colorcar su usuario.', {color: 'orange '});$('#usuario').focus();</script>";}
              if($_GET["info"]=="clave") {echo "<script>ohSnap('Debe colorcar su clave.', {color: 'orange '});$('#clave').focus();</script>";}  
+
+             if($_GET["info"]=="ed_nombre") {echo "<script>ohSnap('Debe colorcar su nombre para poder editar el registro.', {color: 'orange '});$('#ed_nombre').focus();</script>";}   
+             if($_GET["info"]=="ed_correo") {echo "<script>ohSnap('Debe colorcar su correo poder editar el registro.', {color: 'orange '});$('#ed_correo').focus();</script>";}
+             if($_GET["info"]=="ed_usuario") {echo "<script>ohSnap('Debe colorcar su usuario poder editar el registro.', {color: 'orange '});$('#ed_usuario').focus();</script>";}
+             if($_GET["info"]=="ed_clave") {echo "<script>ohSnap('Debe colorcar su clave poder editar el registro.', {color: 'orange '});$('#ed_clave').focus();</script>";}  
+
              if($_GET["info"]=="require_usuario") {echo "<script>ohSnap('El usuario ya esta registrado.', {color: 'orange '});$('#usuario').focus();</script>";}
              if($_GET["info"]=="require_email") {echo "<script>ohSnap('El correo ya esta registrado.', {color: 'orange '}); </script>";} 
              if($_GET["info"]=="suspend_usuario") {echo "<script>ohSnap('El usuario ha sido activado.', {color: 'orange '}); </script>";}
-             if($_GET["info"]=="active_usuario") {echo "<script>ohSnap('El usuario ha sido bloqueado.', {color: 'orange '}); </script>";}    
+             if($_GET["info"]=="active_usuario") {echo "<script>ohSnap('El usuario ha sido bloqueado.', {color: 'orange '}); </script>";} 
+          if($_GET["info"]=="up_true") {echo '<script>swal("Atención!", "Datos actualizados con éxito", "success");
+                 </script>';}
+
 
           } 
 

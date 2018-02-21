@@ -12,15 +12,23 @@ Route::post('login', 'con_login@create');
 Route::post('registro', 'con_register@create');
 
 //Rutas administradores
+//Rutas con privilegios
 Route::get('administrator', 'con_administrator@index');
+Route::post('logadmin', 'con_administrator@login');
+Route::group(['middleware' =>'administrator'], function () { 
 Route::get('dashboard', 'con_dash@index');
 Route::get('configuracion', 'con_configuracion@index');
 Route::get('usuarios', 'con_usuarios@index');
 Route::get('suspender/{id}', 'con_usuarios@suspender');
 Route::get('activar/{id}', 'con_usuarios@activar');
-
+Route::get('logoutadmin', 'con_administrator@salir');
 Route::post('regusuario', 'con_usuarios@create');
-Route::post('logadmin', 'con_administrator@login');
+Route::post('editar_registro', 'con_usuarios@editar');
+Route::post('clave', 'con_configuracion@create');
+
+});
+
+
 
 //Rutas con privilegios
 Route::group(['middleware' =>'login'], function () { 

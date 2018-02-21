@@ -23,7 +23,54 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">  
+    <section class="content"> 
+    <div class="row">
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+                    <h3><?php echo $datos[0]->total;?></h3>
+
+              <p>Usuarios registrados</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="usuarios" class="small-box-footer">Ver  <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+                    <h3><?php echo ($datos[0]->total - $datos[0]->suspendidos);?></h3>
+
+              <p>Usuarios activos</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="usuarios" class="small-box-footer">Ver  <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3><?php echo $datos[0]->suspendidos;?></h3>
+
+              <p>Usuarios bloqueados</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person"></i>
+            </div>
+            <a href="usuarios" class="small-box-footer">Ver  <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div> 
+        <!-- ./col -->
+      </div> 
     </section>
     <!-- /.content -->
   </div>
