@@ -13,7 +13,16 @@ class con_login extends Controller {
 	 */
 	public function index()
 	{
-		return View('login');
+		try {
+				$sql="SELECT * FROM tbl_sucursal";
+				$vista=View::make('login'); 
+				 $datos=DB::select($sql);  
+                 $vista->datos=$datos;
+				return $vista;
+		} catch (Exception $e) {
+			
+		}
+		 
 	}
 
 	/**

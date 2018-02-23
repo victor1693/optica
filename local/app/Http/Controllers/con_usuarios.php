@@ -37,6 +37,29 @@ class con_usuarios extends Controller {
 	 * @return Response
 	 */
 
+
+	public function enviar_clave($id)
+	{
+		dd("entro");
+		if($id!="")
+		{
+			//$sql="UPDATE tbl_usuario SET clave = ".md5('12345')." WHERE id= ".$id." ";
+			try {
+						$sql="SELECT correo FROM tbl_usuario WHERE id= ".$id." ";
+						$datos=DB::select($sql);
+						$_POST["correo"]=$datos[0]->correo;
+						Mail::send("email.confirmacion", $data, function ($message){
+						$message->to($_POST["correo"]);
+						$message->from("no-reply@optica-hebreo.com");
+					    $message->subject("no-reply@optica-hebreo.com"); 
+						});
+			} catch (Exception $e) {
+				return Redirect('error'); 
+			}
+		}
+	}
+
+
 	public function suspender($id)
 	{
 		if($id!="")

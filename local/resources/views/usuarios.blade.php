@@ -130,7 +130,7 @@
                                                                         </a>
                                                                     </li> 
                                                                     <li role="presentation">
-                                                                        <a href="#" role="menuitem" tabindex="-1">
+                                                                        <a href="enviar_clave/'.$key->id.'" role="menuitem" tabindex="-1">
                                                                             Reenviar clave
                                                                         </a>
                                                                     </li>

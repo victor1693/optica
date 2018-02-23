@@ -23,6 +23,9 @@
        <div class="form-group has-feedback">
         <select class="form-control">
           <option value="">Seleccionar</option>
+          <?php foreach ($datos as $key) {
+            echo '<option value="'.$key->id.'">'.$key->descripcion.'</option>';
+          }?>
         </select>
       </div>
       <div class="form-group has-feedback">
