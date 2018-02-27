@@ -33,13 +33,14 @@
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs pull-right"> 
-              <li><a href="#tab_3-2" data-toggle="tab"><strong>Paso 3 - </strong> Medio de pago</a></li>
+              <li><a href="#mpagos" data-toggle="tab"><strong>Paso 3 - </strong> Medio de pago</a></li>
               <li><a href="#tab_2-2" data-toggle="tab"><strong>Paso 2 - </strong>Producto</a></li>
               <li class="active"><a href="#tab_1-1" data-toggle="tab"><strong>Paso 1 - </strong>Cliente</a></li> 
               <li class="pull-left header"><i class="fa fa-th"></i>Nueva venta</li>
             </ul>
             <div class="tab-content ">
-              <div class="tab-pane active row" id="tab_1-1"> 
+            <!--Tab nueva venta-->
+              <div class="tab-pane row" id="tab_1-1"> 
                    <div class="col-sm-6">
 
                      <div class="col-sm-6" style="padding: 0px;">
@@ -79,30 +80,67 @@
 
                    <div class="col-xsm-6 text-center">
                      <img src="local/resources/views/iconos/id-card.png" style="width: 220px;">
-                   </div>
-                  
+                   </div> 
               </div>
-                <!-- /.tab-pane -->
-                <div class="tab-pane" id="tab_2-2">
-                  The European languages are members of the same family. Their separate existence is a myth.
-                  For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
-                  in their grammar, their pronunciation and their most common words. Everyone realizes why a
-                  new common language would be desirable: one could refuse to pay expensive translators. To
-                  achieve this, it would be necessary to have uniform grammar, pronunciation and more common
-                  words. If several languages coalesce, the grammar of the resulting language is more simple
-                  and regular than that of the individual languages.
-                </div>
-                <!-- /.tab-pane -->
-                <div class="tab-pane" id="tab_3-2">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                  It has survived not only five centuries, but also the leap into electronic typesetting,
-                  remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                  sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <!-- /.tab-pane -->
+              <!--Tab medios de pago-->
+              <div class="tab-pane active row" id="mpagos"> 
+                   <div class="col-sm-6">  
+
+                      <table class="table table-condensed table-bordered table-hover">
+                      <tbody>
+                      <tr> 
+                        <th style="width: 100px;">Detalle</th>
+                        <th>Monto</th>  
+                      </tr>                       
+                    </tbody>
+                </table>
+
+                   <!--
+                   <table class="table table-condensed table-bordered table-hover">
+                      <tbody><tr> 
+                        <th style="width: 100px;">Detalle</th>
+                        <th>Monto</th>  
+                      </tr>
+                      <tr> 
+                        <td>Efectivo</td> 
+                        <td> <input type="" name="" style="height: 20px;width: 60px;"></td> 
+                      </tr> 
+
+                       <tr> 
+                        <td>Tarjeta <a href="#"><strong>(+)</strong></a> </td> 
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 60px;"></td>
+                      </tr> 
+                      
+                      <tr> 
+                        <td>Cheque <a href="#"><strong>(+)</strong></a> <strong></strong></td> 
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 60px;"></td>
+                      </tr> 
+
+                      <tr> 
+                        <td>OC</td> 
+                        <td> <input type="" name="" style="height: 20px;width: 60px;"></td>
+                      </tr> 
+
+                      <tr> 
+                        <td>Transferencia</td> 
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 60px;"></td>
+                      </tr> 
+                       <tr> 
+                        <td><strong>Total</strong></td> 
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 60px;"></td>
+                      </tr> 
+                    </tbody>
+                </table>-->
+                      <div class="col-sm-12" style="padding: 0px;padding-top: 10px;margin-bottom:10px;">
+                        <button class="btn btn-primary form-control">Siguiente</button>
+                     </div> 
+                   </div>  
+
+                   <div class="col-xsm-6 text-center">
+                     <img src="local/resources/views/iconos/payments.jpg" style="width: 220px;">
+                   </div> 
+              </div>
+                
             </div>
             <!-- /.tab-content -->
 

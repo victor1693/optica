@@ -319,8 +319,11 @@ echo"<tr><td>".$contador."</td><td id='nombre-".$key->id."'>".$key->nombre."</td
              if($_GET["info"]=="require_email") {echo "<script>ohSnap('El correo ya esta registrado.', {color: 'orange '}); </script>";} 
              if($_GET["info"]=="suspend_usuario") {echo "<script>ohSnap('El usuario ha sido activado.', {color: 'orange '}); </script>";}
              if($_GET["info"]=="active_usuario") {echo "<script>ohSnap('El usuario ha sido bloqueado.', {color: 'orange '}); </script>";} 
-          if($_GET["info"]=="up_true") {echo '<script>swal("Atención!", "Datos actualizados con éxito", "success");
+            if($_GET["info"]=="up_true") {echo '<script>swal("Listo!", "Datos actualizados con éxito", "success");
                  </script>';}
+           if($_GET["info"]=="up_pass") {echo '<script>swal("Listo!", "La clave ha sido enviada con éxito.", "success");
+                 </script>';}
+
 
 
           } 

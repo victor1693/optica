@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Http\Request;
 use View;
+use Mail;
 class con_usuarios extends Controller {
 
 	/**
@@ -40,19 +41,28 @@ class con_usuarios extends Controller {
 
 	public function enviar_clave($id)
 	{
-		dd("entro");
+		 
 		if($id!="")
 		{
-			//$sql="UPDATE tbl_usuario SET clave = ".md5('12345')." WHERE id= ".$id." ";
+			
 			try {
-						$sql="SELECT correo FROM tbl_usuario WHERE id= ".$id." ";
+						$sql="SELECT * FROM tbl_usuario WHERE id= ".$id." ";
 						$datos=DB::select($sql);
 						$_POST["correo"]=$datos[0]->correo;
-						Mail::send("email.confirmacion", $data, function ($message){
-						$message->to($_POST["correo"]);
-						$message->from("no-reply@optica-hebreo.com");
-					    $message->subject("no-reply@optica-hebreo.com"); 
-						});
+						$clave=rand(0,9999);
+						$sql="UPDATE tbl_usuario SET clave ='".md5($clave)."' WHERE id= ".$id." ";
+						DB::update($sql);
+						$data=[
+						'name'=>$datos[0]->nombre,
+						'clave'=>$clave
+						];
+						 Mail::send("email.confirmacion", $data, function ($message){
+							$message->to($_POST["correo"]);
+							$message->from("no-reply@opticashebreo.cl");
+						    $message->subject("Recuperacion de clave"); 
+						}); 
+
+						 return Redirect('usuarios?info=up_pass'); 
 			} catch (Exception $e) {
 				return Redirect('error'); 
 			}

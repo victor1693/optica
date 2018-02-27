@@ -38,7 +38,7 @@ class con_login extends Controller {
 		 if($_POST['pass']==""){return Redirect('iniciar?info=pass');exit();}
 		 $sql="
 		 SELECT idUsuario, login, email, clave,COUNT(idUsuario) AS contador 
-		 FROM usuario 
+		 FROM tbl_usuario 
 		 WHERE (email = '".$_POST['correo']."' OR  login = '".$_POST['correo']."') AND clave ='".hash('sha256', $_POST['pass'])."'";
 		 
 		 	try {
