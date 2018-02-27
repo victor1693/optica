@@ -4,7 +4,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="local/resources/views/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="local/resources/views/img/oh.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo session()->get("nombre");?></p>

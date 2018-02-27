@@ -18,7 +18,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="local/resources/views/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="local/resources/views/img/oh.png" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo session()->get("nombre");?></span>
             </a>             
           </li>
@@ -28,10 +28,7 @@
               <span class="hidden-xs">Salir</span>
             </a>             
           </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href=" " data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
+          
         </ul>
       </div>
     </nav>
