@@ -23,13 +23,52 @@
       <h1>
        Ventas
       </h1> 
-    </section>
-
+    </section> 
     <!-- Main content -->
     <section class="content"> 
  
-   <div class="modal fade" id="modal_tarjeta">
-  <div class="modal-dialog " role="document">
+
+<!--MOdal detalles-->
+ <div class="modal fade" id="modal_opciones">
+   <div class="modal-dialog " role="document">
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h5 class="modal-title pull-left"><strong>Opciones avanzadas</strong></h5>
+        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body row">
+        <table class="table table-hover table-condensed">
+          <thead>
+            <th>#</th>
+            <th>Medio de pago</th>
+            <th>COD- Referencia</th>
+            <th>Ver</th>
+            <th>Eliminar</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Tarjeta</td>
+              <td><strong>8F7E9Q168EF</strong></td>
+              <td><a href="#"><i class="fa fa-eye"></i></a><a href="#"></a></td>
+              <td><a href="#"><i style=" margin-left: 5px;" class="fa fa-trash"></i></a></td>
+            
+            </tr>
+          </tbody>
+        </table>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Agregar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+  <div class="modal fade" id="modal_tarjeta">
+   <div class="modal-dialog " role="document">
     <div class="modal-content ">
       <div class="modal-header">
         <h5 class="modal-title pull-left"><strong>Tarjeta</strong></h5>
@@ -40,7 +79,7 @@
       <div class="modal-body row">
         <div class="col-sm-6">
           <div class="form-group has-feedback">
-            <input id="correo" name="correo" type="text" class="form-control" placeholder="Total">
+            <input   id="correo" name="correo" type="text" class="form-control money" placeholder="Total">
             <span class="glyphicon glyphicon-usd form-control-feedback"></span>
           </div>
 
@@ -74,7 +113,7 @@
 
           <div class="col-xs-12" style="padding: 0px;">
             <div class="form-group has-feedback">
-            <input id="correo" name="correo" type="text" class="form-control" placeholder="Nº Operación">
+            <input id="correo" name="correo" type="text" class="form-control numeric" placeholder="Nº Operación">
             <span class="glyphicon glyphicon-ok form-control-feedback"></span>
           </div>
           </div>
@@ -93,7 +132,7 @@
 
 <!--modal cheque-->
  <div class="modal fade" id="modal_cheque">
-  <div class="modal-dialog " role="document"  style="width: 65%;">
+  <div class="modal-dialog " role="document" >
     <div class="modal-content " >
       <div class="modal-header">
         <h5 class="modal-title pull-left"><strong>Cheques</strong></h5>
@@ -102,7 +141,7 @@
         </button>
       </div>
       <div class="modal-body row">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
           <div class="form-group col-xs-6" style="padding: 0px;">
           <label>Banco</label><br>
              <select class="form-control">
@@ -111,39 +150,39 @@
           </div> 
            <div class="form-group col-xs-6"  style="padding: 0px;">
            <label>Nº de cuenta</label><br>
-            <input class="form-control" placeholder="Nº de cuenta" type="" name="">
+            <input class="form-control numeric" placeholder="Nº de cuenta" type="" name="">
           </div> 
             <div class="form-group col-xs-6"  style="padding: 0px;">
             <label>Nº de cheque</label><br>
-              <input class="form-control" placeholder="Nº de cheque" type="" name="">
+              <input class="form-control  numeric" placeholder="Nº de cheque" type="" name="">
             </div>
            
-              <div class="form-group col-xs-6"  style="padding: 0px;">
+            <div class="form-group col-xs-6"  style="padding: 0px;">
               <label>Fecha de cobro</label><br>
-              <input class="form-control" placeholder="Fecha de cobro" type="date" name="">
+              <input id="datapicker" class="form-control" placeholder="Fecha de cobro" name="">
             </div>
 
             <div class="form-group col-xs-6"  style="padding: 0px;">
                <label>Código</label><br>
-              <input class="form-control" placeholder="Código" type="" name="">
+              <input class="form-control numeric" placeholder="Código" type="" name="">
             </div>
            
             <div class="form-group col-xs-6"  style="padding: 0px;">
              <label>Teléfono</label><br>
-              <input class="form-control" placeholder="Teléfono" type="" name="">
+              <input class="form-control numeric" placeholder="Teléfono" type="" name="">
             </div>
 
              <div class="form-group col-xs-6"  style="padding: 0px;">
               <label>RUT</label><br>
-              <input class="form-control" placeholder="RUT" type="" name="">
+              <input class="form-control  numeric" placeholder="RUT" type="" name="">
             </div>
             <div class="form-group col-xs-6 "  style="padding: 0px;">
              <label>Total</label><br>
-              <input class="form-control active" placeholder="Total" type="" name="">
+              <input class="form-control money" placeholder="Total" type="" name="">
             </div> 
         </div>
-         <div class="col-sm-6 text-center" style="padding-top: 40px;">
-        <img src="http://www.scorezero.com/wp-content/uploads/2009/12/cheque-sync.png" style="width: 300px;">
+         <div class="col-sm-5 text-center" style="padding-top: 40px;">
+        <img class="img-responsive"  src="http://www.scorezero.com/wp-content/uploads/2009/12/cheque-sync.png" >
       </div>
       </div>
      
@@ -177,7 +216,7 @@
                       
                      <div class="col-sm-6" style="padding: 0px;">
                        <label>RUT</label>
-                        <input class="form-control" type="text" name="rut">
+                        <input id="rut" class="form-control" type="text" name="rut">
                      </div>
 
                       <div class="col-sm-6" style="padding: 0px;">
@@ -201,7 +240,7 @@
                      </div>
 
                       <div class="col-sm-12" style="padding: 0px;padding-top: 10px;margin-bottom:10px;">
-                        <button class="btn btn-primary form-control">Siguiente</button>
+                        <button onClick="validar_rut()" class="btn btn-primary form-control">Siguiente</button>
                      </div> 
                    </div>  
 
@@ -215,35 +254,35 @@
                    <table class="table table-condensed table-bordered table-hover">
                       <tbody><tr> 
                         <th style="width: 100px;">Detalle</th>
-                        <th>Monto <a class="pull-right" href="#">(+) Opciones</a> </th>  
+                        <th>Monto <a class="pull-right" href="#" data-toggle="modal" data-target="#modal_opciones">(+) Opciones</a> </th>  
                       </tr>
                       <tr> 
                         <td>Efectivo</td> 
-                        <td> <input type="" name="" style="height: 20px;width: 60px;"></td> 
+                        <td> <input class="money" type="" name="" style="height: 20px;width: 80px;"></td> 
                       </tr> 
 
                        <tr> 
                         <td>Tarjeta <a href="#"  data-toggle="modal" data-target="#modal_tarjeta"><strong>(+)</strong></a> </td> 
-                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 60px;"></td>
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
                       </tr> 
                       
                       <tr> 
                         <td>Cheque <a href="#" data-toggle="modal" data-target="#modal_cheque"><strong>(+)</strong></a> <strong></strong></td> 
-                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 60px;"></td>
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
                       </tr> 
 
                       <tr> 
                         <td>OC</td> 
-                        <td> <input type="" name="" style="height: 20px;width: 60px;"></td>
+                        <td> <input class="numeric" type="" name="" style="height: 20px;width: 80px;"></td>
                       </tr> 
 
                       <tr> 
                         <td>Transferencia</td> 
-                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 60px;"></td>
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
                       </tr> 
                        <tr> 
                         <td><strong>Total</strong></td> 
-                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 60px;"></td>
+                        <td> <input class="money" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
                       </tr> 
                     </tbody>
                 </table> 
@@ -260,7 +299,17 @@
             </div>
             <!-- /.tab-content -->
 
+             <div class='col-lg-4 col-md-4 col-sm-12' style="padding: 0px;margin-top: 15px;">
+                <input  class="form-control" type="" name="" placeholder="Buscar...">               
+            </div>
+              <div class='col-lg-4 col-md-4 col-sm-12' style="padding: 0px;margin-top: 15px;">
+                 <button class="btn btn-primary btn-danger" style="margin-left: 10px;">Hoy</button>
+                <button class="btn btn-primary  btn-danger" style="margin-left: 10px;">Últimos 7 días</button>
+                <button class="btn btn-primary  btn-danger" style="margin-left: 10px;">Todo</button>             
+            </div>
+
             <div class="col-sm-12" style="padding: 0px;margin-top: 20px;">
+           
               <div class="box">
             <div class="box-header">
               <h3 class="box-title">Resumen</h3>
@@ -280,6 +329,7 @@
                   <th>Cheque</th>
                   <th>OC</th>
                   <th>Tipo</th>
+                  <th>Abonar</th>
                   <th>Imprimir</th>
                   <th>Editar</th>
                 </tr>
@@ -293,8 +343,37 @@
                   <td>$0</td> 
                   <td>$0</td> 
                   <td>Saldo</td> 
-                  <td></td> 
-                  <td></td> 
+                    <td>
+                       <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"> 
+                        <i class="fa fa-credit-card"></i>
+                      </a>
+                    </td>
+                  <td>
+                    <li class="dropdown"  style="list-style: none;">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"> 
+                        <i class="fa fa-print"></i>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Interno</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">OT</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cliente</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Rep</a></li> 
+                      </ul>
+                    </li>
+                  </td> 
+                  <td>
+                    <li class="dropdown"  style="list-style: none;">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"> 
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cliente</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Producto</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Medio de pago</a></li> 
+                      </ul>
+                    </li>
+                  </td> 
+                
                 </tr>
                  
               </tbody></table>
@@ -314,5 +393,38 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <?php include('local/resources/views/includes/referencias_down.php');?>
+<script>
+function validar_rut()
+{
+  alert( Fn.validaRut($("#rut").val()) ? 'Valido' : 'inválido');
+}
+  var Fn = {
+    // Valida el rut con su cadena completa "XXXXXXXX-X"
+    validaRut : function (rutCompleto) {
+      if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+        return false;
+      var tmp   = rutCompleto.split('-');
+      var digv  = tmp[1]; 
+      var rut   = tmp[0];
+      if ( digv == 'K' ) digv = 'k' ;
+      return (Fn.dv(rut) == digv );
+    },
+    dv : function(T){
+      var M=0,S=1;
+      for(;T;T=Math.floor(T/10))
+        S=(S+T%10*(9-M++%6))%11;
+      return S?S-1:'k';
+    }
+  }
+ 
+  $(function() {
+    $('.money').maskMoney({prefix: '$ '});
+  })
+    $('#datapicker').datepicker({
+      autoclose: true
+    });
+    $(".numeric").numeric();
+    $("#rut").mask("00", {"placeholder": "12345678-9"});
+</script>
 </body>
 </html>

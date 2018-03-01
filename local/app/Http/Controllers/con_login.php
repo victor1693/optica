@@ -17,7 +17,8 @@ class con_login extends Controller {
 				$sql="SELECT * FROM tbl_sucursal";
 				$vista=View::make('login'); 
 				 $datos=DB::select($sql);  
-                 $vista->datos=$datos;
+                 $vista->
+datos=$datos;
 				return $vista;
 		} catch (Exception $e) {
 			
@@ -37,9 +38,9 @@ class con_login extends Controller {
 		 if($_POST['correo']==""){return Redirect('iniciar?info=correo');exit();}
 		 if($_POST['pass']==""){return Redirect('iniciar?info=pass');exit();}
 		 $sql="
-		 SELECT idUsuario, login, email, clave,COUNT(idUsuario) AS contador 
+		 SELECT id, usuario, correo, clave,COUNT(id) AS contador 
 		 FROM tbl_usuario 
-		 WHERE (email = '".$_POST['correo']."' OR  login = '".$_POST['correo']."') AND clave ='".hash('sha256', $_POST['pass'])."'";
+		 WHERE (correo = '".$_POST['correo']."' OR  usuario = '".$_POST['correo']."') AND clave ='".md5($_POST['pass'])."'";
 		 
 		 	try {
                  $datos=DB::select($sql);
@@ -50,23 +51,25 @@ class con_login extends Controller {
           {
 
           	 $sql="
-				 SELECT estado,COUNT(estado) AS contador 
-				 FROM usuario 
-				 WHERE (email = '".$_POST['correo']."' 
-				 OR  login = '".$_POST['correo']."') 
-				 AND clave ='".hash('sha256', $_POST['pass'])."'";				 
+				 SELECT *,id AS contador 
+				 FROM tbl_usuario 
+				 WHERE (correo = '".$_POST['correo']."' 
+				 OR  usuario = '".$_POST['correo']."') 
+				 AND clave ='".md5($_POST['pass'])."'";		
+				 //echo($sql);		
+				// return 0; 
 				 	try {
 		                $datos2=DB::select($sql);
-		                if($datos2[0]->estado==1)
+		                if($datos2[0]->suspendido==0)
           				{
-          					$request->session()->set('correo', $datos[0]->email);
-				            $request->session()->set('nombre', $datos[0]->login);
-				            $request->session()->set('id', $datos[0]->idUsuario);
-				            return Redirect('inicio');
+          					$request->session()->set('correo', $datos2[0]->correo);
+				            $request->session()->set('nombre', $datos2[0]->nombre);
+				            $request->session()->set('id', $datos2[0]->id);
+				            return Redirect('usdash');
           				}
           				else
           				{
-          					return Redirect('iniciar?info=up_user');
+          					return Redirect('iniciar?info=suspendido');
           				}
 		                
 		            } catch (QueryException $e) {

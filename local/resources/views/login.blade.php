@@ -21,7 +21,7 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
        <div class="form-group has-feedback">
-        <select class="form-control">
+        <select name="sucursal" id="sucursal" class="form-control">
           <option value="">Seleccionar</option>
           <?php foreach ($datos as $key) {
             echo '<option value="'.$key->id.'">'.$key->descripcion.'</option>';
@@ -65,15 +65,14 @@
     if($_GET["info"]=="correo") echo "<script>ohSnap('Debe colorcar su correo.', {color: 'orange '});$('#correo').focus();</script>";
     else if($_GET["info"]=="pass") echo "<script>ohSnap('Debe colorcar su clave.', {color: 'orange '});$('#pass').focus();</script>";
     else if($_GET["info"]=="false") echo "<script>ohSnap('Usuario no registrado.', {color: 'red'});$('#pass').focus();</script>";
-  } 
-  if(isset($_GET["activate"]))
-  {
-    if($_GET["activate"]=="false")
-    {
-       echo '<script>swal("Atención!", "Esta cuenta aún no ha sido activada, revice el su correo.", "info");
+    else if($_GET["info"]=="suspendido") 
+      {
+          echo '<script>swal("Atención!", " Esta cuenta ha sido suspendida, pongase en contacto con el administrador.", "error");
      </script>';
-    }
-  }  
+      };
+
+  } 
+ 
  ?>
 </body>
 </html>

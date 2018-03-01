@@ -49,6 +49,13 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/optica/local/resources/views/dist/js/demo.js">
 </script>
+<script src="/optica/local/resources/views/plugins/jquery.maskMoney.js">
+</script>
+<script src="/optica/local/resources/views/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/optica/local/resources/views/plugins/input-mask/jquery.inputmask.date.extensions.js"></script> 
+
+<script src="/optica/local/resources/views/plugins/numeric/jquery.numeric.js">
+</script>
 <script src="https://rawgithub.com/justindomingue/ohSnap/master/ohsnap.js">
 </script>
 <script src="https://sweetalert.js.org/assets/sweetalert/sweetalert.min.js" type="text/javascript">
