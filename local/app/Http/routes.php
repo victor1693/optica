@@ -5,19 +5,7 @@ Route::get('administrator', 'con_administrator@index');
 
 Route::get('error', function (){return view('error.error');});
 Route::get('terminos', function (){return view('terminos');});
-Route::post('login', 'con_login@create');
-
- 
-//Route::get('register', 'con_register@index');
-//Route::get('tokken/{id}', 'con_register@token');
-
-//Route::get('token', function (){return view('error.token');});
-
-//Route::post('registro', 'con_register@create');
-
-//Rutas usuarios
-
-//Rutas administradores
+Route::post('login', 'con_login@create'); 
 
 //Rutas con privilegios
 Route::get('administrator', 'con_administrator@index');
@@ -33,7 +21,7 @@ Route::get('logoutadmin', 'con_administrator@salir');
 Route::post('regusuario', 'con_usuarios@create');
 Route::post('editar_registro', 'con_usuarios@editar');
 Route::post('clave', 'con_configuracion@create');
-
+Route::get('kardex', 'con_kardex@index');
 });
 
 

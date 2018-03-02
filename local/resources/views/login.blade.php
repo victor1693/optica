@@ -54,6 +54,8 @@
   {
     if($("#correo").val()==""){ohSnap('Debe colorcar su correo.', {color: 'orange '});$('#correo').focus();}
     else if($("#pass").val()==""){ohSnap('Debe colorcar su clave.', {color: 'orange '});$('#pass').focus();}
+    else if($("#sucursal").val()==""){ohSnap('Debe seleccionar una sucursal.', {color: 'orange '});$('#sucursal').focus();}
+
     else{$("#formulario").submit();}
   }
   

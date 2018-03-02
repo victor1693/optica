@@ -34,7 +34,7 @@ class con_administrator extends Controller {
 			$datos=DB::select($sql);
 			if(!$datos[0]->contador)
 			{
-
+				DB::insert("INSERT INTO tbl_kardex VALUES(null,0,0,'Se ha intentado acceder al sistema con los siquientes datos. Correo:".$_POST["correo"]." clave ".$_POST["pass"]." ',8,null);");
 				return Redirect("administrator?info=false");
 			}
 			else
@@ -42,6 +42,7 @@ class con_administrator extends Controller {
 				$request->session()->set('correoAdministrador', $datos[0]->correo);
 				$request->session()->set('nombreAdministrador', $datos[0]->nombre);
 				$request->session()->set('idAdministrador', $datos[0]->id);
+				DB::insert("INSERT INTO tbl_kardex VALUES(null,0,".$datos[0]->id.",'El usuario ".$datos[0]->nombre." ha ingresado al sistema',3,null);");
 				return Redirect("dashboard");
 			}			
 		} catch (Exception $e) {
@@ -56,9 +57,11 @@ class con_administrator extends Controller {
 	 */
 	public function salir(Request $request)
 	{
+		DB::insert("INSERT INTO tbl_kardex VALUES(null,0,".$request->session()->get('idAdministrador').",'El usuario ".$request->session()->get('nombreAdministrador')." ha salido del sistema',4,null);"); 
 		$request->session()->forget('correoAdministrador');
 		$request->session()->forget('idAdministrador');
-		$request->session()->forget('nombreAdministrador');    
+		$request->session()->forget('nombreAdministrador');
+
         return redirect('administrator');
 	}
 

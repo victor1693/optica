@@ -30,6 +30,12 @@
             <i class="fa fa-cog"></i> <span>Configuración</span> 
           </a>
         </li> 
+
+         <li>
+          <a href="kardex">
+            <i class="fa fa-user-secret"></i> <span>Kardex</span> 
+          </a>
+        </li> 
       </ul>
     </section>
     <!-- /.sidebar -->
