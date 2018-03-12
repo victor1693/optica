@@ -200,13 +200,14 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs pull-right"> 
               <li><a href="#mpagos" data-toggle="tab"><strong>Paso 3 - </strong> Medio de pago</a></li>
-              <li><a href="#tab_2-2" data-toggle="tab"><strong>Paso 2 - </strong>Producto</a></li>
-              <li class="active"><a href="#tab_1-1" data-toggle="tab"><strong>Paso 1 - </strong>Cliente</a></li> 
+              <li><a href="#mproductos" data-toggle="tab"><strong>Paso 2 - </strong>Producto</a></li>
+              <li class="active"><a href="#mcliente" data-toggle="tab"><strong>Paso 1 - </strong>Cliente</a></li> 
               <li class="pull-left header"><i class="fa fa-th"></i>Nueva venta</li>
             </ul>
             <div class="tab-content ">
+           
             <!--Tab nueva venta-->
-              <div class="tab-pane row" id="tab_1-1"> 
+              <div class="tab-pane row" id="mcliente"> 
                    <div class="col-sm-6">
 
                      <div class="col-sm-6" style="padding: 0px;">
@@ -248,8 +249,182 @@
                      <img src="local/resources/views/iconos/id-card.png" style="width: 220px;">
                    </div> 
               </div>
+
+
+              <!--Tab productos-->
+              <div class="tab-pane active row" id="mproductos"> 
+                  
+                   <div class="col-sm-12">
+                
+                      <select onChange="paginar_producto(this.value)" class="form-control" style="width: 200px;margin: 0 auto;"> 
+                        <option>Producto</option>
+                        <option value="lentes_cerca">Lentes de cerca</option>
+                        <option value="lentes_lejos">Lentes de lejos</option>
+                        <option value="lentes_tarspaso">Traspaso</option>
+                        <option value="lentes_contacto">Lentes de contacto</option>
+                        <option value="lentes_sol">Lentes de sol</option>
+                        <option value="otros_lentes">Otros</option>
+
+                      </select>
+                       <!--Lentes de lentes de cerca-->
+                      <div class="col-sm-12 control_producto" id="lentes_cerca"  style="display: none;">
+                        <h4 class="text-center">Lentes de cerca</h4>
+                         <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>Cristales</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>Armazon</option></select></div>
+                            <div class="col-sm-3"><input class="form-control" type="text" name="" placeholder="Código"></div>
+                            <div class="col-sm-3"><select class="form-control"><option>CIL (Derecho)</option></select></div>
+                         </div>
+                          <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>ESF (Derecho)</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>EJE (Derecho)</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>CIL (Izquierdo)</option></select></div>
+                             <div class="col-sm-3"><select class="form-control"><option>EJE (Izquierdo)</option></select></div>
+                         </div>
+                          <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>EJE (Izquierdo)</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>DP</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>Seguro</option></select></div> 
+                         </div>
+
+                          <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>Oftalmólogo</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>Fecha de entrega</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>Sucursal de retiro</option></select></div> 
+                         </div>
+                         <div class="col-xs-12">
+                             <label>Observaciones</label>
+                             <textarea class="form-control"></textarea>
+                         </div>
+                       </div>   
+                        
+
+                        <!--Lentes de lejos-->
+                        <!--Lentes de lentes de lejos-->
+                      <div class="col-sm-12 control_producto" id="lentes_lejos"   style="display: none;">
+                        <h4 class="text-center">Lentes de lejos</h4>
+                         <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>Cristales</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>Armazon</option></select></div>
+                            <div class="col-sm-3"><input class="form-control" type="text" name="" placeholder="Código"></div>
+                            <div class="col-sm-3"><select class="form-control"><option>CIL (Derecho)</option></select></div>
+                         </div>
+                          <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>ESF (Derecho)</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>EJE (Derecho)</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>CIL (Izquierdo)</option></select></div>
+                             <div class="col-sm-3"><select class="form-control"><option>EJE (Izquierdo)</option></select></div>
+                         </div>
+                          <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>EJE (Izquierdo)</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>DP</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>Seguro</option></select></div>
+                            <div class="col-sm-3"><select class="form-control"><option>H (Derecha)</option></select></div>  
+                         </div>
+
+                          <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>H (Izquierda)</option></select></div>
+                            <div class="col-sm-3"><select class="form-control"><option>Oftalmólogo</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>Fecha de entrega</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>Sucursal de retiro</option></select></div> 
+                         </div>
+                         <div class="col-xs-12">
+                             <label>Observaciones</label>
+                             <textarea class="form-control"></textarea>
+                         </div>
+                       </div>   
+                    <!--Lentes de lentes de traspaso-->
+                      <div class="col-sm-12 control_producto" id="lentes_tarspaso"   style="display: none;">
+                        <h4 class="text-center">Traspaso</h4>
+                         <div class="col-xs-12" style="padding: 0px;">
+                       
+                            <div class="col-sm-3"><select class="form-control"><option>Armazon</option></select></div>
+                            <div class="col-sm-3"><input class="form-control" type="text" name="" placeholder="Código"></div>
+                             <div class="col-sm-3"><select class="form-control"><option>DP</option></select></div>  
+                            <div class="col-sm-3"><select class="form-control"><option>H (Derecha)</option></select></div> 
+                         </div>
+                          <div class="col-xs-12" style="padding: 0px;">
+                          <div class="col-sm-3"><select class="form-control"><option>H (Izquierda)</option></select></div>
+                            <div class="col-sm-3"><select class="form-control"><option>Oftalmólogo</option></select> </div>
+                             <div class="col-sm-3"><select class="form-control"><option>Fecha de entrega</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>Sucursal de retiro</option></select></div>
+                         </div>
+                          
+                         <div class="col-xs-12">
+                             <label>Observaciones</label>
+                             <textarea class="form-control"></textarea>
+                         </div>
+                       </div>   
+                      <!--Lentes de lentes de contacto-->
+                      <div class="col-sm-12 control_producto" id="lentes_contacto"  style="display: none;" >
+                        <h4 class="text-center">Lentes de contacto</h4>
+                 
+                          <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>ESF (Derecho)</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>EJE (Derecho)</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>CIL (Izquierdo)</option></select></div>
+                             <div class="col-sm-3"><select class="form-control"><option>EJE (Izquierdo)</option></select></div>
+                         </div>
+                          <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>EJE (Izquierdo)</option></select> </div>
+                            <div class="col-sm-3"><select class="form-control"><option>DP</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>Seguro</option></select></div>
+                            <div class="col-sm-3"><select class="form-control"><option>Oftalmólogo</option></select> </div> 
+                         </div>
+
+                          <div class="col-xs-12" style="padding: 0px;"> 
+                            <div class="col-sm-3"><select class="form-control"><option>Fecha de entrega</option></select></div> 
+                            <div class="col-sm-3"><select class="form-control"><option>Sucursal de retiro</option></select></div> 
+                         </div>
+                         <div class="col-xs-12">
+                             <label>Observaciones</label>
+                             <textarea class="form-control"></textarea>
+                         </div>
+                       </div>    
+                     <!--Lentes de lentes de sol-->
+                      <div class="col-sm-12 control_producto" id="lentes_sol"  style="display: none;" >
+                        <h4 class="text-center">Lentes de sol</h4>                 
+                          <div class="col-xs-12" style="padding: 0px;">
+                            <div class="col-sm-3"><select class="form-control"><option>Armazon</option></select> </div>
+                            <div class="col-sm-3"><input class="form-control" type="text" name="" placeholder="Código"></div
+                         </div> 
+                         <div class="col-xs-12">
+                             <label>Observaciones</label>
+                             <textarea class="form-control"></textarea>
+                         </div>
+                       </div>   
+
+                    <div class="col-sm-12 control_producto" id="otros_lentes"  style="display: none;" >
+                        <h4 class="text-center">Otros</h4>                 
+                          <div class="col-xs-12" style="padding: 0px;"> 
+                            <div class="col-sm-3">
+                            <select class="form-control">
+                            <option>Ajuste</option>
+                            <option>Cordon</option>
+                            <option>liquido limpieza</option>
+                            <option>estuche</option>
+                            <option>liquido lente c ontacto</option>
+                            <option>paño limpieza</option>
+                            <option>plaquetas</option>
+                            <option>tornillos</option>
+                            <option>lente contacto cosmetico</option>
+                            </select> 
+                            </div>
+                             
+                         </div> 
+                         <div class="col-xs-12">
+                             <label>Observaciones</label>
+                             <textarea class="form-control"></textarea>
+                         </div>
+                       </div>   
+                    </div> 
+
+                        <!--Lentes de lejos-->
+                  </div>
+              </div>
+
               <!--Tab medios de pago-->
-              <div class="tab-pane active row" id="mpagos"> 
+              <div class="tab-pane row" id="mpagos"> 
                    <div class="col-sm-6">   
                    <table class="table table-condensed table-bordered table-hover">
                       <tbody><tr> 
@@ -393,11 +568,21 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <?php include('local/resources/views/includes/referencias_down.php');?>
-<script>
+ 
+<script> 
+
+function paginar_producto(id)
+{
+  $(".control_producto").hide();
+  $("#"+id).show();
+}
+
 function validar_rut()
 {
   alert( Fn.validaRut($("#rut").val()) ? 'Valido' : 'inválido');
 }
+
+
   var Fn = {
     // Valida el rut con su cadena completa "XXXXXXXX-X"
     validaRut : function (rutCompleto) {
@@ -423,8 +608,13 @@ function validar_rut()
     $('#datapicker').datepicker({
       autoclose: true
     });
+
     $(".numeric").numeric();
-    $("#rut").mask("00", {"placeholder": "12345678-9"});
+    //$("#rut").mask("00", {"placeholder": "12345678-9"});
+
+  //Paginar productos
+  
+
 </script>
 </body>
 </html>

@@ -24,8 +24,7 @@ class con_usuarios extends Controller {
                  $vista->datos=$datos;
 
                  $datos=DB::select("SELECT * FROM tbl_privilegios");  
-                 $vista->privilegios=$datos;
-
+                 $vista->privilegios=$datos; 
                  return $vista;
 		} catch (Exception $e) {
 			return Redirect('error'); 
@@ -77,6 +76,7 @@ class con_usuarios extends Controller {
 			$sql="UPDATE tbl_usuario SET suspendido = 1 WHERE id= ".$id." ";
 			try {
 			DB::update($sql);
+			DB::insert("INSERT INTO tbl_kardex VALUES(null,0,".session()->get("idAdministrador").", 'El usuario ".session()->get("nombreAdministrador")." le ha suspendido al usuario ID: ".$id."',2,null);");
 			return Redirect('usuarios?info=active_usuario');
 			} catch (Exception $e) {
 				return Redirect('error'); 
@@ -91,6 +91,7 @@ class con_usuarios extends Controller {
 			$sql="UPDATE tbl_usuario SET suspendido = 0 WHERE id= ".$id." ";
 			try {
 			DB::update($sql);
+			DB::insert("INSERT INTO tbl_kardex VALUES(null,0,".session()->get("idAdministrador").", 'El usuario ".session()->get("nombreAdministrador")." le ha activado al usuario ID: ".$id."',2,null);");
 			return Redirect('usuarios?info=suspend_usuario');
 			} catch (Exception $e) {
 				return Redirect('error'); 
@@ -111,6 +112,7 @@ class con_usuarios extends Controller {
 
 		try {
  			$datos=DB::select($sql);
+ 			DB::insert("INSERT INTO tbl_kardex VALUES(null,0,".session()->get("idAdministrador").", 'El usuario ".session()->get("nombreAdministrador")." le ha actualizado los datos del El usuario ".$_POST['ed_correo']."' ,5,null);");
 			return Redirect('usuarios?info=up_true');
 		} catch (Exception $e) {
 			return Redirect('error'); 
@@ -131,7 +133,7 @@ class con_usuarios extends Controller {
 		try {
 			$datos=DB::select($sql);
 			if($datos[0]->contador)
-			{
+			{ 
 				return Redirect('usuarios?info=require_usuario');
 			}
 						
@@ -156,6 +158,7 @@ class con_usuarios extends Controller {
 		$sql="INSERT INTO tbl_usuario VALUES(null,'".$_POST['nombre']."','".$_POST['correo']."','".$_POST['usuario']."',1,'".md5($_POST['clave'])."',0,null)";
 		try {
 			DB::insert($sql);
+			DB::insert("INSERT INTO tbl_kardex VALUES(null,0,".session()->get("idAdministrador").", 'El usuario ".session()->get("nombreAdministrador")." registrado al usuario  ".$_POST['correo']." ',9,null);");
 			return Redirect('usuarios?reg=true');			
 		} catch (Exception $e) {
 			return Redirect('error'); 

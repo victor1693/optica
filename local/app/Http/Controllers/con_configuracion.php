@@ -32,8 +32,8 @@ class con_configuracion extends Controller {
 
 		try {
 			DB::UPDATE($sql);
-			return Redirect('configuracion?info=up_user');
-			
+			DB::insert("INSERT INTO tbl_kardex VALUES(null,0,".session()->get("idAdministrador").",'El administrador ".$_POST['email']."  ha cambiado su clave o correo',2,null);");
+			return Redirect('configuracion?info=up_user'); 
 		} catch (Exception $e) {
 			return Redirect('error');
 		}
