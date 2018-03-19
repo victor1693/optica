@@ -50,9 +50,12 @@
 <script src="/optica/local/resources/views/dist/js/demo.js">
 </script>
 <script src="/optica/local/resources/views/plugins/jquery.maskMoney.js">
+</script> 
+
+<script src="/optica/local/resources/views/plugins/select2/select2.full.min.js">
 </script>
-<script src="/optica/local/resources/views/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="/optica/local/resources/views/plugins/input-mask/jquery.inputmask.date.extensions.js"></script> 
+ 
+
 
 <script src="/optica/local/resources/views/plugins/numeric/jquery.numeric.js">
 </script>
@@ -60,3 +63,7 @@
 </script>
 <script src="https://sweetalert.js.org/assets/sweetalert/sweetalert.min.js" type="text/javascript">
 </script>
+
+<script src="/optica/local/resources/views/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/optica/local/resources/views/plugins/input-mask/jquery.inputmask.date.extensions.js"></script> 
+<script src="/optica/local/resources/views/plugins/input-mask/jquery.inputmask.extensions.js"></script>

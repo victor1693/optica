@@ -28,8 +28,9 @@ Route::get('kardex', 'con_kardex@index');
 
 //Rutas con privilegios
 Route::group(['middleware' =>'login'], function () { 
-//Route::get('inicio', 'con_home@index');
-Route::get('usdash', function (){return view('us_dash');}); 
+Route::get('usdash', 'con_home@index');
+Route::get('procesarv', 'con_ventas@create');//procesar ventas
+//Route::get('usdash', function (){return view('us_dash');}); 
 Route::get('logout', 'con_login@salir'); 
 });
  
