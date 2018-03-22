@@ -8,7 +8,6 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <?php include('local/resources/views/includes/referencias_top.html');?>
-  <meta name="csrf-token" content="<?php echo csrf_token(); ?>">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -36,7 +35,7 @@
       <div class="modal-header">
         <h5 class="modal-title pull-left"><strong>Opciones avanzadas</strong></h5>
         <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body row">
@@ -54,13 +53,14 @@
               <td>Tarjeta</td>
               <td><strong>8F7E9Q168EF</strong></td>
               <td><a href="#"><i class="fa fa-eye"></i></a><a href="#"></a></td>
-              <td><a href="#"><i style=" margin-left: 5px;" class="fa fa-trash"></i></a></td>            
+              <td><a href="#"><i style=" margin-left: 5px;" class="fa fa-trash"></i></a></td>
+            
             </tr>
           </tbody>
         </table>        
       </div>
       <div class="modal-footer">
-       <!-- <button type="button" class="btn btn-primary">Agregar</button>-->
+        <button type="button" class="btn btn-primary">Agregar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
       </div>
     </div>
@@ -79,41 +79,41 @@
       <div class="modal-body row">
         <div class="col-sm-6">
           <div class="form-group has-feedback">
-            <input   id="m_total" name="correo" type="text" class="form-control money con_modal" placeholder="Total">
+            <input   id="correo" name="correo" type="text" class="form-control money" placeholder="Total">
             <span class="glyphicon glyphicon-usd form-control-feedback"></span>
           </div>
 
           <div class="form-group col-xs-6" style="padding: 0px;">
-             <select id="m_tarjeta" class="form-control con_modal">
-               <option value="">Tarjeta</option>
-               <option value="RedCompra">RedCompra</option>
-               <option value="MasterCard">MasterCard</option>
-               <option value="Visa">Visa</option>
-               <option value="AbcDin">AbcDin</option>
+             <select class="form-control">
+               <option>Tarjeta</option>
+               <option value="">RedCompra</option>
+               <option value="">MasterCard</option>
+               <option value="">Visa</option>
+               <option value="">AbcDin</option>
              </select>
           </div>
 
            <div class="form-group col-xs-6"  style="padding: 0px;">
-             <select id="m_cuotas" class="form-control con_modal">
-               <option value="">Cuotas</option>
-               <option value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-               <option value="4">4</option>
-               <option value="5">5</option>
-               <option value="6">6</option>
-               <option value="7">7</option>
-               <option value="8">8</option>
-               <option value="9">9</option>
-               <option value="10">10</option>
-               <option value="11">11</option>
-               <option value="12">12</option>
+             <select class="form-control">
+               <option>Cuotas</option>
+               <option value="">1</option>
+               <option value="">2</option>
+               <option value="">3</option>
+               <option value="">4</option>
+               <option value="">5</option>
+               <option value="">6</option>
+               <option value="">7</option>
+               <option value="">8</option>
+               <option value="">9</option>
+               <option value="">10</option>
+               <option value="">11</option>
+               <option value="">12</option>
              </select>
           </div>
 
           <div class="col-xs-12" style="padding: 0px;">
             <div class="form-group has-feedback">
-            <input id="m_operacion"  name="correo" type="text" class="form-control numeric con_modal" placeholder="Nº Operación">
+            <input id="correo" name="correo" type="text" class="form-control numeric" placeholder="Nº Operación">
             <span class="glyphicon glyphicon-ok form-control-feedback"></span>
           </div>
           </div>
@@ -123,7 +123,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onClick="validar_tarjeta()">Agregar</button>
+        <button type="button" class="btn btn-primary">Agregar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
       </div>
     </div>
@@ -144,49 +144,41 @@
         <div class="col-sm-7">
           <div class="form-group col-xs-6" style="padding: 0px;">
           <label>Banco</label><br>
-             <select id="c_banco" class="select2 form-control  con_cheque" style="width: 100%;">
-               <option value="">Banco</option> 
-               <option value="ES">Estado</option>
-                <option value="CH">Chile</option>
-                <option value="SA">Santander</option>
-                <option value="BC">BCI</option>
-                <option value="FA">Falabella</option>
-                <option value="BI">Bice</option>
-                <option value="SE">Security</option>
-                <option value="OT">Otro</option> 
+             <select class="form-control">
+               <option>Banco</option>  
              </select>
           </div> 
            <div class="form-group col-xs-6"  style="padding: 0px;">
            <label>Nº de cuenta</label><br>
-            <input id="c_cuenta" class="form-control numeric con_cheque" placeholder="Nº de cuenta" type="" name="">
+            <input class="form-control numeric" placeholder="Nº de cuenta" type="" name="">
           </div> 
             <div class="form-group col-xs-6"  style="padding: 0px;">
             <label>Nº de cheque</label><br>
-              <input id="c_cheque" class="form-control  numeric con_cheque" placeholder="Nº de cheque" type="" name="">
+              <input class="form-control  numeric" placeholder="Nº de cheque" type="" name="">
             </div>
            
             <div class="form-group col-xs-6"  style="padding: 0px;">
               <label>Fecha de cobro</label><br>
-              <input id="c_fecha" class="form-control datapicker con_cheque" placeholder="Fecha de cobro" name="">
+              <input id="" class="form-control datapicker" placeholder="Fecha de cobro" name="">
             </div>
 
             <div class="form-group col-xs-6"  style="padding: 0px;">
                <label>Código</label><br>
-              <input id="c_codigo" class="form-control numeric con_cheque" placeholder="Código" type="" name="">
+              <input class="form-control numeric" placeholder="Código" type="" name="">
             </div>
            
             <div class="form-group col-xs-6"  style="padding: 0px;">
              <label>Teléfono</label><br>
-              <input id="c_telefono" class="form-control numeric con_cheque" placeholder="Teléfono" type="" name="">
+              <input class="form-control numeric" placeholder="Teléfono" type="" name="">
             </div>
 
              <div class="form-group col-xs-6"  style="padding: 0px;">
               <label>RUT</label><br>
-              <input id="c_rut" class="form-control  numeric con_cheque" placeholder="RUT" type="" name="">
+              <input class="form-control  numeric" placeholder="RUT" type="" name="">
             </div>
             <div class="form-group col-xs-6 "  style="padding: 0px;">
              <label>Total</label><br>
-              <input id="c_total" class="form-control money con_cheque" placeholder="Total" type="" name="">
+              <input class="form-control money" placeholder="Total" type="" name="">
             </div> 
         </div>
          <div class="col-sm-5 text-center" style="padding-top: 40px;">
@@ -195,7 +187,7 @@
       </div>
      
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onClick="validar_cheque()">Agregar</button>
+        <button type="button" class="btn btn-primary">Agregar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
       </div>
     </div>
@@ -207,15 +199,15 @@
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs pull-right"> 
-              <li class="active"><a href="#mpagos" data-toggle="tab"><strong>Paso 3 - </strong> Medio de pago</a></li>
+              <li><a href="#mpagos" data-toggle="tab"><strong>Paso 3 - </strong> Medio de pago</a></li>
               <li><a href="#mproductos" data-toggle="tab"><strong>Paso 2 - </strong>Producto</a></li>
-              <li class=""><a href="#mcliente" data-toggle="tab"><strong>Paso 1 - </strong>Cliente</a></li> 
+              <li class="active"><a href="#mcliente" data-toggle="tab"><strong>Paso 1 - </strong>Cliente</a></li> 
               <li class="pull-left header"><i class="fa fa-th"></i>Nueva venta</li>
             </ul>
             <div class="tab-content ">
            
             <!--Tab nueva venta-->
-              <div class="tab-pane row " id="mcliente"> 
+              <div class="tab-pane row active" id="mcliente"> 
                    <div class="col-sm-6">
 
                      <div class="col-sm-6" style="padding: 0px;">
@@ -630,7 +622,7 @@
               </div>
 
               <!--Tab medios de pago-->
-              <div class="tab-pane row active" id="mpagos"> 
+              <div class="tab-pane row" id="mpagos"> 
                    <div class="col-sm-6">   
                    <table class="table table-condensed table-bordered table-hover">
                       <tbody><tr> 
@@ -639,31 +631,31 @@
                       </tr>
                       <tr> 
                         <td>Efectivo</td> 
-                        <td> <input id="pago_efectivo" class="money" type="" name="" style="height: 20px;width: 80px;"></td> 
+                        <td> <input class="money" type="" name="" style="height: 20px;width: 80px;"></td> 
                       </tr> 
 
                        <tr> 
                         <td>Tarjeta <a href="#"  data-toggle="modal" data-target="#modal_tarjeta"><strong>(+)</strong></a> </td> 
-                        <td> <input id="pago_total_tarjeta" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
                       </tr> 
                       
                       <tr> 
                         <td>Cheque <a href="#" data-toggle="modal" data-target="#modal_cheque"><strong>(+)</strong></a> <strong></strong></td> 
-                        <td> <input id="pago_total_cheque" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
                       </tr> 
 
                       <tr> 
                         <td>OC</td> 
-                        <td> <input id="pago_orden_compra" class="numeric" type="" name="" style="height: 20px;width: 80px;"></td>
+                        <td> <input class="numeric" type="" name="" style="height: 20px;width: 80px;"></td>
                       </tr> 
 
                       <tr> 
                         <td>Transferencia</td> 
-                        <td> <input id="pago_transferencia" class="money" type="" name="" style="height: 20px;width: 80px;"></td>
+                        <td> <input readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
                       </tr> 
                        <tr> 
                         <td><strong>Total</strong></td> 
-                        <td> <input id="pago_total" class="money" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
+                        <td> <input class="money" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
                       </tr> 
                     </tbody>
                 </table> 
@@ -771,7 +763,7 @@
   </div>
 
 
-<div class="control-sidebar-bg"></div>
+  <div class="control-sidebar-bg"></div>
 </div>
 <?php include('local/resources/views/includes/referencias_down.php');?>
 <?php include('local/resources/views/includes_js/us_dash.php');?>

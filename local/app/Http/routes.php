@@ -22,6 +22,7 @@ Route::post('regusuario', 'con_usuarios@create');
 Route::post('editar_registro', 'con_usuarios@editar');
 Route::post('clave', 'con_configuracion@create');
 Route::get('kardex', 'con_kardex@index');
+
 });
 
 
@@ -32,5 +33,13 @@ Route::get('usdash', 'con_home@index');
 Route::get('procesarv', 'con_ventas@create');//procesar ventas
 //Route::get('usdash', function (){return view('us_dash');}); 
 Route::get('logout', 'con_login@salir'); 
+
+
+Route::post('temptarjetac', 'con_ventas@temp_tarjeta');//insertamos en la tabla temporal tarjetas
+Route::post('tempchequec', 'con_ventas@temp_cheque');//insertamos en la tabla temporal tarjetas
+
+Route::post('temptarjetas', 'con_ventas@s_temp_tarjeta');//insertamos en la tabla temporal tarjetas
+Route::post('tempcheques', 'con_ventas@s_temp_cheque');//insertamos en la tabla temporal tarjetas
+
 });
  
