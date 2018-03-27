@@ -34,12 +34,16 @@ Route::get('procesarv', 'con_ventas@create');//procesar ventas
 //Route::get('usdash', function (){return view('us_dash');}); 
 Route::get('logout', 'con_login@salir'); 
 
-
+Route::post('pventas', 'con_ventas@procesar_venta');//insertamos en la tabla temporal tarjetas
+Route::post('listart', 'con_ventas@listar_tabla');//listamos la tabla de ventas
 Route::post('temptarjetac', 'con_ventas@temp_tarjeta');//insertamos en la tabla temporal tarjetas
 Route::post('tempchequec', 'con_ventas@temp_cheque');//insertamos en la tabla temporal tarjetas
 
-Route::post('temptarjetas', 'con_ventas@s_temp_tarjeta');//insertamos en la tabla temporal tarjetas
-Route::post('tempcheques', 'con_ventas@s_temp_cheque');//insertamos en la tabla temporal tarjetas
+Route::post('temptarjetas', 'con_ventas@s_temp_tarjeta');//seleccionamos en la tabla temporal tarjetas
+Route::post('tempcheques', 'con_ventas@s_temp_cheque');//seleccionamos en la tabla temporal tarjetas
+
+Route::post('temptarjetad', 'con_ventas@d_temp_tarjeta');//eliminamos en la tabla temporal tarjetas
+Route::post('tempchequed', 'con_ventas@d_temp_cheque');//eliminamos en la tabla temporal tarjetas
 
 });
  

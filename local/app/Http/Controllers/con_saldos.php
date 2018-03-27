@@ -2,10 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use View;
+
 use Illuminate\Http\Request;
-use DB; 
-class con_home extends Controller {
+
+class con_saldos extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -14,37 +14,7 @@ class con_home extends Controller {
 	 */
 	public function index()
 	{
-		$vista=View::make('us_dash');
-		//Consulta de armazon
-		$sql="SELECT * FROM tbl_armazones";
-		$armazones=DB::select($sql);	
-		//Consulta de armazon
-		$sql="SELECT * FROM tbl_sucursal";
-		$sucursal=DB::select($sql);
-		//Consulta de datos
-		$sql="SELECT * FROM tbl_datos";
-		$datos=DB::select($sql);
-		//Consulta de eje
-		$sql="SELECT * FROM tbl_eje order by eje desc";
-		$eje=DB::select($sql);
-
-		//Consulta de eje
-		$sql="SELECT * FROM tbl_medicos";
-		$medicos=DB::select($sql);
-
-		//Consulta de dp
-		$sql="SELECT * FROM tbl_dp order by dp desc";
-		$dp=DB::select($sql);
-
-		
-
-		$vista->medicos=$medicos; 
-		$vista->dp=$dp; 
-		$vista->eje=$eje; 
-		$vista->armazones=$armazones;
-		$vista->sucursal=$sucursal; 
-		$vista->datos=$datos;  
-		return $vista;
+		//
 	}
 
 	/**
