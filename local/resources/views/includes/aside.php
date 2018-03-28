@@ -22,15 +22,13 @@
             </span>
           </a>
           <ul class="treeview-menu " style="display: block;">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Ingresar ventas</a></li>
+            <li><a href="usdash"><i class="fa fa-circle-o"></i>Ingresar ventas</a></li>
             <li><a href="saldos"><i class="fa fa-circle-o"></i>Ingresar Saldos</a></li> 
-            <li><a href="#"><i class="fa fa-circle-o"></i>Cotización</a></li> 
-            <li><a href="#"><i class="fa fa-circle-o"></i>Ver - Imprimir</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Buscar</a></li>  
-            <li><a href="#"><i class="fa fa-circle-o"></i>Mis ventas</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Mis contabilizados</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Entrega de OT</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Promociones 2017</a></li>    
+            <li><a href="cotizacion"><i class="fa fa-circle-o"></i>Cotización</a></li> 
+            <li><a href="imprimir"><i class="fa fa-circle-o"></i>Ver - Imprimir</a></li>
+            <li><a href="buscar"><i class="fa fa-circle-o"></i>Buscar</a></li>  
+            <li><a href="misventas"><i class="fa fa-circle-o"></i>Mis ventas</a></li>
+            <li><a href="contabilizados"><i class="fa fa-circle-o"></i>Mis contabilizados</a></li>               
           </ul>
         </li>
 
@@ -43,8 +41,8 @@
           </a>
           <ul class="treeview-menu">
              <li><a href="#"><i class="fa fa-circle-o"></i>Inscripción</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Fabricación</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Entregado</a></li>    
+            <li><a href="fabricacion"><i class="fa fa-circle-o"></i>Fabricación</a></li>
+            <li><a href="entregado"><i class="fa fa-circle-o"></i>Entregado</a></li>    
           </ul>
         </li>
       </ul>

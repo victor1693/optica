@@ -22,7 +22,7 @@
     <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-       Ventas
+       Saldos
       </h1> 
     </section> 
     <!-- Main content -->
@@ -200,8 +200,7 @@
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs pull-right"> 
-              <li class=""><a href="#mpagos" data-toggle="tab"><strong>Paso 3 - </strong> Medio de pago</a></li>
-              <li><a href="#mproductos" data-toggle="tab"><strong>Paso 2 - </strong>Producto</a></li>
+              <li class=""><a href="#mpagos" data-toggle="tab"><strong>Paso 2 - </strong> Medio de pago</a></li> 
               <li class="active"><a href="#mcliente" data-toggle="tab"><strong>Paso 1 - </strong>Cliente</a></li> 
               <li class="pull-left header"><i class="fa fa-th"></i>Nueva venta</li>
             </ul>
@@ -253,380 +252,7 @@
 
 
               <!--Tab productos-->
-              <div class="tab-pane row" id="mproductos"> 
-                  
-                   <div class="col-sm-12">
-                
-                    <div class="col-sm-12 text-center">
-                        <select id="select_producto" onChange="paginar_producto(this.value)" class="form-control" style="width: 200px;margin: 0 auto;"> 
-                          <option value="">Producto</option>
-                          <option value="lentes_cerca">Lentes de cerca</option>
-                          <option value="lentes_lejos">Lentes de lejos</option>
-                          <option value="lentes_tarspaso">Traspaso</option>
-                          <option value="lentes_contacto">Lentes de contacto</option>
-                          <option value="lentes_sol">Lentes de sol</option>
-                          <option value="otros_lentes_selector">Otros</option> 
-                      </select> 
-                    </div>
-                        <!--otros-->  
-                    <div class="col-sm-12 control_producto" id="otros_lentes_selector" style="display: none;">
-                        <h4 class="text-center">Otros</h4>                 
-                          <div class="col-xs-12" style="padding: 0px;"> 
-                            <div class="col-sm-3">
-                            <select id="len_otros_ajuste" class="form-control">
-                            <option value="">Ajuste</option>
-                            <option value="Cordon">Cordon</option>
-                            <option value="liquido_limpieza">liquido limpieza</option>
-                            <option value="estuche">estuche</option>
-                            <option value="liquido_lente">liquido lente c ontacto</option>
-                            <option value="pano">paño limpieza</option>
-                            <option value="plaquetas">plaquetas</option>
-                            <option value="tornillos">tornillos</option>
-                            <option value="lente_contacto">lente contacto cosmetico</option>
-                            </select> 
-                            </div>
-                             
-                         </div> 
-                         <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_otros_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                            <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                       </div>   
-
-                       <!--Lentes de lentes de cerca-->
-                      <div class="col-sm-12 control_producto" id="lentes_cerca"  style="display: none;">
-                            <h4 class="text-center lentes_cerca">Lentes de cerca</h4>
-                             <div class="col-xs-12" style="padding: 0px;">
-                                <div class="col-sm-3"><input id="len_cer_cristales" class="form-control" style="width: 100%;" placeholder="Cristales"></input> </div>
-                                <div class="col-sm-3">
-                                <select id="len_cer_armazon" class="select2 form-control " style="width: 100%;">
-                                <option value="">Armazon</option>
-                                <?php foreach ($armazones as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->marca.'</option>';
-                                } ?>
-                                </select></div>
-                                <div class="col-sm-3"><input id="len_cer_codigo" class="form-control" type="text" name="" placeholder="Código"></div>
-                                <div class="col-sm-3"><select id="len_cer_cil_derecho" class="form-control select2" style="width: 100%;"><option value="">CIL (Derecho)</option>
-                                   <?php foreach ($datos as $key) {
-                                   echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                                  } ?>
-                                </select></div>
-                             </div>
-                              <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                                <div class="col-sm-3"><select id="len_cer_esf_derecho" class="form-control select2" style="width: 100%;"><option value="">ESF (Derecho)</option>
-                                   <?php foreach ($datos as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                                } ?>
-                                </select> </div>
-                                <div class="col-sm-3"><select id="len_cer_eje_derecho" class="form-control select2" style="width: 100%;"><option value="">EJE (Derecho)</option>
-                                   <?php foreach ($eje as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                                } ?>
-                                </select></div> 
-                                <div class="col-sm-3"><select id="len_cer_cil_izquierdo" class="form-control select2" style="width: 100%;">
-                                <option value="">CIL (Izquierdo)</option>
-                                <?php foreach ($datos as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                                } ?>
-                                </select></div>
-                                 <div class="col-sm-3"><select id="len_cer_esf_izquierdo" class="form-control select2" style="width: 100%;">
-                                 <option value="">ESF (Izquierdo)</option>
-                                   <?php foreach ($datos as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                                } ?>
-                                 </select></div>
-                             </div>
-                              <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                                <div class="col-sm-3"><select id="len_cer_eje_izquierdo" class="form-control select2" style="width: 100%;">
-                                <option value="">EJE (izquierdo)</option> 
-                                  <?php foreach ($eje as $key) {
-                                   echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                                  } ?> 
-                                </select> </div>
-                                <div class="col-sm-3"><select id="len_cer_dp" class="form-control select2" style="width: 100%;">
-                                <option value="">DP</option>
-                                  <?php foreach ($dp as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
-                                } ?></select></div> 
-                                <div class="col-sm-3"><select id="len_cer_seguro" class="form-control select2" style="width: 100%;"> 
-                                    <option value="">Seguro</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                </select></div> 
-                             </div> 
-                              <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                                <div class="col-sm-3"><select id="len_cer_oftalmologo" class="form-control select2" style="width: 100%;"><option value="">Oftalmólogo</option>
-                                <?php foreach ($medicos as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->nombre.'</option>';
-                                } ?>
-                                </select> </div>
-                                <div class="col-sm-3">
-
-                                <input type="text" id="len_cer_fecha_entrega" class="form-control datapicker" placeholder="Fecha de entrega" name=""></div> 
-                                <div class="col-sm-3">
-                                <select id="len_cer_sucursal" class="form-control select2" style="width: 100%;">
-                                <option value="">Sucursal de retiro</option>
-                                 <?php foreach ($sucursal as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->descripcion.'</option>';
-                                } ?>
-                                </select>
-                                </div> 
-                             </div>
-                             <div class="col-xs-12"> 
-                                 <label>Observaciones</label>
-                                 <textarea id="len_cer_observacion" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                             </div>
-                             <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                                <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                             </div>
-                       </div>   
-                        
-
-                        <!--Lentes de lejos-->
-                        <!--Lentes de lentes de lejos-->
-                      <div class="col-sm-12 control_producto" id="lentes_lejos"   style="display: none;">
-                        <h4 class="text-center">Lentes de lejos</h4>
-                         <div class="col-xs-12" style="padding: 0px;">
-                            <div class="col-sm-3"><input id="len_lej_cristales" class="form-control" placeholder="Cristales" style="width:100%;"/> </div>
-                            <div class="col-sm-3"><select id="len_lej_armazon" class="form-control select2" style="width:100%;"><option value="">Armazon</option> 
-                             <?php foreach ($armazones as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->marca.'</option>';
-                              } ?></select></div>
-                            <div class="col-sm-3"><input id="len_lej_codigo" class="form-control" type="text" name="" placeholder="Código"></div>
-                            <div class="col-sm-3"><select id="len_lej_cil_derecho" class="form-control select2" style="width:100%;"><option value="">CIL (Derecho)</option>
-                             <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                              </select>
-                            </div>
-                         </div>
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                            <div class="col-sm-3"><select id="len_lej_esf_derecho" class="form-control select2" style="width:100%;"><option value="">ESF (Derecho)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select> </div>
-                            <div class="col-sm-3"><select id="len_lej_eje_derecho" class="form-control select2" style="width:100%;"><option value="">EJE (Derecho)</option>
-                               <?php foreach ($eje as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                              } ?>
-                            </select></div> 
-                            <div class="col-sm-3"><select id="len_lej_cil_izquierdo" class="form-control select2" style="width:100%;"><option value="">CIL (Izquierdo)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select></div>
-                             <div class="col-sm-3"><select id="len_lej_esf_izquierdo" class="form-control select2" style="width:100%;"><option value="">ESF (Izquierdo)</option>
-                              <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?></select></div>
-                         </div>
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                            <div class="col-sm-3"><select id="len_lej_eje_izquierdo" class="form-control select2" style="width:100%;"><option value="">EJE (izquierdo)</option>
-                             <?php foreach ($eje as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                              } ?></select> </div>
-                            <div class="col-sm-3"><select id="len_lej_dp" class="form-control select2" style="width:100%;"><option value="">DP</option>
-                             <?php foreach ($dp as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
-                              } ?></select></div> 
-                            <div class="col-sm-3"><select id="len_lej_seguro" class="form-control select2" style="width:100%;"><option value="">Seguro</option>
-                            <option value="A">A</option>
-                            <option value="A">B</option>
-                            <option value="A">C</option>
-                            <option value="A">D</option>
-
-                            </select></div>
-
-                            <div class="col-sm-3"><select id="len_lej_h_derecha" class="form-control select2" style="width:100%;"><option value="">H (Derecha)</option>
-                             <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                              </select></div>  
-                         </div>
-
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                            <div class="col-sm-3"><select id="len_lej_h_izquierda" class="form-control select2" style="width:100%;"><option value="">H (Izquierda)</option>
-                             <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select></div>
-                            <div class="col-sm-3"><select id="len_lej_oftalmologo" class="form-control select2" style="width:100%;"><option value="">Oftalmólogo</option>
-                             <?php foreach ($medicos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->nombre.'</option>';
-                              } ?></select> </div>
-                            <div class="col-sm-3"><input id="len_lej_fecha" placeholder="Fecha de entrega" type="text" class="form-control datapicker" name=""></div> 
-                            <div class="col-sm-3"><select id="len_lej_sucursal" class="form-control select2" style="width:100%;"><option value="">Sucursal de retiro</option>
-                               <?php foreach ($sucursal as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->descripcion.'</option>';
-                              } ?>
-                            </select></div> 
-                         </div>
-                             <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_lej_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                            <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                       </div>  
-
-                    <!--Lentes de lentes de traspaso-->
-                      <div class="col-sm-12 control_producto" id="lentes_tarspaso"   style="display: none;">
-                        <h4 class="text-center">Traspaso</h4>
-                         <div class="col-xs-12" style="padding: 0px;">
-                       
-                            <div class="col-sm-3"><select id="len_tras_armazon" class="form-control select2" style="width:100%;"><option value="">Armazon</option>
-                                <?php foreach ($armazones as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->marca.'</option>';
-                              } ?>
-                            </select>
-                             
-                            </div>
-                            <div class="col-sm-3"><input id="len_tras_codigo" class="form-control" type="text" name="" placeholder="Código"></div>
-                             <div class="col-sm-3"><select id="len_tras_dp" class="form-control select2" style="width:100%;"><option value="">DP</option>
-                               <?php foreach ($dp as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
-                              } ?>
-                             </select></div>  
-                            <div class="col-sm-3"><select id="len_tras_h_derecha" class="form-control select2" style="width:100%;"><option value="">H (Derecha)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select></div> 
-                         </div>
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                          <div class="col-sm-3"><select id="len_tras_h_izquierda" class="form-control select2" style="width:100%;"><option value="">H (Izquierda)</option>
-                             <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                          </select></div>
-                            <div class="col-sm-3"><select id="len_tras_oftalmologo" class="form-control select2" style="width:100%;"><option value="">Oftalmólogo</option>
-                              <?php foreach ($medicos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->nombre.'</option>';
-                              } ?>
-                            </select> </div>
-                             <div class="col-sm-3"><input placeholder="Fecha de entrega" id="len_tras_fecha" type="text" class="form-control datapicker" name=""></div> 
-                            <div class="col-sm-3"><select id="len_tras_sucursal" class="form-control select2" style="width:100%;"><option value="">Sucursal de retiro</option> 
-                               <?php foreach ($sucursal as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->descripcion.'</option>';
-                              } ?>
-                            </select></div>
-                         </div>
-                          
-                         <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_tras_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                             <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                       </div> 
-
-                      <!--Lentes de lentes de contacto-->
-                      <div class="col-sm-12 control_producto" id="lentes_contacto"  style="display: none;" >
-                        <h4 class="text-center">Lentes de contacto</h4>
-                 
-                          <div class="col-xs-12" style="padding: 0px;">
-                            <div class="col-sm-3"><select  id="len_contac_esf_derecho" class="form-control select2" style="width:100%;"><option value="">ESF (Derecho)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select> </div>
-                             <div class="col-sm-3"><select  id="len_contac_esf_izquierdo" class="form-control select2" style="width:100%;"><option value="">ESF (Izquierdo)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select> </div>
-                            <div class="col-sm-3"><select id="len_contac_eje_derecho" class="form-control select2" style="width:100%;"><option value="">EJE (Derecho)</option>
-                               <?php foreach ($eje as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                              } ?>
-                            </select></div> 
-                            <div class="col-sm-3"><select id="len_contac_cil_izquierdo" class="form-control select2" style="width:100%;"><option value="">CIL (Izquierdo)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select></div>
-                             <div class="col-sm-3"><select id="len_contac_eje_izquierdo" class="form-control select2" style="width:100%;"><option value="">EJE (izquierdo)</option>
-                               <?php foreach ($eje as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                              } ?>
-                             </select></div>
-                         </div>
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                            <div class="col-sm-3"><select id="len_contac_cil_derecho" class="form-control select2" style="width:100%;"><option value="">CIL (Derecho)</option>
-                              <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select> </div>
-                            <div class="col-sm-3"><select id="len_contac_dp" class="form-control select2" style="width:100%;"><option value="">DP</option>
-                               <?php foreach ($dp as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
-                              } ?>
-                            </select></div> 
-                            <div class="col-sm-3"><select id="len_contac_seguro" class="form-control select2" style="width:100%;"><option value="">Seguro</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option> 
-                            </select></div>
-                            <div class="col-sm-3"><select id="len_contac_oftalmologo" class="form-control select2" style="width:100%;"><option value="">Oftalmólogo</option>
-                               <?php foreach ($medicos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->nombre.'</option>';
-                              } ?>
-                            </select> </div> 
-                         </div>
-
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;"> 
-                            <div class="col-sm-3"><input placeholder="Fecha de entrega" id="len_contac_fecha" type="text" class="form-control datapicker" name=""></div> 
-                            <div class="col-sm-3"><select id="len_contac_sucursal" class="form-control select2" style="width:100%;"><option value="">Sucursal de retiro</option>
-                               <?php foreach ($sucursal as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->descripcion.'</option>';
-                              } ?>
-                            </select></div> 
-                         </div>
-                          <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_contac_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                                 <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                       </div>    
-                     <!--Lentes de lentes de sol-->
-                      <div class="col-sm-12 control_producto" id="lentes_sol"  style="display: none;" >
-                        <h4 class="text-center">Lentes de sol</h4>                 
-                          <div class="col-xs-12" style="padding: 0px;">
-                            <div class="col-sm-3">
-                            <select id="len_sol_armazon" class="form-control select2" style="width:100%;"><option value="">Armazon</option>
-                             <?php foreach ($armazones as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->marca.'</option>';
-                              } ?>
-                            </select> </div>
-                            <div class="col-sm-3"><input id="len_sol_codigo" class="form-control" type="text" name="" placeholder="Código"></div
-                         </div> 
-                        <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_sol_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                          <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                                 <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                         </div>
-                       </div>   
-                    </div> 
-
-                        <!--Lentes de lejos-->
-                  </div>
-              </div>
-
+               
               <!--Tab medios de pago-->
               <div class="tab-pane row" id="mpagos"> 
                    <div class="col-sm-6">   
@@ -668,7 +294,7 @@
                     </tbody>
                 </table> 
                       <div class="col-sm-12" style="padding: 0px;padding-top: 10px;margin-bottom:10px;">
-                        <button onclick="procesar_venta()"  class="btn btn-primary form-control">Procesar venta</button>
+                        <button onclick=""  class="btn btn-primary form-control">Procesar venta</button>
                      </div> 
                    </div>  
 
@@ -684,18 +310,14 @@
                 <input  class="form-control" type="" name="" placeholder="Buscar...">               
             </div>
               <div class='col-lg-4 col-md-4 col-sm-12' style="padding: 0px;margin-top: 15px;">
-                 <button class="btn btn-primary btn-danger" style="margin-left: 10px;">Hoy</button>
-                <button class="btn btn-primary  btn-danger" style="margin-left: 10px;">Últimos 7 días</button>
-                <button class="btn btn-primary  btn-danger" style="margin-left: 10px;">Todo</button>             
+                 <button class="btn btn-primary btn-danger" style="margin-left: 10px;">Buscar</button>            
             </div>
 
             <div class="col-sm-12" style="padding: 0px;margin-top: 20px;">
            
               <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Resumen</h3>
-              <a href="" class="pull-right" style="padding-left: 10px;">Resumen diario</a>
-              <a href="" class="pull-right">Datos contabilizados</a>
+              <h3 class="box-title">Resumen</h3> 
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -736,7 +358,6 @@
 
 <div class="control-sidebar-bg"></div>
 </div>
-<?php include('local/resources/views/includes/referencias_down.php');?>
-<?php include('local/resources/views/includes_js/us_dash.php');?>
+<?php include('local/resources/views/includes/referencias_down.php');?> 
 </body>
 </html>

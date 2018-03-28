@@ -13,6 +13,12 @@ class con_ventas extends Controller {
 	 *
 	 * @return Response
 	 */
+
+	public function mis_ventas()
+	{
+		return view("ventas");
+	}
+
 	public function temp_tarjeta() //Insertamos en datos en la tabla temporal tarjetas.
  	{
 
@@ -39,17 +45,13 @@ class con_ventas extends Controller {
 	public function temp_cheque() //Insertamos en datos en la tabla temporal cheques.
  	{
  		$total_1=str_replace("$ ", "",$_POST['vtotal']);
- 		$total=str_replace(",","",$total_1);
-
- 		$fecha="";
- 		
- 		
+ 		$total=str_replace(",","",$total_1); 
+ 		$fecha=""; 
  		if($_POST['vfecha']!="")
  		{
  			$datos=explode("/",$_POST['vfecha']);
  			$fecha=$datos[2]."-".$datos[0]."-".$datos[1];
- 		} 
-  
+ 		}  
 		$sql="INSERT INTO tbl_cheque_temp 
 		VALUES(null,
 		'".$_POST['vbanco']."',

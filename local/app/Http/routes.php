@@ -32,8 +32,17 @@ Route::group(['middleware' =>'login'], function () {
 Route::get('usdash', 'con_home@index');
 Route::get('procesarv', 'con_ventas@create');//procesar ventas
 //Route::get('usdash', function (){return view('us_dash');}); 
-Route::get('logout', 'con_login@salir'); 
+Route::get('logout', 'con_login@salir'); //Cerrar sesion
+Route::get('saldos', 'con_saldos@index'); //Revuelve la vista de saldos
+Route::get('cotizacion', 'con_cotizacion@index'); //Revuelve la vista de cotizacion
+Route::get('buscar', 'con_buscar@index'); //Revuelve la vista de buscar
+Route::get('misventas', 'con_ventas@mis_ventas'); //Revuelve la vista de buscar
 
+
+Route::get('entregado', 'con_hospital@entregado'); //Revuelve la vista de entregado hospital
+Route::get('fabricacion', 'con_hospital@fabricacion'); //Revuelve la vista de fabricacion hospital
+Route::get('contabilizados', 'con_contabilizados@index'); //Revuelve la vista de cotizacion
+Route::get('imprimir', 'con_imprimir@index'); //Revuelve la vista de cotizacion
 Route::post('pventas', 'con_ventas@procesar_venta');//insertamos en la tabla temporal tarjetas
 Route::post('listart', 'con_ventas@listar_tabla');//listamos la tabla de ventas
 Route::post('temptarjetac', 'con_ventas@temp_tarjeta');//insertamos en la tabla temporal tarjetas
