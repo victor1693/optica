@@ -553,23 +553,20 @@
                                echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
                               } ?>
                             </select></div>
-                             <div class="col-sm-3"><select id="len_contac_eje_izquierdo" class="form-control select2" style="width:100%;"><option value="">EJE (izquierdo)</option>
+                             
+                         </div>
+                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
+                          <div class="col-sm-3"><select id="len_contac_eje_izquierdo" class="form-control select2" style="width:100%;"><option value="">EJE (izquierdo)</option>
                                <?php foreach ($eje as $key) {
                                echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
                               } ?>
                              </select></div>
-                         </div>
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
                             <div class="col-sm-3"><select id="len_contac_cil_derecho" class="form-control select2" style="width:100%;"><option value="">CIL (Derecho)</option>
                               <?php foreach ($datos as $key) {
                                echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
                               } ?>
                             </select> </div>
-                            <div class="col-sm-3"><select id="len_contac_dp" class="form-control select2" style="width:100%;"><option value="">DP</option>
-                               <?php foreach ($dp as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
-                              } ?>
-                            </select></div> 
+                            
                             <div class="col-sm-3"><select id="len_contac_seguro" class="form-control select2" style="width:100%;"><option value="">Seguro</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
@@ -588,6 +585,11 @@
                             <div class="col-sm-3"><select id="len_contac_sucursal" class="form-control select2" style="width:100%;"><option value="">Sucursal de retiro</option>
                                <?php foreach ($sucursal as $key) {
                                echo'<option value="'.$key->id.'">'.$key->descripcion.'</option>';
+                              } ?>
+                            </select></div> 
+                            <div class="col-sm-3"><select id="len_contac_dp" class="form-control select2" style="width:100%;"><option value="">DP</option>
+                               <?php foreach ($dp as $key) {
+                               echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
                               } ?>
                             </select></div> 
                          </div>
@@ -702,9 +704,7 @@
               <table class="table table-condensed">
                 <thead>
                   <tr>
-                  <th style="width: 10px">#</th>
-                  <th>Check</th>
-                  <th>OT</th>
+                  <th style="width: 10px">#</th>  
                   <th>Total Ventas</th>
                   <th>Efectivo</th>
                   <th>Tarjeta</th>

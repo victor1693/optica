@@ -37,6 +37,7 @@ h_derecho="";
 select_otros="";
 tipo_producto=""; 
 otros="";
+oc=0;
 function text_mostrar()
 { 
 
@@ -66,11 +67,14 @@ console.log("h_izquierdo: "+h_izquierdo);
 console.log("h_derecho: "+h_derecho);
 console.log("select_otros: "+select_otros);
 console.log("tipo_producto: "+tipo_producto);
+console.log("OC: "+oc);
 }
 
 function limpiar_variables()
 { 
 cristales="";
+cristales=0;
+
 armazon="";
 codigo="";
 cil_derecha="";
@@ -98,18 +102,15 @@ function calcular_total()
   tarjeta=$("#pago_total_tarjeta").val().replace("$ ","");
   cheque=$("#pago_total_cheque").val().replace("$ ","");
  
-
-  efec_sin_coma=parseFloat(efectivo.replace(",",""));
-  trans_sin_coma=parseFloat(transferencia.replace(",",""));
-  tarj_sin_coma=parseFloat(tarjeta.replace(",",""));
-  chec_sin_coma=parseFloat(cheque.replace(",",""));
-
-  console.log(efec_sin_coma);
-  console.log(trans_sin_coma);
-  console.log(tarj_sin_coma);
-  console.log(chec_sin_coma);
-  $("#pago_total").val(efec_sin_coma+trans_sin_coma+tarj_sin_coma+chec_sin_coma);
-
+  efec_sin_coma=0;
+  trans_sin_coma=0;
+  tarj_sin_coma=0;
+  chec_sin_coma=0;
+  if(efectivo!=""){efec_sin_coma=parseFloat(efectivo.replace(",",""));}
+  if(transferencia!=""){  trans_sin_coma=parseFloat(transferencia.replace(",",""));}
+  if(tarjeta!=""){  tarj_sin_coma=parseFloat(tarjeta.replace(",",""));}
+  if(cheque!=""){chec_sin_coma=parseFloat(cheque.replace(",",""));} 
+  $("#pago_total").val(efec_sin_coma+trans_sin_coma+tarj_sin_coma+chec_sin_coma); 
 }
 
 function procesar_venta()
@@ -150,7 +151,8 @@ function guardar_venta() // guarda la venta
   vtipo_producto:tipo_producto, 
   votros:otros,
   vefectivo:$("#pago_efectivo").val(), 
-  vtransferencia:$("#pago_transferencia").val()
+  vtransferencia:$("#pago_transferencia").val(),
+  voc:$("#pago_orden_compra").val()
 };
    $.ajaxSetup({
           headers: {
@@ -388,9 +390,7 @@ function listar_tabla_resumen() //Listar tarjetas en el modal opciones avanzadas
                     contador++;  
                     totalpagar=parseFloat(datos['efectivo'])+parseFloat(datos['transferencia'])+parseFloat(datos['cheque'])+parseFloat(datos['tarjeta']);
                     contenido=contenido+'<tr>' 
-                  +'<td>'+contador+'</td>' 
-                  +'<td><input type="checkbox" name=""></td>'
-                  +'<td>1891</td> '
+                  +'<td>'+contador+'</td>'   
                   +'<td>$'+totalpagar+'</td> '
                   +'<td>$'+datos['efectivo']+'</td> '
                   +'<td>$'+datos['tarjeta']+'</td>' 
@@ -415,7 +415,7 @@ function listar_tabla_resumen() //Listar tarjetas en el modal opciones avanzadas
                       +'</ul>'
                     +'</li>'
                   +'</td> '
-                  +'td>'
+                  +'<td>'
                     +'<li class="dropdown"  style="list-style: none;">'
                      +' <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">' 
                        +' <i class="fa fa-edit"></i>'

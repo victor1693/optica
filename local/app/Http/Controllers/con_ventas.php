@@ -61,8 +61,7 @@ class con_ventas extends Controller {
 		'".$_POST['vcodigo']."',
 		'".$_POST['vtelefono']."',
 		'".$_POST['vrut']."',
-		".$total.",".session()->get("id").",'".token(35).strtotime('now')."')"; 
-		 
+		".$total.",".session()->get("id").",'".token(35).strtotime('now')."')"; 		 
 		 
 		if($_POST['vbanco']!="" && $_POST['vcuenta']!="" && $_POST['vcheque']!="" && $fecha!=""  && $_POST['vcodigo']!="" && $_POST['vtelefono']!="" && $_POST['vrut']!="" && $total !="")
  			{
@@ -170,6 +169,7 @@ class con_ventas extends Controller {
 		$otros=$_POST["votros"];        
 		$efectivo=str_replace("$ ", "", $_POST["vefectivo"]); 
 		$transferencia=str_replace("$ ", "", $_POST["vtransferencia"]); 
+		$oc=$_POST["voc"];
 		 
 		//Guargamos las tarjetas
 		$sql_tmp_tarjetas="SELECT * FROM tbl_tarjetas_temp WHERE id_usuario=".session()->get('id')."";
@@ -228,7 +228,16 @@ class con_ventas extends Controller {
 		}
 
 		//Guardamos la Factura 
-
+		$n_efectivo=0;
+		$n_transferencia=0;
+		if($efectivo!="")
+		{
+			$n_efectivo=str_replace(",", "", $efectivo);
+		}
+		if($transferencia!="")
+		{
+			$n_efectivo=str_replace(",", "", $transferencia);
+		}
 		$sql_factura="INSERT INTO tbl_factura VALUES
 		(
 			null,
@@ -238,12 +247,12 @@ class con_ventas extends Controller {
 			'".$direccion."',
 			'".$telefono."',
 			'".$celular."',
-			".str_replace(",", "", $efectivo).",
-			".str_replace(",", "", $transferencia).",
+			".$n_efectivo.",
+			".$n_transferencia.",
 			0,
 			0,
 			'".$token."',
-			0,
+			'".$oc."',
 			null
 		)";
 		 try {
@@ -278,6 +287,7 @@ class con_ventas extends Controller {
 		'".$tipo_producto."',
 		'".$token."', 
 		'".session()->get('id')."',
+		".session()->get('sucursal').",
 		1,
 		null 
 		)
@@ -302,11 +312,11 @@ class con_ventas extends Controller {
 
 	function listar_tabla()
 	{
-			$sql="SELECT t4.id_usuario, t1.efectivo,t1.transferencia,t1.OC,t2.total as tarjeta,t3.total as cheque,sum(t1.efectivo+t1.transferencia+t2.total+t3.total) as suma_total FROM tbl_factura t1
-			LEFT JOIN tbl_tarjetas t2 On t2.token=t1.token
-			LEFT JOIN tbl_cheque t3 On t3.token=t1.token
-            LEFT JOIN tbl_ventas t4 On t4.token=t1.token
-             WHERE t4.id_usuario=".session()->get('id')."
+			$sql="SELECT t4.id_usuario, if(t1.efectivo is null,0,t1.efectivo) as efectivo,if(t1.transferencia is null,0,t1.transferencia)as transferencia,t1.OC,if(t2.total  is null,0, t2.total) as tarjeta,if(t3.total is null,0,t3.total) as cheque,sum(if(t1.transferencia is null,0,t1.transferencia)+if(t2.total is null,0, t2.total)+if(t3.total is null,0,t3.total)+if(t1.efectivo is null,0,t1.efectivo)) as suma_total FROM tbl_factura t1
+				LEFT JOIN tbl_tarjetas t2 On t2.token=t1.token
+				LEFT JOIN tbl_cheque t3 On t3.token=t1.token
+	            LEFT JOIN tbl_ventas t4 On t4.token=t1.token
+             WHERE t4.id_usuario=".session()->get('id')." AND t4.id_sucursal = ".session()->get('sucursal')."
 			GROUP by t1.token";  
 
 			try {

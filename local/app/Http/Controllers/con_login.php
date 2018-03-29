@@ -62,6 +62,7 @@ class con_login extends Controller {
           				{
           					$request->session()->set('correo', $datos2[0]->correo);
 				            $request->session()->set('nombre', $datos2[0]->nombre);
+				            $request->session()->set('sucursal', $_POST['sucursal']);
 				            $request->session()->set('id', $datos2[0]->id);
 				            DB::insert("INSERT INTO tbl_kardex VALUES(null,0,".$datos2[0]->id.",'El usuario ".$datos2[0]->correo." ha ingresado al sistema',8,null);");
 				            return Redirect('usdash');
@@ -96,7 +97,7 @@ class con_login extends Controller {
 		$request->session()->forget('correo');
 		$request->session()->forget('id');
 		$request->session()->forget('nombre');
-
+		$request->session()->forget('sucursal');
         return redirect('/');
 	}
 }
