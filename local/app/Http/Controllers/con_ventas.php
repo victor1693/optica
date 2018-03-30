@@ -169,6 +169,7 @@ class con_ventas extends Controller {
 		$otros=$_POST["votros"];        
 		$efectivo=str_replace("$ ", "", $_POST["vefectivo"]); 
 		$transferencia=str_replace("$ ", "", $_POST["vtransferencia"]); 
+		$total_venta=str_replace("$ ", "", $_POST["vtotal"]); 
 		$oc=$_POST["voc"];
 		 
 		//Guargamos las tarjetas
@@ -236,8 +237,15 @@ class con_ventas extends Controller {
 		}
 		if($transferencia!="")
 		{
-			$n_efectivo=str_replace(",", "", $transferencia);
+			$n_transferencia=str_replace(",", "", $transferencia);
 		}
+		$total_limpio=0;
+		if($total_venta!="")
+		{
+			$total_limpio=str_replace(",", "", $total_venta);
+		}
+
+
 		$sql_factura="INSERT INTO tbl_factura VALUES
 		(
 			null,
@@ -249,8 +257,8 @@ class con_ventas extends Controller {
 			'".$celular."',
 			".$n_efectivo.",
 			".$n_transferencia.",
-			0,
-			0,
+			'venta',
+			".$total_limpio.",
 			'".$token."',
 			'".$oc."',
 			null
@@ -312,7 +320,7 @@ class con_ventas extends Controller {
 
 	function listar_tabla()
 	{
-			$sql="SELECT t4.id_usuario, if(t1.efectivo is null,0,t1.efectivo) as efectivo,if(t1.transferencia is null,0,t1.transferencia)as transferencia,t1.OC,if(t2.total  is null,0, t2.total) as tarjeta,if(t3.total is null,0,t3.total) as cheque,sum(if(t1.transferencia is null,0,t1.transferencia)+if(t2.total is null,0, t2.total)+if(t3.total is null,0,t3.total)+if(t1.efectivo is null,0,t1.efectivo)) as suma_total FROM tbl_factura t1
+			$sql="SELECT t1.total as monto_total, t4.id_usuario, if(t1.efectivo is null,0,t1.efectivo) as efectivo,if(t1.transferencia is null,0,t1.transferencia)as transferencia,t1.OC,if(t2.total  is null,0, t2.total) as tarjeta,if(t3.total is null,0,t3.total) as cheque,sum(if(t1.transferencia is null,0,t1.transferencia)+if(t2.total is null,0, t2.total)+if(t3.total is null,0,t3.total)+if(t1.efectivo is null,0,t1.efectivo)) as suma_total FROM tbl_factura t1
 				LEFT JOIN tbl_tarjetas t2 On t2.token=t1.token
 				LEFT JOIN tbl_cheque t3 On t3.token=t1.token
 	            LEFT JOIN tbl_ventas t4 On t4.token=t1.token

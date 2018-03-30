@@ -659,12 +659,12 @@
 
                       <tr> 
                         <td>Transferencia</td> 
-                        <td> <input   value="0" id="pago_transferencia" class="money" type="" name="" style="height: 20px;width: 80px;"></td>
+                        <td> <input  value="0" id="pago_transferencia" class="money" type="" name="" style="height: 20px;width: 80px;"></td>
                       </tr> 
                        <tr> 
                         <td><strong>Total</strong></td> 
                         <td> <input value="0" id="pago_total" class="money" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;">
-                      <button class="btn btn-success btn-xs" onclick="calcular_total()">Calcular total</button>
+                       
                         </td>
                       </tr> 
                     </tbody>
@@ -699,18 +699,21 @@
               <a href="" class="pull-right" style="padding-left: 10px;">Resumen diario</a>
               <a href="" class="pull-right">Datos contabilizados</a>
             </div>
+
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <table class="table table-condensed">
                 <thead>
                   <tr>
-                  <th style="width: 10px">#</th>  
-                  <th>Total Ventas</th>
+                  <th style="width: 10px">#</th> 
+                  <th>Total</th> 
+                  <th>Abonado</th>
+                  <th>Por abonar</th>
                   <th>Efectivo</th>
                   <th>Tarjeta</th>
                   <th>Cheque</th>
                   <th>Transferencia</th>
-                  <th>Tipo</th>
+                  <th>Estatus</th>
                   <th>Abonar</th>
                   <th>Imprimir</th>
                   <th>Editar</th>
@@ -720,7 +723,8 @@
  
                 </tr>
                  
-              </tbody></table>
+              </tbody>
+              </table>
             </div>
             <!-- /.box-body -->
           </div>

@@ -1,6 +1,5 @@
-
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
     listar_tarjetas(); 
     listar_cheques();
     listar_tabla_resumen();
@@ -117,9 +116,15 @@ function procesar_venta()
 {
   if(validar_formularios(1,0))
   {  
-   guardar_venta(); 
+    if($("#pago_total").val()!="" && $("#pago_total").val()!=0)
+    {
+      guardar_venta(); 
+    }
+    else
+    {
+        swal("Ups!", "Debe colocar el monto total.", "info");
+    }   
   }
-
 }
  
 function guardar_venta() // guarda la venta
@@ -152,7 +157,8 @@ function guardar_venta() // guarda la venta
   votros:otros,
   vefectivo:$("#pago_efectivo").val(), 
   vtransferencia:$("#pago_transferencia").val(),
-  voc:$("#pago_orden_compra").val()
+  voc:$("#pago_orden_compra").val(),
+  vtotal:$("#pago_total").val()
 };
    $.ajaxSetup({
           headers: {
@@ -387,16 +393,27 @@ function listar_tabla_resumen() //Listar tarjetas en el modal opciones avanzadas
                 { 
                   contador=0;
                   $.each(JSON.parse(data), function(i, datos) { 
-                    contador++;  
+                    contador++;
                     totalpagar=parseFloat(datos['efectivo'])+parseFloat(datos['transferencia'])+parseFloat(datos['cheque'])+parseFloat(datos['tarjeta']);
+                    resto=(datos['monto_total']-totalpagar).toFixed(2);
+                    estado="";
+                    if((datos['monto_total']-totalpagar).toFixed(2)<0)
+                    {
+                      //alert((datos['monto_total']-totalpagar).toFixed(2)); 
+                      estado='<span style="color:#a01d00;"><strong>Pendiente</strong></span>';
+                    }
+                    else{estado='<span style="color:#00a01d;"><strong>Pagado</strong></span>';}  
+                    
                     contenido=contenido+'<tr>' 
-                  +'<td>'+contador+'</td>'   
+                  +'<td>'+contador+'</td>'
+                  +'<td>$'+datos['monto_total']+'</td> '      
                   +'<td>$'+totalpagar+'</td> '
+                  +'<td>$'+(datos['monto_total']-totalpagar).toFixed(2)+'</td> '
                   +'<td>$'+datos['efectivo']+'</td> '
                   +'<td>$'+datos['tarjeta']+'</td>' 
                   +'<td>$'+datos['cheque']+'</td> '
                   +'<td>$'+datos['transferencia']+'</td> '
-                  +'<td>Saldo</td> '
+                  +'<td>'+estado+'</td> '
                     +'<td>'
                        +'<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"> '
                         +'<i class="fa fa-credit-card"></i>'
@@ -599,7 +616,7 @@ function validar_formularios(parametro,paginacion)
          }
         }else
         {
-          swal("Error!", "Ra RUT no es válida.", "error"); 
+          swal("Error!", "La RUT no es válida.", "error"); 
         }
       }   
   }
@@ -1124,5 +1141,3 @@ $('.correo').change(function (e) {
         this.style.color = "red";
 });
 </script>
- 
- 
