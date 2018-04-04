@@ -40,7 +40,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-             <li><a href="#"><i class="fa fa-circle-o"></i>Inscripción</a></li>
+             <li><a href="inscripcion"><i class="fa fa-circle-o"></i>Inscripción</a></li>
             <li><a href="fabricacion"><i class="fa fa-circle-o"></i>Fabricación</a></li>
             <li><a href="entregado"><i class="fa fa-circle-o"></i>Entregado</a></li>    
           </ul>

@@ -33,6 +33,7 @@ Route::get('usdash', 'con_home@index');
 Route::get('procesarv', 'con_ventas@create');//procesar ventas
 //Route::get('usdash', function (){return view('us_dash');}); 
 Route::get('logout', 'con_login@salir'); //Cerrar sesion
+Route::get('inscripcion', 'con_inscripcion@index'); //Revuelve la vista de inscripcion hospital
 Route::get('saldos', 'con_saldos@index'); //Revuelve la vista de saldos
 Route::get('cotizacion', 'con_cotizacion@index'); //Revuelve la vista de cotizacion
 Route::get('buscar', 'con_buscar@index'); //Revuelve la vista de buscar
@@ -47,7 +48,7 @@ Route::post('pventas', 'con_ventas@procesar_venta');//insertamos en la tabla tem
 Route::post('listart', 'con_ventas@listar_tabla');//listamos la tabla de ventas
 Route::post('temptarjetac', 'con_ventas@temp_tarjeta');//insertamos en la tabla temporal tarjetas
 Route::post('tempchequec', 'con_ventas@temp_cheque');//insertamos en la tabla temporal tarjetas
-
+Route::post('temporale', 'con_ventas@borrar_temporales');//insertamos en la tabla temporal tarjetas
 Route::post('temptarjetas', 'con_ventas@s_temp_tarjeta');//seleccionamos en la tabla temporal tarjetas
 Route::post('tempcheques', 'con_ventas@s_temp_cheque');//seleccionamos en la tabla temporal tarjetas
 

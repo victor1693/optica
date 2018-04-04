@@ -202,7 +202,7 @@
             <ul class="nav nav-tabs pull-right"> 
               <li class=""><a href="#mpagos" data-toggle="tab"><strong>Paso 2 - </strong> Medio de pago</a></li> 
               <li class="active"><a href="#mcliente" data-toggle="tab"><strong>Paso 1 - </strong>Cliente</a></li> 
-              <li class="pull-left header"><i class="fa fa-th"></i>Nueva venta</li>
+              <li class="pull-left header"><i class="fa fa-th"></i>Agregar Saldo</li>
             </ul>
             <div class="tab-content ">
            
@@ -288,7 +288,7 @@
                        <tr> 
                         <td><strong>Total</strong></td> 
                         <td> <input value="0" id="pago_total" class="money" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;">
-                      <button class="btn btn-success btn-xs" onclick="calcular_total()">Calcular total</button>
+                      
                         </td>
                       </tr> 
                     </tbody>
@@ -304,49 +304,7 @@
               </div>
                 
             </div>
-            <!-- /.tab-content -->
-
-             <div class='col-lg-4 col-md-4 col-sm-12' style="padding: 0px;margin-top: 15px;">
-                <input  class="form-control" type="" name="" placeholder="Buscar...">               
-            </div>
-              <div class='col-lg-4 col-md-4 col-sm-12' style="padding: 0px;margin-top: 15px;">
-                 <button class="btn btn-primary btn-danger" style="margin-left: 10px;">Buscar</button>            
-            </div>
-
-            <div class="col-sm-12" style="padding: 0px;margin-top: 20px;">
-           
-              <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Resumen</h3> 
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <table class="table table-condensed">
-                <thead>
-                  <tr>
-                  <th style="width: 10px">#</th>
-                  <th>Check</th>
-                  <th>OT</th>
-                  <th>Total Ventas</th>
-                  <th>Efectivo</th>
-                  <th>Tarjeta</th>
-                  <th>Cheque</th>
-                  <th>Transferencia</th>
-                  <th>Tipo</th>
-                  <th>Abonar</th>
-                  <th>Imprimir</th>
-                  <th>Editar</th>
-                </tr>
-                </thead>
-                <tbody id="tabla_detalle">
- 
-                </tr>
-                 
-              </tbody></table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-            </div>
+            <!-- /.tab-content --> 
           </div>
           <!-- nav-tabs-custom -->
         </div>

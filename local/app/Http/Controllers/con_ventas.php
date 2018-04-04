@@ -93,7 +93,7 @@ class con_ventas extends Controller {
 	public function s_temp_cheque() //Obtenemos en datos de la tabla temporal cheques.
  	{
 		//Consulta tarjetas
-		$sql="SELECT * FROM tbl_cheque_temp Where id_usuario = ".session()->get('id')."";
+		$sql="SELECT * FROM tbl_cheque_temp where id_usuario = ".session()->get('id')."";
 		try {
 			$cheques=DB::select($sql);
 			echo json_encode($cheques);			
@@ -228,7 +228,7 @@ class con_ventas extends Controller {
 			exit();
 		}
 
-		//Guardamos la Factura 
+		
 		$n_efectivo=0;
 		$n_transferencia=0;
 		if($efectivo!="")
@@ -245,7 +245,7 @@ class con_ventas extends Controller {
 			$total_limpio=str_replace(",", "", $total_venta);
 		}
 
-
+		//Guardamos la Factura 
 		$sql_factura="INSERT INTO tbl_factura VALUES
 		(
 			null,
@@ -320,7 +320,7 @@ class con_ventas extends Controller {
 
 	function listar_tabla()
 	{
-			$sql="SELECT t1.total as monto_total, t4.id_usuario, if(t1.efectivo is null,0,t1.efectivo) as efectivo,if(t1.transferencia is null,0,t1.transferencia)as transferencia,t1.OC,if(t2.total  is null,0, t2.total) as tarjeta,if(t3.total is null,0,t3.total) as cheque,sum(if(t1.transferencia is null,0,t1.transferencia)+if(t2.total is null,0, t2.total)+if(t3.total is null,0,t3.total)+if(t1.efectivo is null,0,t1.efectivo)) as suma_total FROM tbl_factura t1
+			$sql="SELECT t1.total as monto_total, t4.id_usuario, if(t1.efectivo is null,0,t1.efectivo) as efectivo,if(t1.transferencia is null,0,t1.transferencia)as transferencia,t1.OC,sum(if(t2.total  is null,0, t2.total)) as tarjeta,sum(if(t3.total is null,0,t3.total)) as cheque,sum(if(t1.transferencia is null,0,t1.transferencia)+if(t2.total is null,0, t2.total)+if(t3.total is null,0,t3.total)+if(t1.efectivo is null,0,t1.efectivo)) as suma_total FROM tbl_factura t1
 				LEFT JOIN tbl_tarjetas t2 On t2.token=t1.token
 				LEFT JOIN tbl_cheque t3 On t3.token=t1.token
 	            LEFT JOIN tbl_ventas t4 On t4.token=t1.token
@@ -335,8 +335,9 @@ class con_ventas extends Controller {
 			}
 	}
 
-	function eliminar_todo($token)
+	function eliminar_todo($token) 
 	{
+
 		$sql="DELETE FROM tbl_ventas WHERE token='".$token."'";
 		DB::delete($sql);
 		$sql="DELETE FROM tbl_factura WHERE token='".$token."'";
@@ -350,58 +351,15 @@ class con_ventas extends Controller {
 	function borrar_temporales()
 	{
 		    
-		$sql="DELETE FROM tbl_tarjetas_temp WHERE id_usuario='".session()->get('id')."'";
-		DB::delete($sql);
-		$sql="DELETE FROM tbl_cheque_temp WHERE id_usuario='".session()->get('id')."'";
-		DB::delete($sql); 
-	}
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+		try {
+			$sql="DELETE FROM tbl_tarjetas_temp WHERE id_usuario='".session()->get('id')."'";
+			DB::delete($sql);
+			$sql="DELETE FROM tbl_cheque_temp WHERE id_usuario='".session()->get('id')."'";
+			DB::delete($sql); 
+			echo "1";
+		} catch (Exception $e) {
+			echo "0";
+		}
+	} 
 
 }

@@ -1,8 +1,15 @@
 <script>
     $(document).ready(function(){
+    eliminar_temporales();  
     listar_tarjetas(); 
     listar_cheques();
     listar_tabla_resumen();
+    $("#pago_efectivo").val(0);
+    $("#pago_transferencia").val(0);
+    $("#pago_total_tarjeta").val(0);
+    $("#pago_total_cheque").val(0);
+    $("#tabla_medios_pago").html("");
+
 });
 
 //Variables Globales
@@ -109,16 +116,29 @@ function calcular_total()
   if(transferencia!=""){  trans_sin_coma=parseFloat(transferencia.replace(",",""));}
   if(tarjeta!=""){  tarj_sin_coma=parseFloat(tarjeta.replace(",",""));}
   if(cheque!=""){chec_sin_coma=parseFloat(cheque.replace(",",""));} 
-  $("#pago_total").val(efec_sin_coma+trans_sin_coma+tarj_sin_coma+chec_sin_coma); 
+  return (efec_sin_coma+trans_sin_coma+tarj_sin_coma+chec_sin_coma); 
 }
 
 function procesar_venta()
 {
   if(validar_formularios(1,0))
-  {  
+  { 
+    mon_total=$("#pago_total").val().replace("$ ",""); 
+    console.log("Input Total: "+ mon_total.replace(",",""));
+    console.log("Monto total: "+ calcular_total());
+
+
     if($("#pago_total").val()!="" && $("#pago_total").val()!=0)
     {
-      guardar_venta(); 
+      if(mon_total.replace(",","") > calcular_total())
+      {
+        swal("Ups!", "El monto cancelado supera el monto total del producto", "info");
+      }
+      else
+      {
+        guardar_venta();
+      }
+                  
     }
     else
     {
@@ -227,6 +247,14 @@ function guardar_venta() // guarda la venta
     {
       swal("Ups!", "Debe colocar el monto total.", "info");
     }
+    else if($("#c_total").val()=="")
+    {
+      swal("Ups!", "Debe colocar el monto total.", "info");
+    }
+    if(!(Fn.validaRut($("#c_rut").val())))
+        {
+          swal("Error!", "La RUT no es válida.", "error"); 
+        }
     else
     { 
       procesar_cheque();
@@ -344,7 +372,7 @@ function listar_tarjetas() //Listar tarjetas en el modal opciones avanzadas
             datatype:"json",  
             success: function(data)  
             {  
-
+              $("#tabla_medios_pago").html("");
                 total_tarjetas=0;
                 if(data!="error")
                 { 
@@ -361,7 +389,6 @@ function listar_tarjetas() //Listar tarjetas en el modal opciones avanzadas
                     total_tarjetas=total_tarjetas+datos['total'];  
                   });
                   $("#pago_total_tarjeta").val(total_tarjetas);
-
                 } 
                 else
                 { 
@@ -397,12 +424,15 @@ function listar_tabla_resumen() //Listar tarjetas en el modal opciones avanzadas
                     totalpagar=parseFloat(datos['efectivo'])+parseFloat(datos['transferencia'])+parseFloat(datos['cheque'])+parseFloat(datos['tarjeta']);
                     resto=(datos['monto_total']-totalpagar).toFixed(2);
                     estado="";
-                    if((datos['monto_total']-totalpagar).toFixed(2)<0)
-                    {
-                      //alert((datos['monto_total']-totalpagar).toFixed(2)); 
-                      estado='<span style="color:#a01d00;"><strong>Pendiente</strong></span>';
+                    if((datos['monto_total']-totalpagar).toFixed(2)==0)
+                    { ; 
+                      estado='<span style="color:#00a01d;"><strong>Pagado</strong></span>';
                     }
-                    else{estado='<span style="color:#00a01d;"><strong>Pagado</strong></span>';}  
+                    else if((datos['monto_total']-totalpagar).toFixed(2)<0)
+                    {
+                        estado='<span style="color:#ffbf00;"><strong>Canceló de más</strong></span>';
+                    }
+                    else{estado='<span style="color:#a01d00;"><strong>Pendiente</strong></span>';}  
                     
                     contenido=contenido+'<tr>' 
                   +'<td>'+contador+'</td>'
@@ -456,7 +486,26 @@ function listar_tabla_resumen() //Listar tarjetas en el modal opciones avanzadas
             }  
         })
 }
+function eliminar_temporales() //Elimina una tarjeta del modal opciones avanzadas.
+{
+   $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
 
+        $.ajax({
+            url: 'temporale',
+            type: 'post',  
+            success: function(data)  
+            {   
+              if(data!=1)
+              {
+                  swal("Ups!", "Algo ha salido mal, vuelva a cargar la página.", "error");
+              }
+            }  
+        })
+}
 function eliminar_tarjeta(dato) //Elimina una tarjeta del modal opciones avanzadas.
 {
    $.ajaxSetup({
@@ -475,8 +524,9 @@ function eliminar_tarjeta(dato) //Elimina una tarjeta del modal opciones avanzad
                 if(data!="error")
                 {
                   swal("Listo!", "La tarjeta ha sido retirada con éxito.", "success");
-                  $(".con_cheque").val("");
-                  $("#"+dato).remove();
+                  $(".con_cheque").val(""); 
+                  listar_cheques();
+                  listar_tarjetas();
                 } 
                 else
                 {
@@ -501,7 +551,9 @@ function listar_cheques() //Listar cheques en el modal opciones avanzadas
             datatype:"json",  
             success: function(data)  
             {  
-              total_cheque=0;
+              $("#tabla_medios_pago").html("");
+              
+                total_cheque=0;
                 if(data!="error")
                 { 
                   contador=0;
@@ -545,7 +597,9 @@ function eliminar_cheques(dato) //Elimina un cheque del modal opciones avanzadas
                 {
                   swal("Listo!", "El cheque ha sido retirado con éxito.", "success");
                   $(".con_cheque").val("");
-                  $("#"+dato).remove();
+                  //$("#"+dato).remove();
+                  listar_cheques();
+                  listar_tarjetas();
                 } 
                 else
                 {
@@ -1122,13 +1176,39 @@ function paginar_producto(id)
     $(".numeric").numeric(); 
 
 //Formatear RUT
-    function set_rut() //colocar el guion en el input rut
+    function set_rut(par) //colocar el guion en el input rut
     {
-      console.log($("#rut").val().length);
-      if($("#rut").val().length == 8)
-      {
-        $("#rut").val($("#rut").val() + "-")
-      }
+        if(par==1)
+        {
+           if($("#rut").val().length > 7)
+            {
+              cadena=$("#rut").val().split("-").join("");
+              corte_1=cadena.substr(0, 8);
+              corte_2=cadena.substr(8);  
+              $("#rut").val(corte_1+"-"+corte_2);
+            }
+            else
+            {
+              cadena=$("#rut").val().split("-").join("");
+              $("#rut").val(cadena);
+            }
+        } 
+        else
+        {
+
+          if($("#c_rut").val().length > 7)
+            {
+              cadena=$("#c_rut").val().split("-").join("");
+              corte_1=cadena.substr(0, 8);
+              corte_2=cadena.substr(8);  
+              $("#c_rut").val(corte_1+"-"+corte_2); 
+            }
+            else
+            {
+              cadena=$("#c_rut").val().split("-").join("");
+              $("#c_rut").val(cadena);
+            }
+        } 
     }
 
 //Validar correos
