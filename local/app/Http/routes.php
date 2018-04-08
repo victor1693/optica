@@ -51,9 +51,21 @@ Route::post('tempchequec', 'con_ventas@temp_cheque');//insertamos en la tabla te
 Route::post('temporale', 'con_ventas@borrar_temporales');//insertamos en la tabla temporal tarjetas
 Route::post('temptarjetas', 'con_ventas@s_temp_tarjeta');//seleccionamos en la tabla temporal tarjetas
 Route::post('tempcheques', 'con_ventas@s_temp_cheque');//seleccionamos en la tabla temporal tarjetas
-
 Route::post('temptarjetad', 'con_ventas@d_temp_tarjeta');//eliminamos en la tabla temporal tarjetas
 Route::post('tempchequed', 'con_ventas@d_temp_cheque');//eliminamos en la tabla temporal tarjetas
 
+
+//Rutas de clientes
+Route::get('cliente', 'con_clientes@index'); //Revuelve la vista de clientes
+Route::post('clientess', 'con_clientes@select'); //Revuelve la vista de clientes
+Route::post('clienteunico', 'con_clientes@selectunico'); //Devuelve los datos de un cliente filtrado por un id
+Route::post('clientec', 'con_clientes@create'); //Agrega un cliente en la base de datos
+Route::post('clienteup', 'con_clientes@update'); //Actualiza un cliente en la base de datos
+Route::post('buscarcliente', 'con_clientes@buscar'); // Busca un cliente en la base de datos.
+
+//Rutas de facturacion
+Route::post('facturac', 'con_factura@create'); //inserta una factura
+Route::post('selectfacturas', 'con_factura@select'); //inserta una factura
+Route::get('detallefac', 'con_factura@detalle'); //muestra la vista detalle de factuta
 });
  

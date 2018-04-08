@@ -23,6 +23,7 @@
           </a>
           <ul class="treeview-menu " style="display: block;">
             <li><a href="usdash"><i class="fa fa-circle-o"></i>Ingresar ventas</a></li>
+            <li><a href="cliente"><i class="fa fa-circle-o"></i>Clientes</a></li>
             <li><a href="saldos"><i class="fa fa-circle-o"></i>Ingresar Saldos</a></li> 
             <li><a href="cotizacion"><i class="fa fa-circle-o"></i>Cotización</a></li> 
             <li><a href="imprimir"><i class="fa fa-circle-o"></i>Ver - Imprimir</a></li>

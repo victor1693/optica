@@ -9,6 +9,22 @@
   <!-- Bootstrap 3.3.7 -->
   <?php include('local/resources/views/includes/referencias_top.html');?>
   <meta name="csrf-token" content="<?php echo csrf_token(); ?>">
+
+  <style type="text/css">
+  .bloque_1
+  {
+    width: 50px;
+    height: 18px;
+    margin-left: 5px;
+  }
+  .bloque_2
+  {
+    width: 100%;
+    height: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -28,719 +44,520 @@
     <!-- Main content -->
     <section class="content"> 
  
-
-<!--MOdal detalles-->
- <div class="modal fade" id="modal_opciones">
-   <div class="modal-dialog " role="document">
-    <div class="modal-content ">
-      <div class="modal-header">
-        <h5 class="modal-title pull-left"><strong>Opciones avanzadas</strong></h5>
-        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body row">
-        <table class="table table-hover table-condensed">
-          <thead>
-            <th>#</th> 
-            <th>Medio de pago</th> 
-            <th>Monto</th>  
-            <th>Eliminar</th>
-          </thead>
-          <tbody id="tabla_medios_pago">
-          
-          </tbody>
-        </table>        
-      </div>
-      <div class="modal-footer">
-       <!-- <button type="button" class="btn btn-primary">Agregar</button>-->
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-      </div>
-    </div>
-  </div>
-</div> 
-
-  <div class="modal fade" id="modal_tarjeta">
-   <div class="modal-dialog " role="document">
-    <div class="modal-content ">
-      <div class="modal-header">
-        <h5 class="modal-title pull-left"><strong>Tarjeta</strong></h5>
-        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body row">
-        <div class="col-sm-6">
-          <div class="form-group has-feedback">
-            <input   id="m_total" name="correo" type="text" class="form-control money con_modal" placeholder="Total">
-            <span class="glyphicon glyphicon-usd form-control-feedback"></span>
-          </div>
-
-          <div class="form-group col-xs-6" style="padding: 0px;">
-             <select id="m_tarjeta" class="form-control con_modal">
-               <option value="">Tarjeta</option>
-               <option value="RedCompra">RedCompra</option>
-               <option value="MasterCard">MasterCard</option>
-               <option value="Visa">Visa</option>
-               <option value="AbcDin">AbcDin</option>
-             </select>
-          </div>
-
-           <div class="form-group col-xs-6"  style="padding: 0px;">
-             <select id="m_cuotas" class="form-control con_modal">
-               <option value="">Cuotas</option>
-               <option value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-               <option value="4">4</option>
-               <option value="5">5</option>
-               <option value="6">6</option>
-               <option value="7">7</option>
-               <option value="8">8</option>
-               <option value="9">9</option>
-               <option value="10">10</option>
-               <option value="11">11</option>
-               <option value="12">12</option>
-             </select>
-          </div>
-
-          <div class="col-xs-12" style="padding: 0px;">
-            <div class="form-group has-feedback">
-            <input id="m_operacion"  name="correo" type="text" class="form-control numeric con_modal" placeholder="Nº Operación">
-            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-          </div>
-          </div>
-        </div>
-        <div class="col-sm-6 text-center">
-          <img src="local/resources/views/img/tarjeta.png" style="width: 200px;">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onClick="validar_tarjeta()">Agregar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-      </div>
-    </div>
-  </div>
-</div> 
-
+ 
+   
 <!--modal cheque-->
- <div class="modal fade" id="modal_cheque">
-  <div class="modal-dialog " role="document" >
-    <div class="modal-content " >
-      <div class="modal-header">
-        <h5 class="modal-title pull-left"><strong>Cheques</strong></h5>
-        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body row">
-        <div class="col-sm-7">
-          <div class="form-group col-xs-6" style="padding: 0px;">
-          <label>Banco</label><br>
-             <select id="c_banco" class="select2 form-control  con_cheque" style="width: 100%;">
-               <option value="">Banco</option> 
-               <option value="ES">Estado</option>
-                <option value="CH">Chile</option>
-                <option value="SA">Santander</option>
-                <option value="BC">BCI</option>
-                <option value="FA">Falabella</option>
-                <option value="BI">Bice</option>
-                <option value="SE">Security</option>
-                <option value="OT">Otro</option> 
-             </select>
-          </div> 
-           <div class="form-group col-xs-6"  style="padding: 0px;">
-           <label>Nº de cuenta</label><br>
-            <input id="c_cuenta" class="form-control numeric con_cheque" placeholder="Nº de cuenta" type="" name="">
-          </div> 
-            <div class="form-group col-xs-6"  style="padding: 0px;">
-            <label>Nº de cheque</label><br>
-              <input id="c_cheque" class="form-control  numeric con_cheque" placeholder="Nº de cheque" type="" name="">
-            </div>
-           
-            <div class="form-group col-xs-6"  style="padding: 0px;">
-              <label>Fecha de cobro</label><br>
-              <input id="c_fecha" class="form-control datapicker con_cheque" placeholder="Fecha de cobro" name="">
-            </div>
-
-            <div class="form-group col-xs-6"  style="padding: 0px;">
-               <label>Código</label><br>
-              <input id="c_codigo" class="form-control numeric con_cheque" placeholder="Código" type="" name="">
-            </div>
-           
-            <div class="form-group col-xs-6"  style="padding: 0px;">
-             <label>Teléfono</label><br>
-              <input id="c_telefono" class="form-control numeric con_cheque" placeholder="Teléfono" type="" name="">
-            </div>
-
-             <div class="form-group col-xs-6"  style="padding: 0px;">
-              <label>RUT</label><br>
-              <input maxlength="10" onKeyup="set_rut(2)" id="c_rut" class="form-control  con_cheque" placeholder="RUT" type="" name="">
-            </div>
-            <div class="form-group col-xs-6 "  style="padding: 0px;">
-             <label>Total</label><br>
-              <input id="c_total" class="form-control money con_cheque" placeholder="Total" type="" name="">
-            </div> 
-        </div>
-         <div class="col-sm-5 text-center" style="padding-top: 40px;">
-        <img class="img-responsive"  src="http://www.scorezero.com/wp-content/uploads/2009/12/cheque-sync.png" >
-      </div>
-      </div>
-     
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onClick="validar_cheque()">Agregar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-      </div>
-    </div>
-  </div>
-</div> 
-<!--End modal cheque-->
+  
       <div class="row">
       <div class="col-md-12">
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs pull-right"> 
-              <li class=""><a href="#mpagos" data-toggle="tab"><strong>Paso 3 - </strong> Medio de pago</a></li>
-              <li><a href="#mproductos" data-toggle="tab"><strong>Paso 2 - </strong>Producto</a></li>
-              <li class="active"><a href="#mcliente" data-toggle="tab"><strong>Paso 1 - </strong>Cliente</a></li> 
-              <li class="pull-left header"><i class="fa fa-th"></i>Nueva venta</li>
+               
+              <li><a href="#mproductos active" data-toggle="tab"><strong></strong></a></li>
+              
+              <li class="pull-left header"><i class="fa fa-th"></i>Ventas</li>
             </ul>
-            <div class="tab-content ">
-           
-            <!--Tab nueva venta-->
-              <div class="tab-pane row  active" id="mcliente"> 
-                   <div class="col-sm-6">
-
-                     <div class="col-sm-6" style="padding: 0px;">
-                        <label>Nombre</label>
-                        <input id="nombre" class="form-control col-sm-" type="text" name="nombre">
-                     </div>
-                      
-                     <div class="col-sm-6" style="padding: 0px;">
-                       <label>RUT</label>
-                        <input data-mask="000" onKeyup="set_rut(1)" id="rut" class="form-control" type="text" name="rut" maxlength="10">
-                     </div>
-
-                      <div class="col-sm-6" style="padding: 0px;">
-                        <label>Correo</label>
-                        <input id="correo_datos" class="form-control  correo" type="text" name="correo">
-                     </div>
-                      
-                     <div class="col-sm-6" style="padding: 0px;">
-                       <label>Dirección</label>
-                        <input id="direccion" class="form-control" type="text" name="dir">
-                     </div>
-
-                     <div class="col-sm-6" style="padding: 0px;">
-                        <label>Teléfono</label>
-                        <input id="telefono" class="form-control  numeric" type="text" name="nombre">
-                     </div>
-                      
-                     <div class="col-sm-6" style="padding: 0px;">
-                       <label>Celular</label>
-                        <input id="celular" class="form-control numeric" type="text" name="celular">
-                     </div>
-
-                      <div class="col-sm-12" style="padding: 0px;padding-top: 10px;margin-bottom:10px;">
-                        <button onClick="validar_formularios(1,1)" class="btn btn-primary form-control">Siguiente</button>
-                     </div> 
-                   </div>  
-
-                   <div class="col-xsm-6 text-center">
-                     <img src="local/resources/views/iconos/id-card.png" style="width: 220px;">
-                   </div> 
-              </div>
-
-
+            <div class="tab-content "> 
               <!--Tab productos-->
-              <div class="tab-pane row" id="mproductos"> 
-                  
-                   <div class="col-sm-12">
-                
-                    <div class="col-sm-12 text-center">
-                        <select id="select_producto" onChange="paginar_producto(this.value)" class="form-control" style="width: 200px;margin: 0 auto;"> 
-                          <option value="">Producto</option>
-                          <option value="lentes_cerca">Lentes de cerca</option>
-                          <option value="lentes_lejos">Lentes de lejos</option>
-                          <option value="lentes_tarspaso">Traspaso</option>
-                          <option value="lentes_contacto">Lentes de contacto</option>
-                          <option value="lentes_sol">Lentes de sol</option>
-                          <option value="otros_lentes_selector">Otros</option> 
-                      </select> 
-                    </div>
-                        <!--otros-->  
-                    <div class="col-sm-12 control_producto" id="otros_lentes_selector" style="display: none;">
-                        <h4 class="text-center">Otros</h4>                 
-                          <div class="col-xs-12" style="padding: 0px;"> 
-                            <div class="col-sm-3">
-                            <select id="len_otros_ajuste" class="form-control">
-                            <option value="">Ajuste</option>
-                            <option value="Cordon">Cordon</option>
-                            <option value="liquido_limpieza">liquido limpieza</option>
-                            <option value="estuche">estuche</option>
-                            <option value="liquido_lente">liquido lente c ontacto</option>
-                            <option value="pano">paño limpieza</option>
-                            <option value="plaquetas">plaquetas</option>
-                            <option value="tornillos">tornillos</option>
-                            <option value="lente_contacto">lente contacto cosmetico</option>
-                            </select> 
-                            </div>
-                             
-                         </div> 
-                         <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_otros_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                            <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                       </div>   
+              <div class="tab-pane row active" id="mproductos">  
 
-                       <!--Lentes de lentes de cerca-->
-                      <div class="col-sm-12 control_producto" id="lentes_cerca"  style="display: none;">
-                            <h4 class="text-center lentes_cerca">Lentes de cerca</h4>
-                             <div class="col-xs-12" style="padding: 0px;">
-                                <div class="col-sm-3"><input id="len_cer_cristales" class="form-control" style="width: 100%;" placeholder="Cristales"></input> </div>
-                                <div class="col-sm-3">
-                                <select id="len_cer_armazon" class="select2 form-control " style="width: 100%;">
-                                <option value="">Armazon</option>
-                                <?php foreach ($armazones as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->marca.'</option>';
-                                } ?>
-                                </select></div>
-                                <div class="col-sm-3"><input id="len_cer_codigo" class="form-control" type="text" name="" placeholder="Código"></div>
-                                <div class="col-sm-3"><select id="len_cer_cil_derecho" class="form-control select2" style="width: 100%;"><option value="">CIL (Derecho)</option>
-                                   <?php foreach ($datos as $key) {
-                                   echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                                  } ?>
-                                </select></div>
-                             </div>
-                              <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                                <div class="col-sm-3"><select id="len_cer_esf_derecho" class="form-control select2" style="width: 100%;"><option value="">ESF (Derecho)</option>
-                                   <?php foreach ($datos as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                                } ?>
-                                </select> </div>
-                                <div class="col-sm-3"><select id="len_cer_eje_derecho" class="form-control select2" style="width: 100%;"><option value="">EJE (Derecho)</option>
-                                   <?php foreach ($eje as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                                } ?>
-                                </select></div> 
-                                <div class="col-sm-3"><select id="len_cer_cil_izquierdo" class="form-control select2" style="width: 100%;">
-                                <option value="">CIL (Izquierdo)</option>
-                                <?php foreach ($datos as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                                } ?>
-                                </select></div>
-                                 <div class="col-sm-3"><select id="len_cer_esf_izquierdo" class="form-control select2" style="width: 100%;">
-                                 <option value="">ESF (Izquierdo)</option>
-                                   <?php foreach ($datos as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                                } ?>
-                                 </select></div>
-                             </div>
-                              <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                                <div class="col-sm-3"><select id="len_cer_eje_izquierdo" class="form-control select2" style="width: 100%;">
-                                <option value="">EJE (izquierdo)</option> 
-                                  <?php foreach ($eje as $key) {
-                                   echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                                  } ?> 
-                                </select> </div>
-                                <div class="col-sm-3"><select id="len_cer_dp" class="form-control select2" style="width: 100%;">
-                                <option value="">DP</option>
-                                  <?php foreach ($dp as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
-                                } ?></select></div> 
-                                <div class="col-sm-3"><select id="len_cer_seguro" class="form-control select2" style="width: 100%;"> 
-                                    <option value="">Seguro</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                </select></div> 
-                             </div> 
-                              <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                                <div class="col-sm-3"><select id="len_cer_oftalmologo" class="form-control select2" style="width: 100%;"><option value="">Oftalmólogo</option>
-                                <?php foreach ($medicos as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->nombre.'</option>';
-                                } ?>
-                                </select> </div>
-                                <div class="col-sm-3">
-
-                                <input type="text" id="len_cer_fecha_entrega" class="form-control datapicker" placeholder="Fecha de entrega" name=""></div> 
-                                <div class="col-sm-3">
-                                <select id="len_cer_sucursal" class="form-control select2" style="width: 100%;">
-                                <option value="">Sucursal de retiro</option>
-                                 <?php foreach ($sucursal as $key) {
-                                 echo'<option value="'.$key->id.'">'.$key->descripcion.'</option>';
-                                } ?>
-                                </select>
-                                </div> 
-                             </div>
-                             <div class="col-xs-12"> 
-                                 <label>Observaciones</label>
-                                 <textarea id="len_cer_observacion" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                             </div>
-                             <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                                <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                             </div>
-                       </div>   
-                        
-
-                        <!--Lentes de lejos-->
-                        <!--Lentes de lentes de lejos-->
-                      <div class="col-sm-12 control_producto" id="lentes_lejos"   style="display: none;">
-                        <h4 class="text-center">Lentes de lejos</h4>
-                         <div class="col-xs-12" style="padding: 0px;">
-                            <div class="col-sm-3"><input id="len_lej_cristales" class="form-control" placeholder="Cristales" style="width:100%;"/> </div>
-                            <div class="col-sm-3"><select id="len_lej_armazon" class="form-control select2" style="width:100%;"><option value="">Armazon</option> 
-                             <?php foreach ($armazones as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->marca.'</option>';
-                              } ?></select></div>
-                            <div class="col-sm-3"><input id="len_lej_codigo" class="form-control" type="text" name="" placeholder="Código"></div>
-                            <div class="col-sm-3"><select id="len_lej_cil_derecho" class="form-control select2" style="width:100%;"><option value="">CIL (Derecho)</option>
-                             <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                              </select>
-                            </div>
-                         </div>
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                            <div class="col-sm-3"><select id="len_lej_esf_derecho" class="form-control select2" style="width:100%;"><option value="">ESF (Derecho)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select> </div>
-                            <div class="col-sm-3"><select id="len_lej_eje_derecho" class="form-control select2" style="width:100%;"><option value="">EJE (Derecho)</option>
-                               <?php foreach ($eje as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                              } ?>
-                            </select></div> 
-                            <div class="col-sm-3"><select id="len_lej_cil_izquierdo" class="form-control select2" style="width:100%;"><option value="">CIL (Izquierdo)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select></div>
-                             <div class="col-sm-3"><select id="len_lej_esf_izquierdo" class="form-control select2" style="width:100%;"><option value="">ESF (Izquierdo)</option>
-                              <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?></select></div>
-                         </div>
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                            <div class="col-sm-3"><select id="len_lej_eje_izquierdo" class="form-control select2" style="width:100%;"><option value="">EJE (izquierdo)</option>
-                             <?php foreach ($eje as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                              } ?></select> </div>
-                            <div class="col-sm-3"><select id="len_lej_dp" class="form-control select2" style="width:100%;"><option value="">DP</option>
-                             <?php foreach ($dp as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
-                              } ?></select></div> 
-                            <div class="col-sm-3"><select id="len_lej_seguro" class="form-control select2" style="width:100%;"><option value="">Seguro</option>
-                            <option value="A">A</option>
-                            <option value="A">B</option>
-                            <option value="A">C</option>
-                            <option value="A">D</option>
-
-                            </select></div>
-
-                            <div class="col-sm-3"><select id="len_lej_h_derecha" class="form-control select2" style="width:100%;"><option value="">H (Derecha)</option>
-                             <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                              </select></div>  
-                         </div>
-
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                            <div class="col-sm-3"><select id="len_lej_h_izquierda" class="form-control select2" style="width:100%;"><option value="">H (Izquierda)</option>
-                             <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select></div>
-                            <div class="col-sm-3"><select id="len_lej_oftalmologo" class="form-control select2" style="width:100%;"><option value="">Oftalmólogo</option>
-                             <?php foreach ($medicos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->nombre.'</option>';
-                              } ?></select> </div>
-                            <div class="col-sm-3"><input id="len_lej_fecha" placeholder="Fecha de entrega" type="text" class="form-control datapicker" name=""></div> 
-                            <div class="col-sm-3"><select id="len_lej_sucursal" class="form-control select2" style="width:100%;"><option value="">Sucursal de retiro</option>
-                               <?php foreach ($sucursal as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->descripcion.'</option>';
-                              } ?>
-                            </select></div> 
-                         </div>
-                             <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_lej_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                            <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                       </div>  
-
-                    <!--Lentes de lentes de traspaso-->
-                      <div class="col-sm-12 control_producto" id="lentes_tarspaso"   style="display: none;">
-                        <h4 class="text-center">Traspaso</h4>
-                         <div class="col-xs-12" style="padding: 0px;">
-                       
-                            <div class="col-sm-3"><select id="len_tras_armazon" class="form-control select2" style="width:100%;"><option value="">Armazon</option>
-                                <?php foreach ($armazones as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->marca.'</option>';
-                              } ?>
-                            </select>
-                             
-                            </div>
-                            <div class="col-sm-3"><input id="len_tras_codigo" class="form-control" type="text" name="" placeholder="Código"></div>
-                             <div class="col-sm-3"><select id="len_tras_dp" class="form-control select2" style="width:100%;"><option value="">DP</option>
-                               <?php foreach ($dp as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
-                              } ?>
-                             </select></div>  
-                            <div class="col-sm-3"><select id="len_tras_h_derecha" class="form-control select2" style="width:100%;"><option value="">H (Derecha)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select></div> 
-                         </div>
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                          <div class="col-sm-3"><select id="len_tras_h_izquierda" class="form-control select2" style="width:100%;"><option value="">H (Izquierda)</option>
-                             <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                          </select></div>
-                            <div class="col-sm-3"><select id="len_tras_oftalmologo" class="form-control select2" style="width:100%;"><option value="">Oftalmólogo</option>
-                              <?php foreach ($medicos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->nombre.'</option>';
-                              } ?>
-                            </select> </div>
-                             <div class="col-sm-3"><input placeholder="Fecha de entrega" id="len_tras_fecha" type="text" class="form-control datapicker" name=""></div> 
-                            <div class="col-sm-3"><select id="len_tras_sucursal" class="form-control select2" style="width:100%;"><option value="">Sucursal de retiro</option> 
-                               <?php foreach ($sucursal as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->descripcion.'</option>';
-                              } ?>
-                            </select></div>
-                         </div>
-                          
-                         <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_tras_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                             <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                       </div> 
-
-                      <!--Lentes de lentes de contacto-->
-                      <div class="col-sm-12 control_producto" id="lentes_contacto"  style="display: none;" >
-                        <h4 class="text-center">Lentes de contacto</h4>
-                 
-                          <div class="col-xs-12" style="padding: 0px;">
-                            <div class="col-sm-3"><select  id="len_contac_esf_derecho" class="form-control select2" style="width:100%;"><option value="">ESF (Derecho)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select> </div>
-                             <div class="col-sm-3"><select  id="len_contac_esf_izquierdo" class="form-control select2" style="width:100%;"><option value="">ESF (Izquierdo)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select> </div>
-                            <div class="col-sm-3"><select id="len_contac_eje_derecho" class="form-control select2" style="width:100%;"><option value="">EJE (Derecho)</option>
-                               <?php foreach ($eje as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                              } ?>
-                            </select></div> 
-                            <div class="col-sm-3"><select id="len_contac_cil_izquierdo" class="form-control select2" style="width:100%;"><option value="">CIL (Izquierdo)</option>
-                               <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select></div>
-                             
-                         </div>
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;">
-                          <div class="col-sm-3"><select id="len_contac_eje_izquierdo" class="form-control select2" style="width:100%;"><option value="">EJE (izquierdo)</option>
-                               <?php foreach ($eje as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->eje.'</option>';
-                              } ?>
-                             </select></div>
-                            <div class="col-sm-3"><select id="len_contac_cil_derecho" class="form-control select2" style="width:100%;"><option value="">CIL (Derecho)</option>
-                              <?php foreach ($datos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dioptria.'</option>';
-                              } ?>
-                            </select> </div>
-                            
-                            <div class="col-sm-3"><select id="len_contac_seguro" class="form-control select2" style="width:100%;"><option value="">Seguro</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option> 
-                            </select></div>
-                            <div class="col-sm-3"><select id="len_contac_oftalmologo" class="form-control select2" style="width:100%;"><option value="">Oftalmólogo</option>
-                               <?php foreach ($medicos as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->nombre.'</option>';
-                              } ?>
-                            </select> </div> 
-                         </div>
-
-                          <div class="col-xs-12" style="padding: 0px;margin-top: 5px;"> 
-                            <div class="col-sm-3"><input placeholder="Fecha de entrega" id="len_contac_fecha" type="text" class="form-control datapicker" name=""></div> 
-                            <div class="col-sm-3"><select id="len_contac_sucursal" class="form-control select2" style="width:100%;"><option value="">Sucursal de retiro</option>
-                               <?php foreach ($sucursal as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->descripcion.'</option>';
-                              } ?>
-                            </select></div> 
-                            <div class="col-sm-3"><select id="len_contac_dp" class="form-control select2" style="width:100%;"><option value="">DP</option>
-                               <?php foreach ($dp as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->dp.'</option>';
-                              } ?>
-                            </select></div> 
-                         </div>
-                          <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_contac_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                                 <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                       </div>    
-                     <!--Lentes de lentes de sol-->
-                      <div class="col-sm-12 control_producto" id="lentes_sol"  style="display: none;" >
-                        <h4 class="text-center">Lentes de sol</h4>                 
-                          <div class="col-xs-12" style="padding: 0px;">
-                            <div class="col-sm-3">
-                            <select id="len_sol_armazon" class="form-control select2" style="width:100%;"><option value="">Armazon</option>
-                             <?php foreach ($armazones as $key) {
-                               echo'<option value="'.$key->id.'">'.$key->marca.'</option>';
-                              } ?>
-                            </select> </div>
-                            <div class="col-sm-3"><input id="len_sol_codigo" class="form-control" type="text" name="" placeholder="Código"></div
-                         </div> 
-                        <div class="col-xs-12"> 
-                             <label>Observaciones</label>
-                             <textarea id="len_sol_observaciones" class="form-control" style="resize: none;width: 100%;" maxlength="50"></textarea>
-                         </div>
-                         <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                          <div class="col-sm-12 text-center" style="padding-top: 5px;">
-                                 <a onClick="validar_formularios(2,1)" data-toggle="tab" class="form-control btn btn-primary" style="max-width: 200px;">Siguiente</a>
-                         </div>
-                         </div>
-                       </div>   
-                    </div> 
-
-                        <!--Lentes de lejos-->
-                  </div>
-              </div>
-
-              <!--Tab medios de pago-->
-              <div class="tab-pane row" id="mpagos"> 
-                   <div class="col-sm-6">   
-                   <table class="table table-condensed table-bordered table-hover">
-                      <tbody><tr> 
-                        <th style="width: 100px;">Detalle</th>
-                        <th>Monto <a class="pull-right" href="#" data-toggle="modal" data-target="#modal_opciones">(+) Opciones</a> </th>  
-                      </tr>
-                      <tr> 
-                        <td>Efectivo</td> 
-                        <td> <input   value="0" id="pago_efectivo" class="money" type="" name="" style="height: 20px;width: 80px;"></td> 
-                      </tr> 
-
-                       <tr> 
-                        <td>Tarjeta <a href="#"  data-toggle="modal" data-target="#modal_tarjeta"><strong>(+)</strong></a> </td> 
-                        <td> <input value="0" id="pago_total_tarjeta" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
-                      </tr> 
-                      
-                      <tr> 
-                        <td>Cheque <a href="#" data-toggle="modal" data-target="#modal_cheque"><strong>(+)</strong></a> <strong></strong></td> 
-                        <td> <input value="0" id="pago_total_cheque" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;"></td>
-                      </tr> 
-
-                      <tr> 
-                        <td>OC</td> 
-                        <td> <input value="0" id="pago_orden_compra" class="numeric" type="" name="" style="height: 20px;width: 80px;"></td>
-                      </tr> 
-
-                      <tr> 
-                        <td>Transferencia</td> 
-                        <td> <input  value="0" id="pago_transferencia" class="money" type="" name="" style="height: 20px;width: 80px;"></td>
-                      </tr> 
-                       <tr> 
-                        <td><strong>Total</strong></td> 
-                        <td> <input value="0" id="pago_total" class="money" readonly="" type="" name="" style="height: 20px;border: 0px;width: 80px;">
-                       
-                        </td>
-                      </tr> 
-                    </tbody>
-                </table> 
-                      <div class="col-sm-12" style="padding: 0px;padding-top: 10px;margin-bottom:10px;">
-                        <button onclick="procesar_venta()"  class="btn btn-primary form-control">Procesar venta</button>
-                     </div> 
-                   </div>  
-
-                   <div class="col-xsm-6 text-center">
-                     <img src="local/resources/views/iconos/payments.jpg" style="width: 220px;">
-                   </div> 
-              </div>
-                
-            </div>
-            <!-- /.tab-content -->
-
-             <div class='col-lg-4 col-md-4 col-sm-12' style="padding: 0px;margin-top: 15px;">
-                <input  class="form-control" type="" name="" placeholder="Buscar...">               
-            </div>
-              <div class='col-lg-4 col-md-4 col-sm-12' style="padding: 0px;margin-top: 15px;">
-                 <button class="btn btn-primary btn-danger" style="margin-left: 10px;">Hoy</button>
-                <button class="btn btn-primary  btn-danger" style="margin-left: 10px;">Últimos 7 días</button>
-                <button class="btn btn-primary  btn-danger" style="margin-left: 10px;">Todo</button>             
-            </div>
-
-            <div class="col-sm-12" style="padding: 0px;margin-top: 20px;">
-           
-              <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Resumen</h3>
-              <a href="" class="pull-right" style="padding-left: 10px;">Resumen diario</a>
-              <a href="" class="pull-right">Datos contabilizados</a>
-            </div>
-
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <table class="table table-condensed">
-                <thead>
-                  <tr>
-                  <th style="width: 10px">#</th> 
-                  <th>Total</th> 
-                  <th>Abonado</th>
-                  <th>Por abonar</th>
-                  <th>Efectivo</th>
-                  <th>Tarjeta</th>
-                  <th>Cheque</th>
-                  <th>Transferencia</th>
-                  <th>Estatus</th>
-                  <th>Abonar</th>
-                  <th>Imprimir</th>
-                  <th>Editar</th>
-                </tr>
-                </thead>
-                <tbody id="tabla_detalle">
- 
-                </tr>
-                 
-              </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-            </div>
+                    <div class="col-sm-12 text-center" style="padding: 0px;margin-bottom: 15px;">  
+                      <div class="col-sm-6">
+                        <div class="col-sm-12">
+                          <h4 class="box-title">RUT del cliente</h4>
+                        </div> 
+                        <input id="rut" style="max-width: 250px;margin: 0 auto;" class="form-control control_input" type="text" id="buscador" placeholder="12345678-9"> 
+                        <button onClick="cliente()"  style="max-width: 150px;margin-top: 15px;" class="form-cotnrol btn btn-danger btn-sm">Buscar cliente</button> 
+                      </div>
+                      <div class="col-sm-6 text-left" style="border-left: 1px solid #919191;">
+                      <div class="col-sm-12" style="padding:0;">
+                          <h4 class="box-title">Datos del cliente</h4>
+                        </div> 
+                      <strong>RUT: </strong><span id="detalle_rut"></span><br>
+                       <strong>Correo: </strong><span id="detalle_correo"></span><br>
+                      <strong>Dirección: </strong><span id="detalle_direccion"></span><br>
+                       <strong>Teléfonos: </strong><span id="detalle_telefonos"></span><br>
+                      </div>
+                    </div>  
+              </div> 
           </div>
           <!-- nav-tabs-custom -->
         </div>
       </div> 
+
+
+<!--Productos-->
+      <div class="col-md-12">
+          <!-- Custom Tabs (Pulled to the right) -->
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">                
+              <li><a href="#mproductos active" data-toggle="tab"><strong></strong></a></li>              
+              <li class="pull-left header"><i class="fa fa-th"></i>Producto</li>
+            </ul>
+            <div class="tab-content "> 
+              <!--Tab productos-->
+              <div class="tab-pane row active" id="mproductos">  
+               <div class="col-sm-3">
+                 <table style="margin: 0 auto;">
+                   <tr>
+                     <td></td>
+                     <td class="text-center">DE</td>
+                     <td class="text-center">IZ</td>
+                   </tr>
+                   <tr>
+                     <td><strong>CIL</strong></td>
+                     <td>
+                      <select id="pro_cil_de" class="bloque_2  selectores" >
+                      <option value="">Seleccionar</option>                     
+                      <?php foreach ($datos as $key) {
+                        echo "<option value='".$key->id."'>".$key->dioptria."</option>";
+                      }?>                        
+                     </select> 
+                     </td>
+                     <td>
+                       <select id="pro_cil_iz" class="bloque_2 selectores" >  
+                       <option value="">Seleccionar</option>                    
+                       <?php foreach ($datos as $key) {
+                        echo "<option value='".$key->id."'>".$key->dioptria."</option>";
+                      }?>                        
+                     </select> 
+                     </td>
+                   </tr>
+                   <tr>
+                     <td><strong>EJE</strong></td>
+                     <td>
+                       <select id="pro_eje_de" class="bloque_2 selectores"  >  
+                       <option value="">Seleccionar</option>                     
+                       <?php foreach ($eje as $key) {
+                        echo "<option value='".$key->id."'>".$key->eje."</option>";
+                      }?>                        
+                     </select> 
+                     </td>
+                     <td>
+                        <select id="pro_eje_iz" class="bloque_2 selectores"  > 
+                        <option value="">Seleccionar</option>                     
+                       <?php foreach ($eje as $key) {
+                        echo "<option value='".$key->id."'>".$key->eje."</option>";
+                      }?>                        
+                     </select> 
+                     </td>
+                   </tr>
+                   <tr>
+                     <td><strong>ESF</strong></td>
+                     <td>
+                       <select id="pro_esf_de" class="bloque_2 selectores"  >
+                       <option value="">Seleccionar</option>                        
+                     <?php foreach ($datos as $key) {
+                        echo "<option value='".$key->id."'>".$key->dioptria."</option>";
+                      }?>                        
+                     </select> 
+                     </td>
+                     <td>
+                       <select id="pro_esf_iz" class="bloque_2 selectores"  > 
+                       <option value="">Seleccionar</option>  
+                       <?php foreach ($datos as $key) {
+                        echo "<option value='".$key->id."'>".$key->dioptria."</option>";
+                      }?>                        
+                     </select> 
+                     </td>
+                   </tr>
+                    <tr>
+                     <td><strong>H</strong></td>
+                     <td>
+                       <select id="pro_h_de" class="bloque_2 selectores" >
+                       <option value="0">Seleccionar</option>                         
+                       <?php foreach ($datos as $key) {
+                        echo "<option value='".$key->id."'>".$key->dioptria."</option>";
+                      }?>                    
+                     </select> 
+                     </td>
+                     <td>
+                       <select id="pro_h_iz" class="bloque_2 selectores"  >
+                       <option value="0">Seleccionar</option>  
+                       <?php foreach ($datos as $key) {
+                        echo "<option value='".$key->id."'>".$key->dioptria."</option>";
+                      }?>                         
+                     </select> 
+                     </td>
+                   </tr>
+                 </table>
+               </div>
+
+               <div class="col-sm-3" style="padding-top: 18px;">   
+                     <select id="pro_producto" class="bloque_2 selectores" style="margin-top: 2px;">
+                        <option value="">Producto</option>
+                          <option value="lentes_cerca">Lentes de cerca</option>
+                          <option value="lentes_lejos">Lentes de lejos</option>
+                          <option value="lentes_traspaso">Traspaso</option>
+                          <option value="lentes_contacto">Lentes de contacto</option>
+                          <option value="lentes_sol">Lentes de sol</option>
+                          <option value="otros_lentes">Otros</option> 
+                     </select> 
+                     <select id="pro_dp" class="bloque_2 selectores"  >
+                      <option value="">DP</option>
+                      <?php foreach ($dp as $key) {
+                        echo "<option value='".$key->id."'>".$key->dp."</option>";
+                      }?>                       
+                     </select> 
+                      <input id="pro_codigo" placeholder="Código" class="bloque_2 control_input" type="" name="">
+                      <input id="pro_dc" placeholder="DC" class="bloque_2 control_input" type="" name="">
+                </div>
+                <div class="col-sm-3" style="padding-top: 18px;"> 
+                      <select  class="bloque_2 selectores" id="pro_armazon">
+                      <option value="">Armazon</option>
+                      <?php foreach ($armazones as $key) {
+                        echo "<option value='".$key->id."'>".$key->marca."</option>";
+                      }?>                       
+                     </select> 
+                      <select class="bloque_2 selectores" id="pro_seguro">
+                      <option value="">Seguro</option>
+                       <option value="A">A</option>
+                       <option value="B">B</option>
+                       <option value="C">C</option>
+                       <option value="D">D</option>                    
+                     </select> 
+                      <select class="bloque_2 selectores" id="pro_sucursal">
+                      <option value="0">Sucursal</option>
+                      <?php foreach ($sucursal as $key) {
+                        echo "<option value='".$key->id."'>".$key->descripcion."</option>";
+                      }?>                       
+                     </select>
+                     <select class="bloque_2 selectores" id="pro_otros">
+                      <option value="">Otros productos</option>
+                       <option value="Ajuste">  Ajuste  </option>
+                        <option value="Cordon"> Cordon  </option>
+                        <option value="liquido limpieza"> liquido limpieza  </option>
+                        <option value="estuche"> estuche </option>
+                        <option value="liquido lente contacto"> liquido lente contacto </option>
+                        <option value="paño limpieza"> paño limpieza </option>
+                        <option value="plaquetas"> plaquetas </option>
+                        <option value="tornillos"> tornillos </option>
+                        <option value="lente contacto cosmetico"> lente contacto cosmetico  </option> 
+                     </select> 
+                </div>
+
+                <div class="col-sm-3" style="padding-top: 18px;">   
+                       <input id="pro_cristales" placeholder="Cristales" class="bloque_2 control_input" type="" name="">  
+                      <input id="pro_fecha_entrega" placeholder="fecha de entrega" class="bloque_2 control_input datapicker" type="text" name="">  
+                       <select class="bloque_2 selectores" id="pro_oftalmologo">
+                       <option value="0">Oftálmologo</option>
+                      <?php foreach ($medicos as $key) {
+                        echo "<option value='".$key->id."'>".$key->nombre."</option>";
+                      }?>                       
+                     </select>   
+                     <input id="pro_observaciones" placeholder="Observaciones" class="bloque_2 control_input"  type="" name=""> 
+                 </div> 
+                <div class="col-sm-12 text-center" style="padding-top: 15px;">
+                <label>Total a pagar</label>
+                 <input style="width: 250px;margin: auto;" class="form-control control_input" type="" name="" id="pro_total" placeholder="Total a pagar">
+               </div>
+               <div class="col-sm-12 text-center" style="padding-top: 15px;">
+                 <button onclick="crear_factura()" class="btn btn-danger btn-sm">Procesar pedido</button>
+               </div>
+              </div> 
+          </div> 
+        </div>
+      </div>  
+
+
+<!--Facturas-->
+      <div class="col-md-12">
+          <!-- Custom Tabs (Pulled to the right) -->
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right"> 
+               
+              <li><a href="#mproductos active" data-toggle="tab"><strong></strong></a></li>
+              
+              <li class="pull-left header"><i class="fa fa-th"></i>Facturas pendientes</li>
+            </ul>
+            <div class="tab-content "> 
+              <!--Tab productos-->
+              <div class="tab-pane row active" id="mproductos">  
+                <table class="table table-condensed">
+                  <thead >
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>RUT</th>
+                    <th>Monto</th>
+                    <th>Detalle</th>
+                    <th>Pagar</th>
+                  </thead>
+                  <tbody id="tabla_factura">
+                    
+                  </tbody>
+                </table>
+              </div> 
+          </div> 
+        </div>
+      </div>   
+
+ 
     </section>
-    <!-- /.content -->
+  
+
+    <!--Modal agregar cliente-->
+
+    <!-- Button trigger modal --> 
+<!-- Modal -->
+<div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="modalClienteLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="float: left;" class="modal-title" id="modalClienteLabel">Datos del cliente</h5>
+        <button style="float: right;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+         <div class="col-sm-6">
+         <input id="ruta" type="hidden" value="clientec" name="">
+         <label>RUT</label><br>
+         <input disabled="true" class="form-control" id="modal_rut" type="text" name="">
+          <label>Nombre</label><br>
+         <input class="form-control" id="modal_nombre" type="text" name="">
+          <label>Correo</label><br>
+         <input class="form-control" id="modal_correo" type="text" name="">
+       </div>
+       <div class="col-sm-6">
+        <label>Dirección</label><br>
+         <input class="form-control" id="modal_direccion" type="text" name="">
+          <label>Celular</label><br>
+         <input class="form-control" id="modal_celular" type="text" name="">
+          <label>Teléfono</label><br>
+         <input class="form-control" id="modal_telefono" type="text" name="">
+      </div>
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+        <button onclick="crear_cliente()" type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
   </div>
+</div>
 
-
+    <!--Fin Modal agregar cliente-->
+  </div>
 <div class="control-sidebar-bg"></div>
 </div>
-<?php include('local/resources/views/includes/referencias_down.php');?>
-<?php include('local/resources/views/includes_js/us_dash.php');?>
+<?php include('local/resources/views/includes/referencias_down.php');?> 
+
+<script type="text/javascript">
+ 
+ $('.datapicker').datepicker({
+      autoclose: true
+    });
+
+ $("#rut").keyup(function(e) {
+    if(e.keyCode == 13) {
+      cliente($("#rut").val()); 
+    }
+});
+ 
+
+//Limpiar campos decliente
+function limpiar()
+{
+  $("#detalle_correo").html("");
+  $("#detalle_telefonos").html("");
+  $("#detalle_direccion").html("");
+  $("#detalle_rut").html("");
+
+  $("#modal_nombre").val("");
+  $("#modal_rut").val("");
+  $("#modal_telefono").val("");
+  $("#modal_direccion").val("");
+  $("#modal_celular").val("");
+  $("#modal_correo").val("");
+}
+
+
+//Consultar si in cliente existe o no
+  function cliente(id) 
+  {
+    limpiar();
+    if($("#rut").val()=='')
+    {
+       swal("Ups!", "Debe completar el campo rut.", "info");
+      return 0;     
+    }
+     $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+              url: 'buscarcliente',
+              type: 'post', 
+              data:
+              {                
+                rut:$("#rut").val(),                
+              },
+               datatype:"json",  
+                success: function(data)  
+                {                             
+                    seleccionar_facturas($("#rut").val());
+                      $.each(JSON.parse(data), function(i, datos) { 
+                        if(datos['cantidad']==1)
+                        {
+                          $("#detalle_correo").html(datos["correo"]);
+                          $("#detalle_telefonos").html(datos["celular"]+" / "+ datos["telefono"]);
+                          $("#detalle_direccion").html(datos["direccion"]);
+                          $("#detalle_rut").html(datos["rut"]);
+                        } 
+                        else if(datos['cantidad']==0)
+                        { 
+                          $('#modalCliente').modal('show');
+                          $("#modal_rut").val($("#rut").val());
+                          $("#modal_nombre").focus();
+                        }  
+                      });   
+                }  
+          })
+    } 
+//guardar cliente
+//Almacena un cliente en la BD
+  function crear_cliente() 
+  {
+     $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+              url: $("#ruta").val(),
+              type: 'post', 
+              data:
+              {
+                nombre:$("#modal_nombre").val(),
+                rut:$("#modal_rut").val(),
+                telefono:$("#modal_telefono").val(),
+                direccion:$("#modal_direccion").val(),
+                celular:$("#modal_celular").val(),
+                correo:$("#modal_correo").val(),
+              },
+              success: function(data)  
+              { 
+                
+                  if(data==1)
+                  {
+                    swal("Listo!", "Cliente agregado con éxito", "success");
+                    limpiar();
+                    cliente($("#modal_rut").val());
+                    $('#modalCliente').modal('hide');
+                    
+
+                  }
+                 
+                  else if(data==0)
+                  {
+                    swal("Ups!", "Algo ha salido mal, inténtelo de nuevo.", "error");
+                  }
+                  else
+                  {
+                    swal("Ups!", data, "info");
+                  }           
+              }  
+          })
+  } 
+   function seleccionar_facturas(parametro) 
+  {
+     $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+           $.ajax({
+            url: 'selectfacturas',
+            type: 'post',
+            data:{rut:parametro},
+            datatype:"json",  
+            success: function(data)  
+            {  
+              $("#tabla_factura").html("");
+                total_tarjetas=0;
+                if(data!="error")
+                { 
+                  contador=0;
+                  $.each(JSON.parse(data), function(i, datos) { 
+                    contador++;
+                    $("#tabla_factura").append(
+                    "<tr id='"+datos['id']+"'>"+
+                    "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+contador+"</td>"+
+                    "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+datos['nombre']+"</td>"+
+                    "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+datos['rut']+"</td>"+
+                    "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+datos['total']+"</td>"+
+                    "<td style='padding-top=0;padding-bottom:0;height:25px;'><a href='#'>Ver</a></td>"+
+                    "<td style='padding-top=0;padding-bottom:0;height:25px;'><button class='btn btn-xs btn-primary'>Pagar</button></td>"+  
+                    "</tr>");   
+                  }); 
+
+                  if(contador>0)
+                  {
+                    swal("Atención!", "El cliente tiene "+contador+" facturas pendientes.", "info");
+                  }
+                } 
+                else
+                { 
+                  swal("Ups!", "Algo ha salido mal, inténtelo de nuevo. Verifíque los campos.", "error");
+                }           
+            }  
+        })
+  }
+
+   function crear_factura() 
+  {
+     $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+              url: "facturac",
+              type: 'post', 
+              data:
+              {
+                cristales:$("#pro_cristales").val(),
+                armazon:$("#pro_armazon").val(),
+                codigo:$("#pro_codigo").val(),
+                dc:$("#pro_dc").val(),
+                cil_derecho:$("#pro_cil_de").val(),
+                cil_izquierdo:$("#pro_cil_iz").val(), 
+                eje_derecho:$("#pro_eje_de").val(),
+                eje_izquierdo:$("#pro_eje_iz").val(),
+                esf_derecho:$("#pro_esf_de").val(),
+                esf_izquierdo:$("#pro_esf_iz").val(),
+                dp:$("#pro_dp").val(), 
+                seguro:$("#pro_seguro").val(),
+                oftalmologo:$("#pro_oftalmologo").val(),
+                observacion:$("#pro_observaciones").val(),
+                total:$("#pro_total").val(),
+                fecha_entrega:$("#pro_fecha_entrega").val(),
+                sucursal:$("#pro_sucursal").val(), 
+                h_izquierdo:$("#pro_h_de").val(),
+                h_derecho:$("#pro_h_iz").val(),
+                otros:$("#pro_otros").val(), 
+                rut:$("#rut").val(), 
+                producto:$("#pro_producto").val(), 
+                
+              },
+              success: function(data)  
+              {  
+                if(data==1)
+                {
+                  swal("Listo!", "Factura almanecenada con éxito.", "success");
+                  $(".selectores").prop('selectedIndex', 0);
+                  $(".control_input").val("");
+                }
+                else
+                {
+                  swal("Ups!", data, "info");
+                }
+              }  
+          })
+  }
+</script>
+ 
 </body>
 </html>

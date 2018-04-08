@@ -16,7 +16,7 @@ class con_home extends Controller {
 	{
 		$vista=View::make('us_dash');
 		//Consulta de armazon
-		$sql="SELECT * FROM tbl_armazones";
+		$sql="SELECT * FROM tbl_armazones group by marca order by marca asc ";
 		$armazones=DB::select($sql);	
 		//Consulta de armazon
 		$sql="SELECT * FROM tbl_sucursal";
@@ -34,9 +34,7 @@ class con_home extends Controller {
 
 		//Consulta de dp
 		$sql="SELECT * FROM tbl_dp order by dp desc";
-		$dp=DB::select($sql);
-
-		
+		$dp=DB::select($sql); 
 
 		$vista->medicos=$medicos; 
 		$vista->dp=$dp; 
