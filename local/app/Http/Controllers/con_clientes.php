@@ -24,12 +24,12 @@ class con_clientes extends Controller {
 	 */
 	public function create()
 	{
-		if($_POST['nombre']==""){echo "Debe completar el campo nombre.";return 0;}
-		else if($_POST['correo']==""){echo "Debe completar el campo correo.";return 0;}
-		else if($_POST['rut']==""){echo "Debe completar el campo rut.";return 0;}
-		else if($_POST['telefono']==""){echo "Debe completar el campo teléfono.";return 0;}
-		else if($_POST['celular']==""){echo "Debe completar el campo celular.";return 0;}
-		else if($_POST['direccion']==""){echo "Debe completar el campo dirección.";return 0;}
+		if($_POST['nombre']==""){echo "Debe completar el campo nombre.";exit();}
+		else if($_POST['correo']==""){echo "Debe completar el campo correo.";exit();}
+		else if($_POST['rut']==""){echo "Debe completar el campo rut.";exit();}
+		else if($_POST['telefono']==""){echo "Debe completar el campo teléfono.";exit();}
+		else if($_POST['celular']==""){echo "Debe completar el campo celular.";exit();}
+		else if($_POST['direccion']==""){echo "Debe completar el campo dirección.";exit();}
 		else
 		{
 			$sql="INSERT INTO tbl_cliente VALUES(
@@ -53,12 +53,12 @@ class con_clientes extends Controller {
 	}
 	public function update()
 	{
-		if($_POST['nombre']==""){echo "Debe completar el campo nombre.";return 0;}
-		else if($_POST['correo']==""){echo "Debe completar el campo correo.";return 0;}
-		else if($_POST['rut']==""){echo "Debe completar el campo rut.";return 0;}
-		else if($_POST['telefono']==""){echo "Debe completar el campo teléfono.";return 0;}
-		else if($_POST['celular']==""){echo "Debe completar el campo celular.";return 0;}
-		else if($_POST['direccion']==""){echo "Debe completar el campo dirección.";return 0;}
+		if($_POST['nombre']==""){echo "Debe completar el campo nombre.";exit();}
+		else if($_POST['correo']==""){echo "Debe completar el campo correo.";exit();}
+		else if($_POST['rut']==""){echo "Debe completar el campo rut.";exit();}
+		else if($_POST['telefono']==""){echo "Debe completar el campo teléfono.";exit();}
+		else if($_POST['celular']==""){echo "Debe completar el campo celular.";exit();}
+		else if($_POST['direccion']==""){echo "Debe completar el campo dirección.";exit();}
 		else
 		{
 			$sql="UPDATE tbl_cliente SET 

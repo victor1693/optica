@@ -66,6 +66,12 @@ Route::post('buscarcliente', 'con_clientes@buscar'); // Busca un cliente en la b
 //Rutas de facturacion
 Route::post('facturac', 'con_factura@create'); //inserta una factura
 Route::post('selectfacturas', 'con_factura@select'); //inserta una factura
-Route::get('detallefac', 'con_factura@detalle'); //muestra la vista detalle de factuta
+Route::get('detallefac', 'con_factura@detalle'); //muestra la vista detalle de factura
+
+//Rutas de pagos
+Route::post('efectivo', 'con_pagos@efectivo'); // Inserta un pago de tipo efectivo
+Route::post('transferencia', 'con_pagos@transferencia'); //Inserta un pago de tipo transferencia
+Route::post('tarjeta', 'con_pagos@tarjeta'); //Inserta un pago de tipo tarjeta
+Route::post('cheque', 'con_pagos@cheque'); //Inserta un pago de tipo cheque
 });
  

@@ -67,8 +67,8 @@
                         <div class="col-sm-12">
                           <h4 class="box-title">RUT del cliente</h4>
                         </div> 
-                        <input id="rut" style="max-width: 250px;margin: 0 auto;" class="form-control control_input" type="text" id="buscador" placeholder="12345678-9"> 
-                        <button onClick="cliente()"  style="max-width: 150px;margin-top: 15px;" class="form-cotnrol btn btn-danger btn-sm">Buscar cliente</button> 
+                        <input maxlength="10" onkeyup="formatear('#rut')" id="rut" style="max-width: 250px;margin: 0 auto;" class="form-control control_input numeric" type="text" id="buscador" placeholder="12345678-9"> 
+                        <button onClick="cliente($('#rut').val())"  style="max-width: 150px;margin-top: 15px;" class="form-cotnrol btn btn-danger btn-sm">Buscar cliente</button> 
                       </div>
                       <div class="col-sm-6 text-left" style="border-left: 1px solid #919191;">
                       <div class="col-sm-12" style="padding:0;">
@@ -250,7 +250,7 @@
                  </div> 
                 <div class="col-sm-12 text-center" style="padding-top: 15px;">
                 <label>Total a pagar</label>
-                 <input style="width: 250px;margin: auto;" class="form-control control_input" type="" name="" id="pro_total" placeholder="Total a pagar">
+                 <input style="width: 250px;margin: auto;" class="form-control control_input numeric" type="" name="" id="pro_total" placeholder="Total a pagar">
                </div>
                <div class="col-sm-12 text-center" style="padding-top: 15px;">
                  <button onclick="crear_factura()" class="btn btn-danger btn-sm">Procesar pedido</button>
@@ -279,7 +279,7 @@
                     <th>#</th>
                     <th>Cliente</th>
                     <th>RUT</th>
-                    <th>Monto</th>
+                    <th>Total</th>
                     <th>Detalle</th>
                     <th>Pagar</th>
                   </thead>
@@ -294,13 +294,8 @@
 
  
     </section>
-  
 
-    <!--Modal agregar cliente-->
-
-    <!-- Button trigger modal --> 
-<!-- Modal -->
-<div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="modalClienteLabel" aria-hidden="true">
+    <div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="modalClienteLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -314,19 +309,19 @@
          <div class="col-sm-6">
          <input id="ruta" type="hidden" value="clientec" name="">
          <label>RUT</label><br>
-         <input disabled="true" class="form-control" id="modal_rut" type="text" name="">
+         <input  maxlength="10" onkeyup="formatear('#modal_rut')" disabled="true" class="form-control numeric" id="modal_rut" type="text" name="">
           <label>Nombre</label><br>
-         <input class="form-control" id="modal_nombre" type="text" name="">
+         <input class="form-control " id="modal_nombre" type="text" name="">
           <label>Correo</label><br>
-         <input class="form-control" id="modal_correo" type="text" name="">
+         <input class="form-control correo" id="modal_correo" type="text" name="">
        </div>
        <div class="col-sm-6">
         <label>Dirección</label><br>
-         <input class="form-control" id="modal_direccion" type="text" name="">
+         <input class="form-control " id="modal_direccion" type="text" name="">
           <label>Celular</label><br>
-         <input class="form-control" id="modal_celular" type="text" name="">
+         <input class="form-control numeric" id="modal_celular" type="text" name="">
           <label>Teléfono</label><br>
-         <input class="form-control" id="modal_telefono" type="text" name="">
+         <input class="form-control numeric" id="modal_telefono" type="text" name="">
       </div>
        </div>
       <div class="modal-footer">
@@ -339,22 +334,217 @@
 
     <!--Fin Modal agregar cliente-->
   </div>
+  <!--Modal tipo de pago-->
+  <!-- Modal -->
+<div class="modal fade" id="modalPagos" tabindex="-1" role="dialog" aria-labelledby="modalPagosLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="float: left;" class="modal-title" id="modalPagosLabel">Formulario de pago</h5>
+        <button style="float: right;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      <input id="id_factura" type="hidden" name="">
+       <div class="row">
+           <div class="col-md-12">
+          <!-- Custom Tabs -->
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#efectivo" data-toggle="tab">Efectivo</a></li>
+              <li><a href="#transferencia" data-toggle="tab">Transferencia</a></li>
+              <li><a href="#tarjetas" data-toggle="tab">Tarjeta</a></li>
+              <li><a href="#cheques" data-toggle="tab">Cheques</a></li>  
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active text-center" id="efectivo">
+               <img style="width: 200px;" src="local/resources/views/img/efectivo.png"><br><br>
+                <label>Total en efectivo</label>
+                 <input style="width: 200px;margin: 0 auto;" id="total_efectivo" class="form-control numeric" type="text" name="">
+                 <div class="text-right"  style="margin-top: 20px;">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                  <button onclick="pagar_efectivo($('#id_factura').val())" type="button" class="btn btn-primary">Pagar</button>    
+                </div>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane text-center" id="transferencia"> 
+                <img style="width: 200px;" src="local/resources/views/img/transferencia.jpg"><br><br>
+                <label>Total en transferencia</label>
+                 <input style="width: 200px;margin: 0 auto;" id="total_transferencia" class="form-control numeric" type="text" name="">
+                 <div class="text-right"  style="margin-top: 20px;">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                  <button onclick="pagar_transferencia($('#id_factura').val())" type="button" class="btn btn-primary">Pagar</button>    
+                </div>
+
+              </div>
+
+              <div class="tab-pane text-center" id="cheques"> 
+               <div class="row">
+               <div class="col-sm-12">
+                  <img style="width: 100px;" src="local/resources/views/img/cheque.png"><br><br>
+               </div>
+               <div class="col-sm-6">
+                 <label>RUT</label><br>
+                 <input id="che_rut" class="form-control" placeholder="RUT" type="text" name=""><br>
+                 <label>Nº Cuenta</label><br>
+                 <input id="che_cuenta" class="form-control numeric" placeholder="Nº Cuenta" type="text" name=""><br>
+                 <label>Nº Cheque</label><br>
+                 <input id="che_cheque" class="form-control numeric" placeholder="Nº Cheque" type="text" name=""><br>
+                 <label>Banco</label><br>
+                 <select id="che_banco" class="form-control">
+                   <option value="">Banco</option
+                   <option value="ES">Estado</option>
+                        <option value="CH">Chile</option>
+                        <option value="SA">Santander</option>
+                        <option value="BC">BCI</option>
+                        <option value="FA">Falabella</option>
+                        <option value="BI">Bice</option>
+                        <option value="SE">Security</option>
+                        <option value="OT">Otro</option>>
+                 </select>
+                 
+               </div>
+
+               <div class="col-sm-6 text-center" >
+               <label>Código</label><br>
+                 <input id="che_codigo" class="form-control" placeholder="Código" type="text" name=""><br>
+                 <label>Fecha</label><br>
+                 <input id="che_fecha" class="form-control datepicker" placeholder="Fecha" type="text" name=""><br>
+                 <label>Teléfono</label><br>
+                 <input id="che_cheque" class="form-control numeric" placeholder="Teléfono" type="text" name=""><br>
+                 <label>Total</label><br>
+                 <input id="che_cheque" class="form-control numeric" placeholder="Total" type="text" name=""><br>
+                
+               </div>
+              <div class="col-sm-12">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                  <button type="button" class="btn btn-primary">Pagar</button>
+              </div>   
+                </div>
+             
+
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane text-center" id="tarjetas">
+              <div class="row"> 
+                <img style="width: 200px;" src="local/resources/views/img/tarjetas.png"><br><br>
+ <div class="col-sm-5">
+                  <label>Tarjeta</label><br>
+                  <select id="select_tarjeta" class="form-control">
+                    <option value="">Tarjeta</option>
+                    <option value="RC">RedCompra</option>
+                        <option value="MC">MasterCard</option>
+                        <option value="VI">Visa</option>
+                        <option value="AD">AbcDin</option>
+                  </select>
+                   <label>Cuotas</label><br>
+                  <select id="cuotas" class="form-control">
+                    <option value="">Cuotas</option>
+                    <option value="1">1</option> 
+                    <option value="2">2</option> 
+                    <option value="3">3</option> 
+                    <option value="4">4</option> 
+                    <option value="5">5</option> 
+                    <option value="6">6</option> 
+                    <option value="7">7</option> 
+                    <option value="8">8</option> 
+                    <option value="9">9</option> 
+                    <option value="10">10</option> 
+                    <option value="11">11</option> 
+                    <option value="12">12</option> 
+                  </select>
+                 
+
+                </div>
+                <div class="col-sm-7">
+                  <label>Nº Operación</label><br>
+                 <input placeholder="Nº Operación" style="width: 200px;margin: 0 auto;" id="operacion_transferencia" class="form-control numeric" type="text" name="">
+                 <label>Total</label><br>
+                 <input placeholder="Total" style="width: 200px;margin: 0 auto;" id="total_transferencia" class="form-control numeric" type="text" name=""> 
+                  <div class="text-right"  style="margin-top: 20px;">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                  <button type="button" class="btn btn-primary">Pagar</button>    
+                </div>
+                </div>
+                 </div>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- nav-tabs-custom -->
+        </div>
+       </div>
+     <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>        
+      </div>-->
+    </div>
+  </div>
+</div>
+  <!--Fin modal tipo de pago-->
+
+    <!--Modal agregar cliente-->
+
+    <!-- Button trigger modal --> 
+<!-- Modal -->
+
 <div class="control-sidebar-bg"></div>
 </div>
 <?php include('local/resources/views/includes/referencias_down.php');?> 
 
 <script type="text/javascript">
- 
+
+//Coloca el iddentidicador de la factura
+function set_factura(id)
+{
+  $("#id_factura").val(id);
+}
+ //Funcion para validar RUP
+  var Fn = 
+  {
+    // Valida el rut con su cadena completa "XXXXXXXX-X"
+    validaRut : function (rutCompleto) {
+      if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+        return false;
+      var tmp   = rutCompleto.split('-');
+      var digv  = tmp[1]; 
+      var rut   = tmp[0];
+      if ( digv == 'K' ) digv = 'k' ;
+      return (Fn.dv(rut) == digv );
+    },
+    dv : function(T){
+      var M=0,S=1;
+      for(;T;T=Math.floor(T/10))
+        S=(S+T%10*(9-M++%6))%11;
+      return S?S-1:'k';
+    }
+  }
+//Campos con formato de fecha
  $('.datapicker').datepicker({
       autoclose: true
     });
-
+//envento enter en campo rut
  $("#rut").keyup(function(e) {
     if(e.keyCode == 13) {
       cliente($("#rut").val()); 
     }
 });
  
+ //Validar correos
+$('.correo').change(function (e) {
+    var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var EmailId = this.value;
+    if (emailRegex.test(EmailId))
+        this.style.color = "";
+    else
+        this.style.color = "red";
+});
+//Tipo numerico en los input
+ $(".numeric").keyup(function (){
+ this.value = (this.value + '').replace(/[^0-9--]/g, '');
+});
 
 //Limpiar campos decliente
 function limpiar()
@@ -372,6 +562,23 @@ function limpiar()
   $("#modal_correo").val("");
 }
 
+//dar formato a la rut
+
+function formatear(par)
+{
+   if($(par).val().length > 7)
+            {
+              cadena=$(par).val().split("-").join("");
+              corte_1=cadena.substr(0, 8);
+              corte_2=cadena.substr(8);  
+              $(par).val(corte_1+"-"+corte_2);
+            }
+            else
+            {
+              cadena=$(par).val().split("-").join("");
+              $(par).val(cadena);
+            }
+}
 
 //Consultar si in cliente existe o no
   function cliente(id) 
@@ -382,6 +589,11 @@ function limpiar()
        swal("Ups!", "Debe completar el campo rut.", "info");
       return 0;     
     }
+    else if(!(Fn.validaRut(id)))
+        {
+          swal("Error!", "La RUT no es válida.", "error");
+          return 0;    
+        }
      $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -415,7 +627,76 @@ function limpiar()
                       });   
                 }  
           })
-    } 
+    }
+ //Pagar transferencia
+  function pagar_transferencia(id)
+  {
+     $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+              url: "transferencia",
+              type: 'post', 
+              data:
+              {
+                venta:id,
+                monto:$("#total_transferencia").val(), 
+              },
+              success: function(data)  
+              {  
+                  if(data==1)
+                  {
+                    swal("Listo!", "Pago realizado con éxito.", "success");
+                   
+                    $("#total_transferencia").val(""); 
+                    $('#modalPagos').modal('hide');
+                    $('#id_factura').val("");
+                  }
+                 
+                  else if(data=="error")
+                  {
+                    swal("Ups!", "Algo ha salido mal, inténtelo de nuevo.", "error");
+                  }         
+              }  
+          })
+  } 
+ //Pagar efectivo
+  function pagar_efectivo(id)
+  {
+     $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+              url: "efectivo",
+              type: 'post', 
+              data:
+              {
+                venta:id,
+                monto:$("#total_efectivo").val(), 
+              },
+              success: function(data)  
+              { 
+                
+                  if(data==1)
+                  {
+                    swal("Listo!", "Pago realizado con éxito.", "success");
+                   
+                    $("#total_efectivo").val(""); 
+                    $('#modalPagos').modal('hide');
+                    $('#id_factura').val("");
+                  }
+                 
+                  else if(data=="error")
+                  {
+                    swal("Ups!", "Algo ha salido mal, inténtelo de nuevo.", "error");
+                  }         
+              }  
+          })
+  }  
 //guardar cliente
 //Almacena un cliente en la BD
   function crear_cliente() 
@@ -443,10 +724,11 @@ function limpiar()
                   if(data==1)
                   {
                     swal("Listo!", "Cliente agregado con éxito", "success");
-                    limpiar();
+                   
+               
                     cliente($("#modal_rut").val());
                     $('#modalCliente').modal('hide');
-                    
+                     limpiar();
 
                   }
                  
@@ -489,13 +771,13 @@ function limpiar()
                     "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+datos['rut']+"</td>"+
                     "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+datos['total']+"</td>"+
                     "<td style='padding-top=0;padding-bottom:0;height:25px;'><a href='#'>Ver</a></td>"+
-                    "<td style='padding-top=0;padding-bottom:0;height:25px;'><button class='btn btn-xs btn-primary'>Pagar</button></td>"+  
+                    "<td style='padding-top=0;padding-bottom:0;height:25px;'><button onClick='set_factura("+datos['id']+")' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#modalPagos'>Abonar</button></td>"+  
                     "</tr>");   
                   }); 
 
                   if(contador>0)
                   {
-                    swal("Atención!", "El cliente tiene "+contador+" facturas pendientes.", "info");
+                    swal("Atención!", "El cliente tiene "+contador+" facturas.", "info");
                   }
                 } 
                 else
@@ -549,6 +831,7 @@ function limpiar()
                   swal("Listo!", "Factura almanecenada con éxito.", "success");
                   $(".selectores").prop('selectedIndex', 0);
                   $(".control_input").val("");
+                  seleccionar_facturas($("#rut").val());
                 }
                 else
                 {

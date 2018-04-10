@@ -155,8 +155,9 @@ function linpiar_formulario()
 }
 
 //seleciona un cliente
-  function cliente(id) 
+  function cliente(id,id2) 
   {
+    
      $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -167,7 +168,7 @@ function linpiar_formulario()
               type: 'post', 
               data:
               {                
-                rut:id,                
+                rut:id+'-'+id2,                
               },
                datatype:"json",  
                 success: function(data)  
@@ -267,6 +268,7 @@ function linpiar_formulario()
                   contador=0;
                   $.each(JSON.parse(data), function(i, datos) { 
                     contador++;
+                    var cadena1 = datos['rut'];                     
                     $("#tabla_clientes").append(
                     "<tr id='"+datos['id']+"'>"+
                     "<td>"+contador+"</td>"+ 
@@ -275,7 +277,7 @@ function linpiar_formulario()
                      "<td>"+datos['correo']+"</td>"+
                     "<td>"+datos['direccion']+"</td>"+  
                      "<td>"+datos['telefono']+" / "+datos['celular']+"</td>"+
-                    "<td><button onClick='cliente("+datos['rut']+"),editar()' class='btn btn-xs btn-primary'>Editar</button></td>"+                         
+                    "<td><button onClick='cliente("+cadena1.split('-')[0]+","+cadena1.split('-')[1]+"),editar()' class='btn btn-xs btn-primary'>Editar</button></td>"+                         
                     "</tr>");   
                   }); 
                 } 
