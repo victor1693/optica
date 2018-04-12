@@ -14,7 +14,12 @@ class con_factura extends Controller {
 	 */
 	public function select()
 	{
-		$sql="SELECT t1.total,t1.id,t2.nombre,t2.rut FROM `tbl_ventas` t1 left JOIN tbl_cliente t2 ON t2.rut=t1.rut WHERE t1.id_sucursal=".session()->get('sucursal')." and t1.rut='".$_POST['rut']."';";
+		$sql="SELECT t1.total,t1.id,t2.nombre,t2.rut,if(sum(t3.efectivo_monto + t3.tarjeta_monto + t3.transferencia_monto + t3.cheque_monto) is null,0,sum(t3.efectivo_monto + t3.tarjeta_monto + t3.transferencia_monto + t3.cheque_monto)) as monto_abonado FROM tbl_facturas t1 
+    left JOIN tbl_cliente t2 ON t2.rut=t1.rut 
+    left JOIN tbl_pagos t3 ON t3.id_venta=t1.id
+     WHERE t1.id_sucursal=".session()->get('sucursal')." and t1.rut='".$_POST['rut']."' and estatus = 0
+     GROUP by t1.id;
+     ";
 		try {
 			$datos=DB::select($sql);
 			echo json_encode($datos);
@@ -152,7 +157,7 @@ class con_factura extends Controller {
             if($total==""){echo "Debe colocar el monto total.";exit();}	
             } 
             if($dc==""){$dc=0;} 
-          	$sql="INSERT INTO tbl_ventas VALUES(
+          	$sql="INSERT INTO tbl_facturas VALUES(
           	null,
           	'".$cristales."',
           	'".$armazon."',
@@ -177,6 +182,7 @@ class con_factura extends Controller {
           	'".$rut."',
           	".session()->get('sucursal').",
           	".$total.",
+            0,
           	null
           	)"; 
           	try {

@@ -280,6 +280,7 @@
                     <th>Cliente</th>
                     <th>RUT</th>
                     <th>Total</th>
+                    <th>Montos abonados</th>
                     <th>Detalle</th>
                     <th>Pagar</th>
                   </thead>
@@ -394,7 +395,7 @@
                  <input id="che_cheque" class="form-control numeric" placeholder="Nº Cheque" type="text" name=""><br>
                  <label>Banco</label><br>
                  <select id="che_banco" class="form-control">
-                   <option value="">Banco</option
+                   <option value="">Banco</option>
                    <option value="ES">Estado</option>
                         <option value="CH">Chile</option>
                         <option value="SA">Santander</option>
@@ -411,20 +412,18 @@
                <label>Código</label><br>
                  <input id="che_codigo" class="form-control" placeholder="Código" type="text" name=""><br>
                  <label>Fecha</label><br>
-                 <input id="che_fecha" class="form-control datepicker" placeholder="Fecha" type="text" name=""><br>
+                 <input id="che_fecha" class="form-control datapicker" placeholder="Fecha" type="text" name=""><br>
                  <label>Teléfono</label><br>
-                 <input id="che_cheque" class="form-control numeric" placeholder="Teléfono" type="text" name=""><br>
+                 <input id="che_telefono" class="form-control numeric" placeholder="Teléfono" type="text" name=""><br>
                  <label>Total</label><br>
-                 <input id="che_cheque" class="form-control numeric" placeholder="Total" type="text" name=""><br>
+                 <input id="che_total" class="form-control numeric" placeholder="Total" type="text" name=""><br>
                 
                </div>
               <div class="col-sm-12">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                  <button type="button" class="btn btn-primary">Pagar</button>
+                  <button onclick="pagar_cheque($('#id_factura').val())"  type="button" class="btn btn-primary">Pagar</button>
               </div>   
-                </div>
-             
-
+                </div> 
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane text-center" id="tarjetas">
@@ -440,7 +439,7 @@
                         <option value="AD">AbcDin</option>
                   </select>
                    <label>Cuotas</label><br>
-                  <select id="cuotas" class="form-control">
+                  <select id="tarjetas_cuotas" class="form-control">
                     <option value="">Cuotas</option>
                     <option value="1">1</option> 
                     <option value="2">2</option> 
@@ -460,12 +459,12 @@
                 </div>
                 <div class="col-sm-7">
                   <label>Nº Operación</label><br>
-                 <input placeholder="Nº Operación" style="width: 200px;margin: 0 auto;" id="operacion_transferencia" class="form-control numeric" type="text" name="">
+                 <input placeholder="Nº Operación" style="width: 200px;margin: 0 auto;" id="tarjeta_operacion" class="form-control numeric" type="text" name="">
                  <label>Total</label><br>
-                 <input placeholder="Total" style="width: 200px;margin: 0 auto;" id="total_transferencia" class="form-control numeric" type="text" name=""> 
+                 <input placeholder="Total" style="width: 200px;margin: 0 auto;" id="tarjeta_total" class="form-control numeric" type="text" name=""> 
                   <div class="text-right"  style="margin-top: 20px;">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                  <button type="button" class="btn btn-primary">Pagar</button>    
+                  <button onclick="pagar_tarjeta($('#id_factura').val())" type="button" class="btn btn-primary">Pagar</button>    
                 </div>
                 </div>
                  </div>
@@ -653,12 +652,120 @@ function formatear(par)
                     $("#total_transferencia").val(""); 
                     $('#modalPagos').modal('hide');
                     $('#id_factura').val("");
+                     seleccionar_facturas($("#rut").val());
                   }
                  
                   else if(data=="error")
                   {
                     swal("Ups!", "Algo ha salido mal, inténtelo de nuevo.", "error");
-                  }         
+                  }  
+
+                  else
+                  {                    
+                    swal("Ups!", data, "info");
+                  }  
+              }  
+          })
+  } 
+
+  //Pagar cheque
+  function pagar_tarjeta(id)
+  {
+     $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+              url: "tarjeta",
+              type: 'post', 
+              data:
+              {
+                venta:id,
+                total:$("#tarjeta_total").val(), 
+                tarjeta:$("#select_tarjeta").val(), 
+                cuotas:$("#tarjetas_cuotas").val(), 
+                operación:$("#tarjeta_operacion").val(),  
+              },
+              success: function(data)  
+              { 
+                
+                  if(data==1)
+                  {
+                    swal("Listo!", "Pago realizado con éxito.", "success");
+                     $("#tarjeta_total").val(""); 
+                     $("#select_tarjeta").val(""); 
+                     $("#tarjetas_cuotas").val(""); 
+                     $("#tarjeta_operacion").val("");  
+                    $('#modalPagos').modal('hide');
+                    $('#id_factura').val("");
+                     seleccionar_facturas($("#rut").val());
+                  }
+                 
+                  else if(data=="error")
+                  {
+                    swal("Ups!", "Algo ha salido mal, inténtelo de nuevo.", "error");
+                  } 
+
+                  else
+                  {
+                    swal("Atención!", data, "info");
+                  }        
+              }  
+          })
+  } 
+  //Pagar cheque
+  function pagar_cheque(id)
+  {
+     $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+              url: "cheque",
+              type: 'post', 
+              data:
+              {
+                venta:id,
+                total:$("#che_total").val(), 
+                rut:$("#che_rut").val(), 
+                cuenta:$("#che_cuenta").val(), 
+                cheque:$("#che_cheque").val(), 
+                banco:$("#che_banco").val(), 
+                codigo:$("#che_codigo").val(), 
+                fecha:$("#che_fecha").val(),  
+                telefono:$("#che_telefono").val(), 
+              },
+              success: function(data)  
+              { 
+                
+                  if(data==1)
+                  {
+                    swal("Listo!", "Pago realizado con éxito.", "success");                   
+                      $("#che_total").val("");
+                      $("#che_rut").val("");
+                      $("#che_cuenta").val("");
+                      $("#che_cheque").val(""); 
+                      $("#che_banco").val(""); 
+                      $("#che_codigo").val(""); 
+                      $("#che_fecha").val("");  
+                      $("#che_telefono").val(""); 
+
+                    $('#modalPagos').modal('hide');
+                    $('#id_factura').val("");
+                     seleccionar_facturas($("#rut").val());
+                  }
+                 
+                  else if(data=="error")
+                  {
+                    swal("Ups!", "Algo ha salido mal, inténtelo de nuevo.", "error");
+                  } 
+
+                  else
+                  {
+                    swal("Atención!", data, "info");
+                  }        
               }  
           })
   } 
@@ -688,16 +795,55 @@ function formatear(par)
                     $("#total_efectivo").val(""); 
                     $('#modalPagos').modal('hide');
                     $('#id_factura').val("");
+                    seleccionar_facturas($("#rut").val());
                   }
                  
                   else if(data=="error")
                   {
                     swal("Ups!", "Algo ha salido mal, inténtelo de nuevo.", "error");
-                  }         
+                  } 
+                   else
+                  {                    
+                    swal("Ups!", data, "info");
+                  }          
               }  
           })
   }  
 //guardar cliente
+//entregas de productos
+  function engregar(id) 
+  {
+     $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+              url: "entregarpro",
+              type: 'post', 
+              data:
+              {
+                id:id,               
+              },
+              success: function(data)  
+              { 
+                
+                  if(data==1)
+                  {
+                    swal("Listo!", "Producto entregado con éxito", "success"); 
+                    seleccionar_facturas($("#rut").val());
+                  }
+                  else if(data=="0")
+                  {
+                    swal("Atención!", "Debe seleccionar una factura para entregar.", "info"); 
+                  } 
+                  else 
+                  {
+                    swal("Ups!", "Algo ha salido mal, inténtelo de nuevo.", "error");
+                  }      
+              }  
+          })
+  } 
 //Almacena un cliente en la BD
   function crear_cliente() 
   {
@@ -770,7 +916,9 @@ function formatear(par)
                     "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+datos['nombre']+"</td>"+
                     "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+datos['rut']+"</td>"+
                     "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+datos['total']+"</td>"+
+                    "<td style='padding-top=0;padding-bottom:0;height:25px;'>"+datos['monto_abonado']+"</td>"+
                     "<td style='padding-top=0;padding-bottom:0;height:25px;'><a href='#'>Ver</a></td>"+
+                    "<td style='padding-top=0;padding-bottom:0;height:25px;'><button onClick='engregar("+datos['id']+")' class='btn btn-xs btn-primary'>Entregar</button></td>"+                     
                     "<td style='padding-top=0;padding-bottom:0;height:25px;'><button onClick='set_factura("+datos['id']+")' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#modalPagos'>Abonar</button></td>"+  
                     "</tr>");   
                   }); 
